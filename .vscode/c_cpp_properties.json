@@ -1,0 +1,28 @@
+{
+	"configurations": [
+		{
+			"name": "Win32",
+			"browse": {
+				"limitSymbolsToIncludedHeaders": false,
+				"path": [
+					"C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr\\avr\\include",
+					"C:\\Program Files (x86)\\Arduino\\libraries\\*",
+					"C:\\Users\\MitchE3D\\OneDrive - E3 Displays\\Documents\\Arduino\\libraries\\Keypad",
+					"C:\\Users\\MitchE3D\\OneDrive - E3 Displays\\Documents\\Arduino\\libraries\\LCD_I2C-master",
+					"C:\\Users\\MitchE3D\\OneDrive - E3 Displays\\Documents\\Arduino\\libraries\\HX711-master",
+					"C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\libraries\\EEPROM",
+					"${workspaceRoot}"
+				]
+			},
+			"defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+			"compilerPath": "/usr/bin/gcc",
+			"cStandard": "c11",
+			"cppStandard": "gnu++14",
+			"intelliSenseMode": "clang-x64",
+			"forcedInclude": [
+				"C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+			]
+		}
+	],
+	"version": 4
+}
