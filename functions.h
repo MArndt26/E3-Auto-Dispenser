@@ -82,7 +82,7 @@ void lcdInit()
  **/
 void EEPROM_ReadAll()
 {
-    for (int i = eeAddress; i < eeAddress + DISP_SET_STR_MAX_LEN - SET_MSG.length(); i++)
+    for (int i = eeAddress; i < eeAddress + DISP_SET_STR_MAX_LEN; i++)
     {
         char c = EEPROM.read(i);
 
@@ -145,8 +145,8 @@ void printLCD()
     //first line
     Serial.print("|");
     Serial.print(WEIGHT_MSG);
-    Serial.print(curString);
-    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - curString.length(); i++)
+    // Serial.print(curString);
+    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN; i++)
     {
         Serial.print(' ');
     }
@@ -156,7 +156,7 @@ void printLCD()
     Serial.print("|");
     Serial.print(SET_MSG);
     Serial.print(curString);
-    for (int i = 0; i < DISP_SET_STR_MAX_LEN - setString.length(); i++)
+    for (int i = 0; i < DISP_SET_STR_MAX_LEN - curString.length(); i++)
     {
         Serial.print(' ');
     }
