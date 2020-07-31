@@ -30,13 +30,15 @@ void userSuccess()
 
 void userError(String msg)
 {
-    Serial.println(msg);
+    Serial.print(msg);
+    Serial.print(": ");
     userError();
 }
 
 void userSuccess(String msg)
 {
-    Serial.println(msg);
+    Serial.print(msg);
+    Serial.print(": ");
     userSuccess();
 }
 
@@ -66,13 +68,23 @@ void printLCD()
     Serial.println("------------------");
 }
 
-// void debugVars()
-// {
-//     Serial.print("curStr: ");
-//     Serial.print(curString);
-//     Serial.print(", setStr: ");
-//     Serial.print(setString);
-//     Serial.print(", c: ");
-//     Serial.print(c);
-//     Serial.println();
-// }
+void debugVars()
+{
+    Serial.print("curStr: ");
+    Serial.print(curString);
+    Serial.print(", setStr: ");
+    Serial.print(setString);
+    Serial.print(", c: ");
+    Serial.print(c);
+    Serial.print(", cur_fn: ");
+    Serial.print(cur_FN_Button);
+    Serial.print(", fn: {");
+    for (int i = 0; i < 3; i++)
+    {
+        Serial.print(fnStrings[i]);
+        Serial.print(", ");
+    }
+
+    Serial.print("}");
+    Serial.println();
+}

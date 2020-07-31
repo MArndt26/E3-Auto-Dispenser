@@ -37,12 +37,14 @@ void homeScreen()
 
 void presetScreen()
 {
-    Serial.println("PRESET SCREEN");
+    Serial.print("PRESET SCREEN: ");
+    Serial.println(cur_FN_Button);
 }
 
 void programScreen()
 {
-    Serial.println("PROGRAM SCREEN");
+    Serial.print("PROGRAM SCREEN: ");
+    Serial.println(cur_FN_Button);
 }
 
 void runScreen()
@@ -69,6 +71,13 @@ void updateScreen()
     }
 }
 
+void appendChar()
+{
+    lcd.setCursor(SET_MSG.length() + curString.length(), SET_LINE_NUMBER);
+    curString += c;
+    lcd.print(c);
+}
+
 // void clearDisplay()
 // {
 //     curString = "";
@@ -85,14 +94,6 @@ void updateScreen()
 //     setString = curString;
 
 //     clearDisplay();
-// }
-
-// void appendChar()
-// {
-//     lcd.setCursor(SET_MSG.length() + curString.length(), SET_LINE_NUMBER);
-//     curString += c;
-//     lcd.print(c);
-//     printLCD();
 // }
 
 // void printHomePage()

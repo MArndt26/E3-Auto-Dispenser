@@ -3,10 +3,12 @@
 
 int eeAddress = 0;
 
-String setString = "";
+String setString = "";              //set value saved to eeprom
+String fnStrings[3] = {"", "", ""}; //function strings corresponding to fn1, fn2, fn3
 
 void save()
 {
+    fnStrings[cur_FN_Button - FN1] = curString;
     setString = curString;
     curString = "";
 }
@@ -29,5 +31,4 @@ void EEPROM_ReadAll()
             setString += c;
         }
     }
-    // setString += '\0';
 }

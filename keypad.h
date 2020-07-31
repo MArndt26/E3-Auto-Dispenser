@@ -9,6 +9,7 @@ const char FN3 = 'C';
 const char TARE = 'D';
 const char ENTER = '#';
 
+char prev_FN_Button = '\0';
 char cur_FN_Button = '\0';
 
 const byte ROWS = 4;
@@ -26,13 +27,21 @@ byte colPins[COLS] = {5, 4, 3, 2};
 // //main keypad object
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
-void getKeyPressed()
-{
-    c = keypad.getKey(); //returns the key that is pressed or ##### if no key is pressed
-}
+/*---------------KEYPAD FUNCTIONS------------------*/
 
 void keypadInit()
 {
     //Keypad object has no () constructor
     Serial.println("Keypad Initialized");
+}
+
+void getKeyPressed()
+{
+    c = keypad.getKey(); //returns the key that is pressed or ##### if no key is pressed
+}
+
+void clearFN_Buttons()
+{
+    prev_FN_Button = '\0';
+    cur_FN_Button = '\0';
 }

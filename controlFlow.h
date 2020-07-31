@@ -53,14 +53,19 @@ void getInputs()
  */
 void doStateChange()
 {
+    debugVars();
     switch (curState)
     {
     case HOME_STATE:
         if (c == ENTER) //check if the enter key was pressed
         {
-            if (curString == "") //check if user has input data to save
+            if (curString != "") //check if user has input data to save
             {
                 save();
+            }
+            else if (setString == "")
+            {
+                userError("Cannot Run Without Set Val");
             }
             else //if no data to save, treat enter as start operation
             {
@@ -69,6 +74,7 @@ void doStateChange()
         }
         else if (cur_FN_Button != '\0') //check if cur_FN_Button has been previously set
         {
+            prev_FN_Button = cur_FN_Button; //assign current value to previous
             curState = PRESET_STATE;
         }
         else
@@ -77,9 +83,23 @@ void doStateChange()
         }
         break;
     case PRESET_STATE:
-        if (cur_FN_Button != c) //check if user has pressed the same fn button twice
+        if (c == ENTER)
         {
-            String msg = "Non Consistant State Change Request: " + cur_FN_Button + " -> " + c;
+            if (fnStrings[c - FN1] != "") //Valid (saved) function to run
+            {
+                curState = RUN_STATE;
+            }
+            else
+            {
+                userError("Cannot run null function");
+            }
+        }
+        else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
+        {
+            String msg = "Non Consistant State Change Request: ";
+            msg += prev_FN_Button;
+            msg += " -> ";
+            msg += cur_FN_Button;
             userError(msg);
         }
         else //user has pressed a function button twice to request program state for that var
@@ -102,54 +122,68 @@ void doStateChange()
         }
         else //user has pressed a FN button again to escape the programming window
         {
-            cur_FN_Button = '\0'; //reset cur_FN_Button
+            clearFN_Buttons();
             curState = HOME_STATE;
         }
         break;
     case RUN_STATE:
-        cur_FN_Button = '\0'; //reset cur_FN_Button
+        clearFN_Buttons();
         curState = HOME_STATE;
         break;
     }
+    c = '\0'; //consume character used for state change
+    curString = "";
     updateScreen();
+}
+
+boolean checkValidInput()
+{
+    if (c >= '0' && c <= '9') //check if key pressed is in the range [0, 9]
+    {
+        if (curString.length() < DISP_SET_STR_MAX_LEN) //check if you are trying to type off the screen
+        {
+            return true;
+        }
+        else
+        {
+            userError("in c=[0, 9]");
+        }
+    }
+    else if (c == '.')
+    {
+        if (curString == "")
+        {
+            userError("Cannot Start with dp");
+        }
+        else if (curString[curString.length() - 1] == '.')
+        {
+            userError("Cannot have back-to-back dps");
+        }
+        else if (curString.length() == DISP_SET_STR_MAX_LEN)
+        {
+            userError("Cannot add a dp at end of string");
+        }
+        else if (curString.indexOf(".") != -1)
+        {
+            userError("Cannot have two dps");
+        }
+        else
+        {
+            return true;
+        }
+    }
+    else
+    {
+        String msg = "Unexpected Input Recieved: ";
+        msg += c;
+        userError(msg);
+    }
+    return false;
 }
 
 // relaysOff();
 
-// if (c >= '0' && c <= '9') //check if key pressed is in the range [0, 9]
-// {
-//     if (curString.length() < DISP_SET_STR_MAX_LEN) //check if you are trying to type off the screen
-//     {
-//         appendChar();
-//     }
-//     else
-//     {
-//         userError("in c=[0, 9]");
-//     }
-// }
-// else if (c == '.')
-// {
-//     if (curString == "")
-//     {
-//         userError("Cannot Start with dp");
-//     }
-//     else if (curString[curString.length() - 1] == '.')
-//     {
-//         userError("Cannot have back-to-back dps");
-//     }
-//     else if (curString.length() == DISP_SET_STR_MAX_LEN)
-//     {
-//         userError("Cannot add a dp at end of string");
-//     }
-//     else if (curString.indexOf(".") != -1)
-//     {
-//         userError("Cannot have two dps");
-//     }
-//     else
-//     {
-//         appendChar();
-//     }
-// }
+//
 // else if (c == '#') //enter key has been pressed
 // {
 //     if (curString == "") //no user input
