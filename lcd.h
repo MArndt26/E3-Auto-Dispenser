@@ -11,14 +11,23 @@ const byte MASS_CURSOR_START = 5;
 const String SET_MSG = "SET VAl:";
 const String WEIGHT_MSG = "WEIGHT:";
 
-const byte DISP_SET_STR_MAX_LEN = 7;         //16 - 1 - 4; //Note: changing this can corrupt the data stored on eeprom
-const byte HOME_DISP_WEIGHT_STR_MAX_LEN = 8; //16 - 1 - 5
+const byte DISP_SET_STR_MAX_LEN = 7;    //16 - 1 - 4; //Note: changing this can corrupt the data stored on eeprom
+const byte DISP_WEIGHT_STR_MAX_LEN = 8; //16 - 1 - 5
 
 //PRESET SCREEN
 const String PRESET_MSG = "PREST:";
 const String PRESET_ENTER_MSG = " PRESS # to SET ";
 
 const byte PRESET_DISP_SET_STR_MAX_LEN = 9;
+
+//PROGRAM SCREEN
+const String PROGRAM_MSG = "PROGR:";
+const String PROGRAM_ENTER_MSG = "PRESS # to PROGR";
+
+const byte PROGRAM_DISP_SET_STR_MAX_LEN = 9;
+
+//RUN SCREEN
+const String RUN_WARN_MSG = "g [PRESS ANY KEY TO STOP]";
 
 String curString = ""; //value user is currently typing in
 String setString = ""; //set value saved to eeprom
@@ -86,11 +95,6 @@ void serialSetCursor(int row, int col)
  * |PRESS # to PROGR|
  * ------------------
  *
- * RUN_PAGE: NOTE: get to this page by pressing # from Home Page when SET VAL has been entered
- * ------------------
- * |WEIGHT:      50g|
- * |SET:50g PRESS ANY KEY TO STOP| --> scrolling text
- * ------------------
  *
  * NOTE: the following button presses are INVALID input:
  *      AB    ::cannot switch from A PRESET to B PROGRAM_PAGE
@@ -121,17 +125,15 @@ void lcdInit()
 void homeScreen()
 {
     //first line
-    Serial.print("|");
     Serial.print(WEIGHT_MSG);
     Serial.print(weightString);
-    for (int i = 0; i < HOME_DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
+    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
     {
         Serial.print(' ');
     }
-    Serial.println("g|");
+    Serial.println("g");
 
     //second line
-    Serial.print("|");
     Serial.print(SET_MSG);
 
     int length = DISP_SET_STR_MAX_LEN;
@@ -150,7 +152,7 @@ void homeScreen()
     {
         Serial.print(' ');
     }
-    Serial.println("g|");
+    Serial.println("g");
 }
 /*
  * PRESET_PAGE: NOTE: get to this page by pressing A, B, C, D
@@ -163,31 +165,63 @@ void homeScreen()
 void presetScreen()
 {
     //first line
-    Serial.print("|");
     Serial.print(PRESET_MSG);
     Serial.print(getFN_String());
     for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN - getFN_String().length(); i++)
     {
         Serial.print(' ');
     }
-    Serial.println("g|");
+    Serial.println("g");
 
     //second line
-    Serial.print("|");
     Serial.print(PRESET_ENTER_MSG);
-
-    Serial.println("|");
 }
 
+/*
+ * PROGRAM_PAGE: NOTE: get to this page by pressing A, B, C, D
+ *               twice from home page, once from PRESET_PAGE
+ * ------------------
+ * |PROGR:A 1234567g|
+ * |PRESS # to PROGR|
+ * ------------------
+ */
 void programScreen()
 {
-    Serial.print("PROGRAM SCREEN: ");
-    Serial.println(cur_FN_Button);
+    //first line
+    Serial.print(PROGRAM_MSG);
+    Serial.print(curString);
+    for (int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN - curString.length(); i++)
+    {
+        Serial.print(' ');
+    }
+    Serial.println("g");
+
+    //second line
+    Serial.print(PROGRAM_ENTER_MSG);
 }
 
+/*
+ * RUN_PAGE: NOTE: get to this page by pressing # from Home Page when SET VAL has been entered
+ * ------------------
+ * |WEIGHT:      50g|
+ * |SET:50g PRESS ANY KEY TO STOP| --> scrolling text
+ * ------------------
+ */
 void runScreen()
 {
-    Serial.println("RUN SCREEN");
+    //first line
+    Serial.print(WEIGHT_MSG);
+    Serial.print(weightString);
+    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
+    {
+        Serial.print(' ');
+    }
+    Serial.println("g");
+
+    //second line
+    Serial.print(SET_MSG);
+    Serial.print(setString);
+    Serial.print(RUN_WARN_MSG);
 }
 
 void updateScreen()
@@ -205,9 +239,12 @@ void updateScreen()
         presetScreen();
         break;
     case PROGRAM_STATE:
+        Serial.print("PROGRAM SCREEN: ");
+        Serial.println(cur_FN_Button);
         programScreen();
         break;
     case RUN_STATE:
+        Serial.println("RUN SCREEN");
         runScreen();
         break;
     }
@@ -219,36 +256,3 @@ void appendChar()
     curString += c;
     lcd.print(c);
 }
-
-// void clearDisplay()
-// {
-//     curString = "";
-
-//     lcd.setCursor(SET_CURSOR_START, SET_LINE_NUMBER);
-//     lcd.print(setString);
-
-//     lcd.setCursor(MASS_CURSOR_START, WEIGHT_LINE_NUMBER);
-//     lcd.print(curString);
-// }
-
-// void saveScreen()
-// {
-//     setString = curString;
-
-//     clearDisplay();
-// }
-
-// void printHomePage()
-// {
-//     lcd.setCursor(0, WEIGHT_LINE_NUMBER);
-//     lcd.print(WEIGHT_MSG);
-//     lcd.print(curString);
-//     lcd.setCursor(HOME_DISP_WEIGHT_STR_MAX_LEN, WEIGHT_LINE_NUMBER);
-//     lcd.print('g');
-
-//     lcd.setCursor(0, SET_LINE_NUMBER);
-//     lcd.print(SET_MSG);
-//     lcd.print(setString);
-//     lcd.setCursor(DISP_SET_STR_MAX_LEN, SET_LINE_NUMBER);
-//     lcd.print('g');
-// }

@@ -24,16 +24,16 @@ void setup()
 
     debugVars();
 
-    cur_FN_Button = FN2_Button;
-    fn2String = "";
+    setString = "1";
+    c = ENTER;
     doStateChange();
 
     updateScreen();
     delay(500);
-    for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN; i++)
+    for (int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN; i++)
     {
         char c = '1' + i;
-        fn2String += c;
+        setString += c;
         updateScreen();
 
         delay(500);
