@@ -37,7 +37,17 @@ void keypadInit()
 
 void getKeyPressed()
 {
-    c = keypad.getKey(); //returns the key that is pressed or ##### if no key is pressed
+    // c = keypad.getKey(); //returns the key that is pressed or /0 if no key is pressed
+
+    while (Serial.available() > 0)
+    {
+        c = Serial.read();
+
+#if HUSH
+        Serial.print("char: ");
+        Serial.println(c);
+#endif
+    }
 }
 
 void clearFN_Buttons()

@@ -230,21 +230,15 @@ void updateScreen()
     switch (curState)
     {
     case HOME_STATE:
-        Serial.println("HOME SCREEN");
         homeScreen();
         break;
     case PRESET_STATE:
-        Serial.print("PRESET SCREEN: ");
-        Serial.println(cur_FN_Button);
         presetScreen();
         break;
     case PROGRAM_STATE:
-        Serial.print("PROGRAM SCREEN: ");
-        Serial.println(cur_FN_Button);
         programScreen();
         break;
     case RUN_STATE:
-        Serial.println("RUN SCREEN");
         runScreen();
         break;
     }
@@ -252,7 +246,13 @@ void updateScreen()
 
 void appendChar()
 {
-    lcd.setCursor(SET_MSG.length() + curString.length(), SET_LINE_NUMBER);
-    curString += c;
-    lcd.print(c);
+    if (curString.length() >= DISP_SET_STR_MAX_LEN) //check if you are trying to type off the screen
+    {
+        curString = c;
+    }
+    else
+    {
+        curString += c;
+    }
+    c = '\0'; //consume character
 }
