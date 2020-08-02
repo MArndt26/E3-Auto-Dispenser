@@ -6,70 +6,43 @@ const byte successPin = A2;
 void debugInit()
 {
     Serial.begin(9600); //for debuggin purposes
+    while (!Serial)
+    { // wait for serial port to connect. Needed for native USB
+    }
     pinMode(errorPin, OUTPUT);
     pinMode(successPin, OUTPUT);
 
+#if HUSH
     Serial.println("User Functions Initialized");
+#endif
 }
 
-void userError()
+void userError(String msg)
 {
-    Serial.println("Error");
+#if HUSH
+    Serial.print("Error: ");
+    Serial.println(msg);
+#endif
     digitalWrite(errorPin, HIGH);
     delay(100);
     digitalWrite(errorPin, LOW);
 }
 
-void userSuccess()
+void userSuccess(String msg)
 {
-    Serial.println("Success");
+#if HUSH
+    Serial.print("Success: ");
+    Serial.println(msg);
+
+#endif
     digitalWrite(successPin, HIGH);
     delay(100);
     digitalWrite(successPin, LOW);
 }
 
-void userError(String msg)
-{
-    Serial.print(msg);
-    Serial.print(": ");
-    userError();
-}
-
-void userSuccess(String msg)
-{
-    Serial.print(msg);
-    Serial.print(": ");
-    userSuccess();
-}
-
-void printLCD()
-{
-    Serial.println("------------------");
-    //first line
-    Serial.print("|");
-    Serial.print(WEIGHT_MSG);
-    // Serial.print(curString);
-    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN; i++)
-    {
-        Serial.print(' ');
-    }
-    Serial.println("g|");
-
-    //second line
-    Serial.print("|");
-    Serial.print(SET_MSG);
-    Serial.print(curString);
-    for (int i = 0; i < DISP_SET_STR_MAX_LEN - curString.length(); i++)
-    {
-        Serial.print(' ');
-    }
-    Serial.println("g|");
-
-    Serial.println("------------------");
-}
-
 void debugVars()
 {
+#if HUSH
     Serial.print("curStr: ");
     Serial.print(curString);
     Serial.print(", setStr: ");
@@ -78,13 +51,14 @@ void debugVars()
     Serial.print(c);
     Serial.print(", cur_fn: ");
     Serial.print(cur_FN_Button);
-    Serial.print(", fn: {");
-    for (int i = 0; i < 3; i++)
-    {
-        Serial.print(fnStrings[i]);
-        Serial.print(", ");
-    }
-
-    Serial.print("}");
+    Serial.print(", fn1: ");
+    Serial.print(fn1String);
+    Serial.print(", fn2: ");
+    Serial.print(fn2String);
+    Serial.print(", fn3: ");
+    Serial.print(fn3String);
+    Serial.print(", weightString: ");
+    Serial.println(weightString);
     Serial.println();
+#endif
 }

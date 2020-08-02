@@ -7,8 +7,9 @@ void masterInit()
     keypadInit();
 
     lcdInit();
-
+#if HUSH
     Serial.println("All Modules Initialized");
+#endif
 }
 
 void getInputs()
@@ -53,7 +54,6 @@ void getInputs()
  */
 void doStateChange()
 {
-    debugVars();
     switch (curState)
     {
     case HOME_STATE:
@@ -85,7 +85,15 @@ void doStateChange()
     case PRESET_STATE:
         if (c == ENTER)
         {
-            if (fnStrings[c - FN1] != "") //Valid (saved) function to run
+            if (c == FN1_Button && fn1String != "")
+            {
+                curState = RUN_STATE;
+            }
+            else if (c == FN2_Button && fn2String != "") //Valid (saved) function to run
+            {
+                curState = RUN_STATE;
+            }
+            else if (c == FN3_Button && fn3String != "") //Valid (saved) function to run
             {
                 curState = RUN_STATE;
             }
@@ -133,6 +141,7 @@ void doStateChange()
     }
     c = '\0'; //consume character used for state change
     curString = "";
+    debugVars();
     updateScreen();
 }
 

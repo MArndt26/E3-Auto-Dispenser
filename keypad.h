@@ -1,11 +1,9 @@
-
-
-// /*--------------KEYPAD VARS------------------*/
+/*--------------KEYPAD VARS------------------*/
 char c; //holds value read in by keypad
 
-const char FN1 = 'A';
-const char FN2 = 'B';
-const char FN3 = 'C';
+const char FN1_Button = 'A';
+const char FN2_Button = 'B';
+const char FN3_Button = 'C';
 const char TARE = 'D';
 const char ENTER = '#';
 
@@ -31,8 +29,10 @@ Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 void keypadInit()
 {
-    //Keypad object has no () constructor
+//Keypad object has no () constructor
+#if HUSH
     Serial.println("Keypad Initialized");
+#endif
 }
 
 void getKeyPressed()

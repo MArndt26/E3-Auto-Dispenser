@@ -1,12 +1,15 @@
+//HUSH used to remove all serial other than serial screen emulation
+#define HUSH 0
+
 #include <EEPROM.h>
 #include <Keypad.h>
 #include "LiquidCrystal_I2C.h"
+#include "HX711.h"
 #include "state.h"
 #include "keypad.h"
-#include "lcd.h"
-#include "HX711.h"
-#include "EE_MEM.h"
 #include "scale.h"
+#include "lcd.h"
+#include "EE_MEM.h"
 #include "debug.h"
 
 #include "controlFlow.h"
@@ -15,9 +18,26 @@ void setup()
 {
     masterInit();
 
+#if HUSH
     Serial.println("Setup Complete");
+#endif
+
+    debugVars();
+
+    cur_FN_Button = FN2_Button;
+    fn2String = "";
+    doStateChange();
 
     updateScreen();
+    delay(500);
+    for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN; i++)
+    {
+        char c = '1' + i;
+        fn2String += c;
+        updateScreen();
+
+        delay(500);
+    }
 }
 
 void loop()
@@ -26,7 +46,7 @@ void loop()
 
     if (c != '\0')
     {
-        if (c >= FN1 && c <= FN3) //function button pressed
+        if (c >= FN1_Button && c <= FN3_Button) //function button pressed
         {
             cur_FN_Button = c;
             doStateChange();

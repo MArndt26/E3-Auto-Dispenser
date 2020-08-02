@@ -1,14 +1,23 @@
-/*-------------EEPROM VALS------------*/
+/*-------------EEPROM VARS------------*/
 //https://www.arduino.cc/en/Reference/EEPROMGet
 
 int eeAddress = 0;
 
-String setString = "";              //set value saved to eeprom
-String fnStrings[3] = {"", "", ""}; //function strings corresponding to fn1, fn2, fn3
-
 void save()
 {
-    fnStrings[cur_FN_Button - FN1] = curString;
+    if (cur_FN_Button == FN1_Button)
+    {
+        fn1String = curString;
+    }
+    else if (cur_FN_Button == FN2_Button)
+    {
+        fn2String = curString;
+    }
+    else if (cur_FN_Button == FN3_Button)
+    {
+        fn3String = curString;
+    }
+    //else not trying to save fn button
     setString = curString;
     curString = "";
 }

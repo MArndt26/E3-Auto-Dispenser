@@ -10,5 +10,7 @@ HX711 scale;
 void scaleInit()
 {
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+#if HUSH
     Serial.println("Scale Initialized");
+#endif
 }
