@@ -1,6 +1,32 @@
 /*--------------LDC VARS----------------*/
 //Resource: https://gitlab.com/tandembyte/LCD_I2C
 
+//Custom Characters
+const byte LOCKED = 1;
+byte lockedDATA[] = {
+    B01110,
+    B10001,
+    B10001,
+    B11111,
+    B11011,
+    B11011,
+    B11111,
+    B00000};
+
+const byte UNLOCKED = 0;
+byte unlockedDATA[] = {
+    B01110,
+    B10000,
+    B10000,
+    B11111,
+    B11011,
+    B11011,
+    B11111,
+    B00000};
+
+//SCREEN
+const byte SCREEN_X = 16;
+
 //HOME SCREEN
 const byte WEIGHT_LINE_NUMBER = 0;
 const byte SET_LINE_NUMBER = 1;
@@ -8,11 +34,14 @@ const byte SET_LINE_NUMBER = 1;
 const byte SET_CURSOR_START = 4;
 const byte MASS_CURSOR_START = 5;
 
-const String SET_MSG = "SET VAl:";
+const String SET_MSG = "SetVal:";
 const String WEIGHT_MSG = "WEIGHT:";
 
 const byte DISP_SET_STR_MAX_LEN = 7;    //16 - 1 - 4; //Note: changing this can corrupt the data stored on eeprom
 const byte DISP_WEIGHT_STR_MAX_LEN = 8; //16 - 1 - 5
+
+//SHIFTING VARS
+byte offset = 0;
 
 //PRESET SCREEN
 const String PRESET_MSG = "PREST:";
@@ -110,6 +139,9 @@ void lcdInit()
 {
     lcd.init();
     lcd.backlight();
+    lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
+    lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
+    lcd.setCursor(0, 0);
 #if HUSH
     Serial.println("LCD Initialized");
 #endif
@@ -119,40 +151,49 @@ void lcdInit()
  * HOME_PAGE:
  * ------------------
  * |WEIGHT:12345678g|
- * |SET VAL:1234567g|
+ * |0SetVal:1234567g|
  * ------------------
  */
 void homeScreen()
 {
     //first line
-    Serial.print(WEIGHT_MSG);
-    Serial.print(weightString);
+    lcd.print(WEIGHT_MSG);
+    lcd.print(weightString);
     for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
     {
-        Serial.print(' ');
+        lcd.print(' ');
     }
-    Serial.println("g");
+    lcd.print("g");
 
     //second line
-    Serial.print(SET_MSG);
+    lcd.setCursor(0, 1);
+    if (curString == "")
+    {
+        lcd.write(LOCKED);
+    }
+    else
+    {
+        lcd.write(UNLOCKED);
+    }
+    lcd.print(SET_MSG);
 
     int length = DISP_SET_STR_MAX_LEN;
     if (curString.length() > 0)
     {
-        Serial.print(curString);
+        lcd.print(curString);
         length -= curString.length();
     }
     else
     {
-        Serial.print(setString);
+        lcd.print(setString);
         length -= setString.length();
     }
 
     for (int i = 0; i < length; i++)
     {
-        Serial.print(' ');
+        lcd.print(' ');
     }
-    Serial.println("g");
+    lcd.print("g");
 }
 /*
  * PRESET_PAGE: NOTE: get to this page by pressing A, B, C, D
@@ -165,16 +206,18 @@ void homeScreen()
 void presetScreen()
 {
     //first line
-    Serial.print(PRESET_MSG);
-    Serial.print(getFN_String());
+    lcd.print(PRESET_MSG);
+    lcd.print(getFN_String());
     for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN - getFN_String().length(); i++)
     {
-        Serial.print(' ');
+        lcd.print(' ');
     }
-    Serial.println("g");
+    lcd.print("g");
 
     //second line
-    Serial.print(PRESET_ENTER_MSG);
+    lcd.setCursor(0, 1);
+
+    lcd.print(PRESET_ENTER_MSG);
 }
 
 /*
@@ -188,16 +231,18 @@ void presetScreen()
 void programScreen()
 {
     //first line
-    Serial.print(PROGRAM_MSG);
-    Serial.print(curString);
+    lcd.print(PROGRAM_MSG);
+    lcd.print(curString);
     for (int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN - curString.length(); i++)
     {
-        Serial.print(' ');
+        lcd.print(' ');
     }
-    Serial.println("g");
+    lcd.print("g");
 
     //second line
-    Serial.print(PROGRAM_ENTER_MSG);
+    lcd.setCursor(0, 1);
+
+    lcd.print(PROGRAM_ENTER_MSG);
 }
 
 /*
@@ -210,23 +255,39 @@ void programScreen()
 void runScreen()
 {
     //first line
-    Serial.print(WEIGHT_MSG);
-    Serial.print(weightString);
+    lcd.print(WEIGHT_MSG);
+    lcd.print(weightString);
     for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
     {
-        Serial.print(' ');
+        lcd.print(' ');
     }
-    Serial.println("g");
+    lcd.print("g");
 
     //second line
-    Serial.print(SET_MSG);
-    Serial.print(setString);
-    Serial.print(RUN_WARN_MSG);
+    lcd.setCursor(0, 1);
+
+    String msg = SET_MSG + setString + RUN_WARN_MSG;
+
+    if (offset + SCREEN_X / 2 >= msg.length()) //check if end of message is in middle of screen
+    {
+        offset = 0; //go back to start
+    }
+    else if (offset + SCREEN_X < msg.length()) //substring will go out of bounds
+    {
+        msg = msg.substring(offset, msg.length());
+    }
+    else
+    {
+        msg = msg.substring(offset, offset + SCREEN_X);
+        msg += "         ";
+    }
+
+    lcd.print(msg);
 }
 
 void updateScreen()
 {
-    serialSetCursor(0, 0);
+    lcd.setCursor(0, 0);
     switch (curState)
     {
     case HOME_STATE:

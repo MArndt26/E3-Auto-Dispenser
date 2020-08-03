@@ -4,6 +4,12 @@ const byte INPUT_IS_FN = 1;
 const byte INPUT_IS_DIGIT = 2;
 const byte INPUT_IS_ENTER = 3;
 
+//TIME VARS
+int period = 500;
+int frontDelay = 2000;
+unsigned long time_now = 0;
+byte first = true;
+
 void masterInit()
 {
     debugInit();
@@ -110,7 +116,8 @@ void doStateChange()
         curState = HOME_STATE;
         break;
     }
-    c = '\0'; //consume character used for state change
+    time_now = millis(); //reset time
+    c = '\0';            //consume character used for state change
     curString = "";
 }
 

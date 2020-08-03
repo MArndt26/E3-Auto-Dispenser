@@ -3,6 +3,7 @@
 
 #include <EEPROM.h>
 #include <Keypad.h>
+#include <Wire.h>
 #include "LiquidCrystal_I2C.h"
 #include "HX711.h"
 #include "state.h"
@@ -29,7 +30,7 @@ void setup()
 
 void loop()
 {
-    handleInput();
+    handleInput(); //reads in and handles input
 
     switch (curState)
     {
@@ -40,6 +41,31 @@ void loop()
     case PROGRAM_STATE:
         break;
     case RUN_STATE:
+
+        if (first)
+        {
+            if (millis() - time_now > frontDelay)
+            {
+                offset++;
+                first = false;
+                time_now = millis();
+                updateScreen();
+            }
+        }
+        else if (millis() - time_now > period)
+        {
+            Serial.println(offset);
+            if (offset == 0)
+            {
+                first = true;
+            }
+            else
+            {
+                offset++;
+            }
+            time_now = millis();
+            updateScreen();
+        }
         break;
     }
 }
