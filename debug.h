@@ -17,24 +17,15 @@ void debugInit()
 #endif
 }
 
-void userError(String msg)
+void userError()
 {
-#if HUSH
-    Serial.print("Error: ");
-    Serial.println(msg);
-#endif
     digitalWrite(errorPin, HIGH);
     delay(100);
     digitalWrite(errorPin, LOW);
 }
 
-void userSuccess(String msg)
+void userSuccess()
 {
-#if HUSH
-    Serial.print("Success: ");
-    Serial.println(msg);
-
-#endif
     digitalWrite(successPin, HIGH);
     delay(100);
     digitalWrite(successPin, LOW);
@@ -58,7 +49,9 @@ void debugVars()
     Serial.print(", fn3: ");
     Serial.print(fn3String);
     Serial.print(", weightString: ");
-    Serial.println(weightString);
+    Serial.print(weightString);
+    // Serial.print(", weightRaw: ");
+    // Serial.print(curWeight);
     Serial.println();
 #endif
 }

@@ -1,5 +1,9 @@
 //HUSH used to remove all serial other than serial screen emulation
-#define HUSH 0
+#define HUSH 1
+#define HUSH_ERRORS 0
+#define HUSH_SUCCESS 1
+
+#define SERIAL_DEBUG 0
 
 #include <EEPROM.h>
 #include <Keypad.h>
@@ -11,6 +15,7 @@
 #include "scale.h"
 #include "lcd.h"
 #include "EE_MEM.h"
+#include "relay.h"
 #include "debug.h"
 
 #include "controlFlow.h"
@@ -21,27 +26,48 @@ void setup()
 
 #if HUSH
     Serial.println("Setup Complete");
+    debugVars();
 #endif
 
-    debugVars();
-
-    updateScreen();
+    updateScreenImmediate();
 }
 
 void loop()
 {
     handleInput(); //reads in and handles input
 
+#if HUSH
+    debugVars();
+#endif
+
     switch (curState)
     {
     case HOME_STATE:
+        relaysOff();
+        updateScreen();
         break;
     case PRESET_STATE:
+        relaysOff();
         break;
     case PROGRAM_STATE:
+        relaysOff();
         break;
     case RUN_STATE:
-
+        relaysOn();
+        // #if HUSH
+        //         Serial.print("weight int: ");
+        //         Serial.print(weightString.toInt());
+        //         Serial.print(", set int: ");
+        //         Serial.print(setString.toInt());
+        // #endif
+        if (weightString.toInt() >= setString.toInt())
+        {
+            doStateChange();
+            userSuccess();
+#if HUSH_SUCCESS
+            Serial.println("Success: Finished Filling Cup");
+#endif
+        }
         if (first)
         {
             if (millis() - time_now > frontDelay)
@@ -49,12 +75,11 @@ void loop()
                 offset++;
                 first = false;
                 time_now = millis();
-                updateScreen();
+                updateScreenImmediate();
             }
         }
         else if (millis() - time_now > period)
         {
-            Serial.println(offset);
             if (offset == 0)
             {
                 first = true;
@@ -64,7 +89,7 @@ void loop()
                 offset++;
             }
             time_now = millis();
-            updateScreen();
+            updateScreenImmediate();
         }
         break;
     }

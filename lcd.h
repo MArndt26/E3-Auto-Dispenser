@@ -65,6 +65,10 @@ String fn1String = ""; //fn1 value saved to eeprom
 String fn2String = ""; //fn2 value saved to eeprom
 String fn3String = ""; //fn3 value saved to eeprom
 
+//TARE SCREEN
+const String TARE_MSG = "------TARE------";
+const String BLANK_LINE = "                ";
+
 /**MAIN LCD object:
  *  params for constructor are as follows:
  *      (I2C address, disp resolution x, disp resolution y)
@@ -207,6 +211,7 @@ void presetScreen()
 {
     //first line
     lcd.print(PRESET_MSG);
+    lcd.print(cur_FN_Button);
     lcd.print(getFN_String());
     for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN - getFN_String().length(); i++)
     {
@@ -232,6 +237,7 @@ void programScreen()
 {
     //first line
     lcd.print(PROGRAM_MSG);
+    lcd.print(cur_FN_Button);
     lcd.print(curString);
     for (int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN - curString.length(); i++)
     {
@@ -285,8 +291,22 @@ void runScreen()
     lcd.print(msg);
 }
 
-void updateScreen()
+void tareScreen()
 {
+    //first line
+    lcd.setCursor(0, 0);
+    lcd.print(TARE_MSG);
+
+    //second line
+    lcd.setCursor(0, 1);
+    lcd.print(BLANK_LINE);
+}
+
+void updateScreenImmediate()
+{
+#if HUSH
+    Serial.println("screen updated");
+#endif
     lcd.setCursor(0, 0);
     switch (curState)
     {
@@ -315,5 +335,4 @@ void appendChar()
     {
         curString += c;
     }
-    c = '\0'; //consume character
 }

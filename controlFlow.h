@@ -12,13 +12,18 @@ byte first = true;
 
 void masterInit()
 {
+    relayInit();
+
     debugInit();
+
+    memoryInit();
 
     scaleInit();
 
     keypadInit();
 
     lcdInit();
+
 #if HUSH
     Serial.println("All Modules Initialized");
 #endif
@@ -38,11 +43,24 @@ void doStateChange()
         {
             if (curString != "") //check if user has input data to save
             {
-                save();
+                if (save())
+                {
+                    userSuccess();
+                }
+                else
+                {
+                    userError();
+                }
+#if HUSH_SUCCESS
+                Serial.println("Success: Saved Vars to Memory");
+#endif
             }
             else if (setString == "")
             {
-                userError("Cannot Run Without Set Val");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot Run Without Set Val");
+#endif
             }
             else //if no data to save, treat enter as start operation
             {
@@ -56,7 +74,10 @@ void doStateChange()
         }
         else
         {
-            userError("Tried to Change state with curr FN = null");
+            userError();
+#if HUSH_ERRORS
+            Serial.println("Error: Tried to Change state with curr FN = null");
+#endif
         }
         break;
     case PRESET_STATE:
@@ -76,16 +97,22 @@ void doStateChange()
             }
             else
             {
-                userError("Cannot run null function");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot run null function");
+#endif
             }
         }
         else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
         {
+            userError();
+#if HUSH_ERRORS
             String msg = "Non Consistant State Change Request: ";
             msg += prev_FN_Button;
             msg += " -> ";
             msg += cur_FN_Button;
-            userError(msg);
+            Serial.println(msg);
+#endif
         }
         else //user has pressed a function button twice to request program state for that var
         {
@@ -97,12 +124,25 @@ void doStateChange()
         {
             if (curString != "") //Check if there is a valid value to save
             {
-                save();
+                if (save())
+                {
+                    userSuccess();
+                }
+                else
+                {
+                    userError();
+                }
+#if HUSH_SUCCESS
+                Serial.println("Success: Saved Vars to Memory");
+#endif
                 curState = HOME_STATE;
             }
             else
             {
-                userError("User Tried to Save a Null Value");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: User Tried to Save a Null Value");
+#endif
             }
         }
         else //user has pressed a FN button again to escape the programming window
@@ -127,19 +167,31 @@ boolean checkValidInput()
     {
         if (curString == "")
         {
-            userError("Cannot Start with dp");
+            userError();
+#if HUSH_ERRORS
+            Serial.println("Error: Cannot Start with dp");
+#endif
         }
         else if (curString[curString.length() - 1] == '.')
         {
-            userError("Cannot have back-to-back dps");
+            userError();
+#if HUSH_ERRORS
+            Serial.println("Error: Cannot have back-to-back dps");
+#endif
         }
         else if (curString.length() == DISP_SET_STR_MAX_LEN)
         {
-            userError("Cannot add a dp at end of string");
+            userError();
+#if HUSH_ERRORS
+            Serial.println("Error: Cannot add a dp at end of string");
+#endif
         }
         else if (curString.indexOf(".") != -1)
         {
-            userError("Cannot have two dps");
+            userError();
+#if HUSH_ERRORS
+            Serial.println("Error: Cannot have two dps");
+#endif
         }
         else
         {
@@ -148,33 +200,41 @@ boolean checkValidInput()
     }
     else
     {
+        userError();
+#if HUSH_ERRORS
         String msg = "Unexpected Input Recieved: ";
         msg += c;
-        userError(msg);
+        Serial.println(msg);
+#endif
     }
     return false;
 }
 
-void handleInput()
+boolean handleFN()
 {
-    getKeyPressed(); //gets current key char and writes to global c
-
-    if (c != '\0') //check if input exists
+    if (c >= FN1_Button && c <= FN3_Button) //function button pressed
     {
-        if (curState == RUN_STATE)
-        {
-            doStateChange(); //break from run state if any key is pressd
-        }
-        if (c >= FN1_Button && c <= FN3_Button) //function button pressed
-        {
-            cur_FN_Button = c;
-            doStateChange();
-        }
-        else if (c == '#') //enter button pressed
-        {
-            doStateChange();
-        }
-        else if (c >= '0' && c <= '9')
+        cur_FN_Button = c;
+        doStateChange();
+        return true;
+    }
+    return false;
+}
+
+void handleKeypad(boolean keypadAllowed)
+{
+    if (c >= FN1_Button && c <= FN3_Button) //function button pressed
+    {
+        cur_FN_Button = c;
+        doStateChange();
+    }
+    else if (c == ENTER) //enter button pressed
+    {
+        doStateChange();
+    }
+    else if (keypadAllowed)
+    {
+        if (c >= '0' && c <= '9')
         {
             appendChar();
         }
@@ -182,19 +242,31 @@ void handleInput()
         {
             if (curString == "")
             {
-                userError("Cannot Start with dp");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot Start with dp");
+#endif
             }
             else if (curString[curString.length() - 1] == '.')
             {
-                userError("Cannot have back-to-back dps");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot have back-to-back dps");
+#endif
             }
             else if (curString.length() == DISP_SET_STR_MAX_LEN)
             {
-                userError("Cannot add a dp at end of string");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot add a dp at end of string");
+#endif
             }
             else if (curString.indexOf(".") != -1)
             {
-                userError("Cannot have two dps");
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Cannot have two dps");
+#endif
             }
             else //valid dp was entered
             {
@@ -203,11 +275,66 @@ void handleInput()
         }
         else
         {
-            String msg = "Unexpected Input Recieved: ";
+            userError();
+#if HUSH_ERRORS
+            String msg = "Unexpected Input Recieved w/ keypad: ";
             msg += c;
-            userError(msg);
+            Serial.println(msg);
+#endif
         }
-        debugVars();
-        updateScreen();
+    }
+    else
+    {
+        userError();
+#if HUSH_ERRORS
+        String msg = "Unexpected Input Recieved w/out keypad: ";
+        msg += c;
+        Serial.println(msg);
+#endif
+    }
+}
+
+void handleInput()
+{
+    getWeight(); //gets smoothed weight and assigns to weight string
+
+    getKeyPressed(); //gets current key char and writes to global c
+
+    if (c != '\0') //check if input exists
+    {
+        switch (curState)
+        {
+        case HOME_STATE:
+            if (c == TARE) //tare only works from home screen
+            {
+                tareScreen();
+                tareScale();
+            }
+            else
+            {
+                handleKeypad(true);
+            }
+            break;
+        case PRESET_STATE:
+            handleKeypad(false);
+            break;
+        case PROGRAM_STATE:
+            handleKeypad(true);
+            break;
+        case RUN_STATE:
+            doStateChange(); //break from run state if any key is pressd
+            break;
+        }
+        c = '\0'; //consume character
+        updateScreenImmediate();
+    }
+}
+
+void updateScreen()
+{
+    if (millis() - time_now > period)
+    {
+        time_now = millis();
+        updateScreenImmediate();
     }
 }
