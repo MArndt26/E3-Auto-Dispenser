@@ -2,6 +2,7 @@
 #define HUSH 1
 #define HUSH_ERRORS 0
 #define HUSH_SUCCESS 1
+#define KEYPAD_ENTER 1
 
 #define SERIAL_DEBUG 0
 

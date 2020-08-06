@@ -64,7 +64,14 @@ void doStateChange()
             }
             else //if no data to save, treat enter as start operation
             {
+#if KEYPAD_ENTER
                 curState = RUN_STATE;
+#else
+                userError();
+#if HUSH_ERRORS
+                Serial.println("Error: Must Press Foot Pedal to Start");
+#endif
+#endif
             }
         }
         else if (cur_FN_Button != '\0') //check if cur_FN_Button has been previously set
