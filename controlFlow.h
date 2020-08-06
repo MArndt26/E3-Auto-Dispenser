@@ -290,11 +290,22 @@ void handleKeypad(boolean keypadAllowed)
     }
 }
 
+void handleDigital()
+{
+    if (readFootSwitch())
+    {
+        c = ENTER;
+    }
+    delay(200); //delay to debounce button press
+}
+
 void handleInput()
 {
     getWeight(); //gets smoothed weight and assigns to weight string
 
     getKeyPressed(); //gets current key char and writes to global c
+
+    handleDigital(); //overrides key pressed if foot switch is pressed
 
     if (c != '\0') //check if input exists
     {

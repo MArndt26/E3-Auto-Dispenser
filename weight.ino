@@ -15,7 +15,7 @@
 #include "scale.h"
 #include "lcd.h"
 #include "EE_MEM.h"
-#include "relay.h"
+#include "digital.h"
 #include "debug.h"
 
 #include "controlFlow.h"

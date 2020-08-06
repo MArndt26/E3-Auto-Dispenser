@@ -1,6 +1,7 @@
-/*---------------Relay Vars-------------------*/
+/*---------------DIGITAL Vars-------------------*/
 const byte PUMP_CTRL_PIN = A3;
 const byte IO_1_PIN = A2;
+const byte FOOT_SWITCH_PIN = A1;
 
 void relaysOn()
 {
@@ -14,10 +15,16 @@ void relaysOff()
     digitalWrite(IO_1_PIN, LOW);
 }
 
+boolean readFootSwitch()
+{
+    return digitalRead(FOOT_SWITCH_PIN) == HIGH;
+}
+
 void relayInit()
 {
     pinMode(PUMP_CTRL_PIN, OUTPUT);
     pinMode(IO_1_PIN, OUTPUT);
+    pinMode(FOOT_SWITCH_PIN, INPUT);
     relaysOff();
 
 #if HUSH
