@@ -148,6 +148,10 @@ void doStateChange()
 #endif
             }
         }
+        else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
+        {
+            prev_FN_Button = cur_FN_Button; //update current fn button tree
+        }
         else //user has pressed a FN button again to escape the programming window
         {
             clearFN_Buttons();
