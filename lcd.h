@@ -329,7 +329,7 @@ void appendChar()
 {
     if (curString.length() >= DISP_SET_STR_MAX_LEN) //check if you are trying to type off the screen
     {
-        curString = c;
+        curString = "";
     }
     else
     {
