@@ -4,8 +4,6 @@ String weightString = "";
 const int LOADCELL_DOUT_PIN = 11;
 const int LOADCELL_SCK_PIN = 10;
 
-const double calibration_factor = 496.8f;
-
 //DATA SMOOTHING VARS
 const int numReadings = 10; //used for running average
 
@@ -13,7 +11,8 @@ double readings[numReadings]; // the readings from the analog input
 int readIndex = 0;            // the index of the current reading
 double total = 0.0f;          // the running total
 double average = 0.0f;        // the average
-double curWeight = 0;
+
+const double calibration_factor = 496.8f;
 
 HX711 scale;
 
@@ -44,8 +43,7 @@ void getWeight()
     // subtract the last reading:
     total = total - readings[readIndex];
     // read from the sensor:
-    curWeight = scale.get_value();
-    readings[readIndex] = curWeight;
+    readings[readIndex] = (double)scale.get_value() / calibration_factor;
 
     // add the reading to the total:
     total = total + readings[readIndex];
@@ -62,5 +60,5 @@ void getWeight()
     // calculate the average:
     average = total / (double)numReadings;
 
-    weightString = String(average);
+    weightString = String(average, 1);
 }

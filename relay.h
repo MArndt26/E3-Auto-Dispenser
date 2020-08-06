@@ -1,6 +1,6 @@
 /*---------------Relay Vars-------------------*/
-const byte PUMP_CTRL_PIN = A0;
-const byte IO_1_PIN = A3;
+const byte PUMP_CTRL_PIN = A3;
+const byte IO_1_PIN = A2;
 
 void relaysOn()
 {

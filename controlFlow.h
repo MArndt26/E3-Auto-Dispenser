@@ -83,15 +83,15 @@ void doStateChange()
     case PRESET_STATE:
         if (c == ENTER)
         {
-            if (c == FN1_Button && fn1String != "")
+            if (cur_FN_Button == FN1_Button && fn1String != "")
             {
                 curState = RUN_STATE;
             }
-            else if (c == FN2_Button && fn2String != "") //Valid (saved) function to run
+            else if (cur_FN_Button == FN2_Button && fn2String != "") //Valid (saved) function to run
             {
                 curState = RUN_STATE;
             }
-            else if (c == FN3_Button && fn3String != "") //Valid (saved) function to run
+            else if (cur_FN_Button == FN3_Button && fn3String != "") //Valid (saved) function to run
             {
                 curState = RUN_STATE;
             }

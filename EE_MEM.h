@@ -39,15 +39,31 @@ int readChunck(int start, byte mem_type)
     {
     case SET_MEM:
         setString = update;
+#if HUSH
+        Serial.print("setString = ");
+        Serial.println(setString);
+#endif
         break;
     case FN1_MEM:
         fn1String = update;
+#if HUSH
+        Serial.print("fn1String = ");
+        Serial.println(fn1String);
+#endif
         break;
     case FN2_MEM:
         fn2String = update;
+#if HUSH
+        Serial.print("fn2String = ");
+        Serial.println(fn2String);
+#endif
         break;
     case FN3_MEM:
         fn3String = update;
+#if HUSH
+        Serial.print("fn3String = ");
+        Serial.println(fn3String);
+#endif
         break;
     }
 
@@ -67,7 +83,7 @@ void EEPROM_ReadAll()
 
     eeAddressOffset = readChunck(eeAddressOffset, FN2_MEM);
 
-    eeAddressOffset = readChunck(eeAddressOffset, FN2_MEM);
+    eeAddressOffset = readChunck(eeAddressOffset, FN3_MEM);
 }
 
 int writeChunk(int start, byte mem_type)

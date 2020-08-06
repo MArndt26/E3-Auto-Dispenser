@@ -1,6 +1,6 @@
 /*---------------DEBUG VARS-----------------*/
-const byte errorPin = A1;
-const byte successPin = A2;
+const byte errorPin = 13;
+const byte successPin = 12;
 
 /*---------------DEBUG FUNCTIONS------------*/
 void debugInit()
@@ -50,8 +50,6 @@ void debugVars()
     Serial.print(fn3String);
     Serial.print(", weightString: ");
     Serial.print(weightString);
-    // Serial.print(", weightRaw: ");
-    // Serial.print(curWeight);
     Serial.println();
 #endif
 }
