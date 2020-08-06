@@ -108,14 +108,7 @@ void doStateChange()
         }
         else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
         {
-            userError();
-#if HUSH_ERRORS
-            String msg = "Non Consistant State Change Request: ";
-            msg += prev_FN_Button;
-            msg += " -> ";
-            msg += cur_FN_Button;
-            Serial.println(msg);
-#endif
+            prev_FN_Button = cur_FN_Button; //update current fn button tree
         }
         else //user has pressed a function button twice to request program state for that var
         {
