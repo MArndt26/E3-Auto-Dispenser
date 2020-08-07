@@ -12,7 +12,7 @@ int readIndex = 0;            // the index of the current reading
 double total = 0.0f;          // the running total
 double average = 0.0f;        // the average
 
-const double calibration_factor = 496.8f;
+const double calibration_factor = 464.5f;
 
 HX711 scale;
 
