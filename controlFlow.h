@@ -163,6 +163,7 @@ void doStateChange()
     time_now = millis(); //reset time
     c = '\0';            //consume character used for state change
     curString = "";
+    updateScreenImmediate();
 }
 
 boolean handleFN()
@@ -262,7 +263,7 @@ void handleInput()
             break;
         }
         c = '\0'; //consume character
-        updateScreenImmediate();
+        // updateScreenImmediate();
     }
 }
 

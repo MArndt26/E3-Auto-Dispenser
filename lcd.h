@@ -335,4 +335,5 @@ void appendChar()
     {
         curString += c;
     }
+    updateScreenImmediate();
 }
