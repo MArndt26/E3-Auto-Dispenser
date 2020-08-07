@@ -27,7 +27,7 @@ void relayInit()
     pinMode(FOOT_SWITCH_PIN, INPUT);
     relaysOff();
 
-#if HUSH
+    #if HUSH
     Serial.println("Relays Initialized");
-#endif
+    #endif
 }

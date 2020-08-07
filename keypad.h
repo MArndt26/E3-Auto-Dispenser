@@ -13,14 +13,14 @@ char cur_FN_Button = '\0';
 const byte ROWS = 4;
 const byte COLS = 4;
 
-char hexaKeys[ROWS][COLS] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', 'C'},
-    {'*', '0', '#', 'D'}};
+char hexaKeys[ROWS][COLS] ={
+    { '1', '2', '3', 'A' },
+    { '4', '5', '6', 'B' },
+    { '7', '8', '9', 'C' },
+    { '*', '0', '#', 'D' } };
 
-byte rowPins[ROWS] = {9, 8, 7, 6};
-byte colPins[COLS] = {5, 4, 3, 2};
+byte rowPins[ROWS] ={ 9, 8, 7, 6 };
+byte colPins[COLS] ={ 5, 4, 3, 2 };
 
 // //main keypad object
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
@@ -29,38 +29,38 @@ Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 void keypadInit()
 {
-//Keypad object has no () constructor
-#if HUSH
+    //Keypad object has no () constructor
+    #if HUSH
     Serial.println("Keypad Initialized");
-#endif
+    #endif
 }
 
 boolean getKeyPressed()
 {
     c = keypad.getKey(); //returns the key that is pressed or /0 if no key is pressed
 
-#if NO_HOME_KEYPAD_ENTER
+    #if NO_HOME_KEYPAD_ENTER
     if (curState == HOME_STATE && c == ENTER)
     {
         c = '\0';
         return false;
     }
-#endif
+    #endif
 
-#if SERIAL_DEBUG
+    #if SERIAL_DEBUG
     while (Serial.available() > 0)
     {
         c = Serial.read();
 
-#if HUSH
+        #if HUSH
         if (c != '\0')
         {
             Serial.print("char: ");
             Serial.println(c);
         }
-#endif
+        #endif
     }
-#endif
+    #endif
     return true;
 }
 

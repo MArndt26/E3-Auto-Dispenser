@@ -33,9 +33,9 @@ void scaleInit()
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
     scale.set_scale(calibration_factor); //Adjust to this calibration factor
     tareScale();
-#if HUSH
+    #if HUSH
     Serial.println("Scale Initialized");
-#endif
+    #endif
 }
 
 void getWeight()

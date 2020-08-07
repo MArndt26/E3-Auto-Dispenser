@@ -3,7 +3,7 @@
 
 //Custom Characters
 const byte LOCKED = 1;
-byte lockedDATA[] = {
+byte lockedDATA[] ={
     B01110,
     B10001,
     B10001,
@@ -11,10 +11,10 @@ byte lockedDATA[] = {
     B11011,
     B11011,
     B11111,
-    B00000};
+    B00000 };
 
 const byte UNLOCKED = 0;
-byte unlockedDATA[] = {
+byte unlockedDATA[] ={
     B01110,
     B10000,
     B10000,
@@ -22,7 +22,7 @@ byte unlockedDATA[] = {
     B11011,
     B11011,
     B11111,
-    B00000};
+    B00000 };
 
 //SCREEN
 const byte SCREEN_X = 16;
@@ -146,9 +146,9 @@ void lcdInit()
     lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
     lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
     lcd.setCursor(0, 0);
-#if HUSH
+    #if HUSH
     Serial.println("LCD Initialized");
-#endif
+    #endif
 }
 
 /*
@@ -304,9 +304,9 @@ void tareScreen()
 
 void updateScreenImmediate()
 {
-#if HUSH
+    #if HUSH
     Serial.println("screen updated");
-#endif
+    #endif
     lcd.setCursor(0, 0);
     switch (curState)
     {

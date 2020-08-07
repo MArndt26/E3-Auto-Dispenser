@@ -12,9 +12,9 @@ void debugInit()
     pinMode(errorPin, OUTPUT);
     pinMode(successPin, OUTPUT);
 
-#if HUSH
+    #if HUSH
     Serial.println("User Functions Initialized");
-#endif
+    #endif
 }
 
 void userError()

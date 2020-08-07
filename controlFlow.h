@@ -28,15 +28,15 @@ void masterInit()
 
     digitalWrite(errorPin, LOW); //stop showing error after all modules initialized
 
-#if HUSH
+    #if HUSH
     Serial.println("All Modules Initialized");
-#endif
+    #endif
 }
 
 /*
  * Function doStateChange()
  *  Assumptions: c in range (FN1->FN2) or c = ENTER
- *  
+ *
  */
 void doStateChange()
 {
@@ -55,16 +55,16 @@ void doStateChange()
                 {
                     userError();
                 }
-#if HUSH_SUCCESS
+                #if HUSH_SUCCESS
                 Serial.println("Success: Saved Vars to Memory");
-#endif
+                #endif
             }
             else if (setString == "")
             {
                 userError();
-#if HUSH_ERRORS
+                #if HUSH_ERRORS
                 Serial.println("Error: Cannot Run Without Set Val");
-#endif
+                #endif
             }
             else //if no data to save, treat enter as start operation
             {
@@ -79,9 +79,9 @@ void doStateChange()
         else
         {
             userError();
-#if HUSH_ERRORS
+            #if HUSH_ERRORS
             Serial.println("Error: Tried to Change state with curr FN = null");
-#endif
+            #endif
         }
         break;
     case PRESET_STATE:
@@ -105,9 +105,9 @@ void doStateChange()
             else
             {
                 userError();
-#if HUSH_ERRORS
+                #if HUSH_ERRORS
                 Serial.println("Error: Cannot run null function");
-#endif
+                #endif
             }
         }
         else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
@@ -132,17 +132,17 @@ void doStateChange()
                 {
                     userError();
                 }
-#if HUSH_SUCCESS
+                #if HUSH_SUCCESS
                 Serial.println("Success: Saved Vars to Memory");
-#endif
+                #endif
                 curState = HOME_STATE;
             }
             else
             {
                 userError();
-#if HUSH_ERRORS
+                #if HUSH_ERRORS
                 Serial.println("Error: User Tried to Save a Null Value");
-#endif
+                #endif
             }
         }
         else if (cur_FN_Button != prev_FN_Button) //check if user has pressed the same fn button twice
@@ -196,21 +196,21 @@ void handleKeypad(boolean keypadAllowed)
         else
         {
             userError();
-#if HUSH_ERRORS
+            #if HUSH_ERRORS
             String msg = "Unexpected Input Recieved w/ keypad: ";
             msg += c;
             Serial.println(msg);
-#endif
+            #endif
         }
     }
     else
     {
         userError();
-#if HUSH_ERRORS
+        #if HUSH_ERRORS
         String msg = "Unexpected Input Recieved w/out keypad: ";
         msg += c;
         Serial.println(msg);
-#endif
+        #endif
     }
 }
 
@@ -230,9 +230,9 @@ void handleInput()
     if (!getKeyPressed()) //gets current key char and writes to global c
     {
         userError();
-#if HUSH_ERRORS
+        #if HUSH_ERRORS
         Serial.println("Key Pressed Error");
-#endif
+        #endif
     }
     handleDigital(); //overrides key pressed if foot switch is pressed
 
