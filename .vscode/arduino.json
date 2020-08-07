@@ -1,6 +1,0 @@
-{
-    "programmer": "AVR ISP",
-    "board": "arduino:avr:uno",
-    "sketch": "weight.ino",
-    "port": "COM7"
-}
