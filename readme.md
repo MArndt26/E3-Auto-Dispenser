@@ -38,3 +38,7 @@
 - [x] Test with Hardware
 - [ ] Change all String variables to char arrays
 - [ ] Only update display when text has changed for performance update
+
+## Collabroators
+- MArndt26
+- JArndt94
