@@ -10,6 +10,7 @@
 #include <Keypad.h>
 #include <Wire.h>
 #include "LiquidCrystal_I2C.h"
+#include "time.h"
 #include "HX711.h"
 #include "state.h"
 #include "keypad.h"

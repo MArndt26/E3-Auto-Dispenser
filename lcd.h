@@ -336,4 +336,5 @@ void appendChar()
         curString += c;
     }
     updateScreenImmediate();
+    time_now = millis();
 }
