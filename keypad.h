@@ -35,9 +35,17 @@ void keypadInit()
 #endif
 }
 
-void getKeyPressed()
+boolean getKeyPressed()
 {
     c = keypad.getKey(); //returns the key that is pressed or /0 if no key is pressed
+
+#if NO_HOME_KEYPAD_ENTER
+    if (curState == HOME_STATE && c == ENTER)
+    {
+        c = '\0';
+        return false;
+    }
+#endif
 
 #if SERIAL_DEBUG
     while (Serial.available() > 0)
@@ -53,6 +61,7 @@ void getKeyPressed()
 #endif
     }
 #endif
+    return true;
 }
 
 void clearFN_Buttons()

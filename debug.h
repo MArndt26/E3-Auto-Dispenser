@@ -30,10 +30,9 @@ void userSuccess()
     delay(100);
     digitalWrite(successPin, LOW);
 }
-
+#if HUSH
 void debugVars()
 {
-#if HUSH
     Serial.print("curStr: ");
     Serial.print(curString);
     Serial.print(", setStr: ");
@@ -51,5 +50,5 @@ void debugVars()
     Serial.print(", weightString: ");
     Serial.print(weightString);
     Serial.println();
-#endif
 }
+#endif

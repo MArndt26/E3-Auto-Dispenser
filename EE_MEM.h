@@ -172,7 +172,6 @@ boolean save()
     }
     else
     {
-        return false;
 #if HUSH_ERRORS
         Serial.println("tried to save invalid fn button");
 #endif

@@ -16,6 +16,8 @@ void masterInit()
 
     debugInit();
 
+    digitalWrite(errorPin, HIGH); //signal error
+
     memoryInit();
 
     scaleInit();
@@ -23,6 +25,8 @@ void masterInit()
     keypadInit();
 
     lcdInit();
+
+    digitalWrite(errorPin, LOW); //stop showing error after all modules initialized
 
 #if HUSH
     Serial.println("All Modules Initialized");
@@ -64,14 +68,7 @@ void doStateChange()
             }
             else //if no data to save, treat enter as start operation
             {
-#if KEYPAD_ENTER
                 curState = RUN_STATE;
-#else
-                userError();
-#if HUSH_ERRORS
-                Serial.println("Error: Must Press Foot Pedal to Start");
-#endif
-#endif
             }
         }
         else if (cur_FN_Button != '\0') //check if cur_FN_Button has been previously set
@@ -168,55 +165,6 @@ void doStateChange()
     curString = "";
 }
 
-boolean checkValidInput()
-{
-    if (c == '.')
-    {
-        if (curString == "")
-        {
-            userError();
-#if HUSH_ERRORS
-            Serial.println("Error: Cannot Start with dp");
-#endif
-        }
-        else if (curString[curString.length() - 1] == '.')
-        {
-            userError();
-#if HUSH_ERRORS
-            Serial.println("Error: Cannot have back-to-back dps");
-#endif
-        }
-        else if (curString.length() == DISP_SET_STR_MAX_LEN)
-        {
-            userError();
-#if HUSH_ERRORS
-            Serial.println("Error: Cannot add a dp at end of string");
-#endif
-        }
-        else if (curString.indexOf(".") != -1)
-        {
-            userError();
-#if HUSH_ERRORS
-            Serial.println("Error: Cannot have two dps");
-#endif
-        }
-        else
-        {
-            return true;
-        }
-    }
-    else
-    {
-        userError();
-#if HUSH_ERRORS
-        String msg = "Unexpected Input Recieved: ";
-        msg += c;
-        Serial.println(msg);
-#endif
-    }
-    return false;
-}
-
 boolean handleFN()
 {
     if (c >= FN1_Button && c <= FN3_Button) //function button pressed
@@ -244,41 +192,6 @@ void handleKeypad(boolean keypadAllowed)
         if (c >= '0' && c <= '9')
         {
             appendChar();
-        }
-        else if (c == '.')
-        {
-            if (curString == "")
-            {
-                userError();
-#if HUSH_ERRORS
-                Serial.println("Error: Cannot Start with dp");
-#endif
-            }
-            else if (curString[curString.length() - 1] == '.')
-            {
-                userError();
-#if HUSH_ERRORS
-                Serial.println("Error: Cannot have back-to-back dps");
-#endif
-            }
-            else if (curString.length() == DISP_SET_STR_MAX_LEN)
-            {
-                userError();
-#if HUSH_ERRORS
-                Serial.println("Error: Cannot add a dp at end of string");
-#endif
-            }
-            else if (curString.indexOf(".") != -1)
-            {
-                userError();
-#if HUSH_ERRORS
-                Serial.println("Error: Cannot have two dps");
-#endif
-            }
-            else //valid dp was entered
-            {
-                appendChar();
-            }
         }
         else
         {
@@ -314,8 +227,13 @@ void handleInput()
 {
     getWeight(); //gets smoothed weight and assigns to weight string
 
-    getKeyPressed(); //gets current key char and writes to global c
-
+    if (!getKeyPressed()) //gets current key char and writes to global c
+    {
+        userError();
+#if HUSH_ERRORS
+        Serial.println("Key Pressed Error");
+#endif
+    }
     handleDigital(); //overrides key pressed if foot switch is pressed
 
     if (c != '\0') //check if input exists

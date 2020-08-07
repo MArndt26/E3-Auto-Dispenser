@@ -1,8 +1,8 @@
 //HUSH used to remove all serial other than serial screen emulation
-#define HUSH 1
+#define HUSH 0
 #define HUSH_ERRORS 0
-#define HUSH_SUCCESS 1
-#define KEYPAD_ENTER 1
+#define HUSH_SUCCESS 0
+#define NO_HOME_KEYPAD_ENTER 1
 
 #define SERIAL_DEBUG 0
 
@@ -55,12 +55,6 @@ void loop()
         break;
     case RUN_STATE:
         relaysOn();
-        // #if HUSH
-        //         Serial.print("weight int: ");
-        //         Serial.print(weightString.toInt());
-        //         Serial.print(", set int: ");
-        //         Serial.print(setString.toInt());
-        // #endif
         if (weightString.toInt() >= setString.toInt())
         {
             doStateChange();
