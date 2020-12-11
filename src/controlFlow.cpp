@@ -1,8 +1,12 @@
-/*----------------CONTROL FLOW VARS---------------*/
-const byte NO_INPUT = 0;
-const byte INPUT_IS_FN = 1;
-const byte INPUT_IS_DIGIT = 2;
-const byte INPUT_IS_ENTER = 3;
+#include "controlFlow.h"
+#include "lcd.h"
+#include "buttons.h"
+#include "digital.h"
+#include "debug.h"
+#include "EE_MEM.h"
+#include "scale.h"
+#include "state.h"
+#include "time.h"
 
 void masterInit()
 {

@@ -41,7 +41,7 @@ const byte DISP_SET_STR_MAX_LEN = 7;    //16 - 1 - 4; //Note: changing this can 
 const byte DISP_WEIGHT_STR_MAX_LEN = 8; //16 - 1 - 5
 
 //SHIFTING VARS
-byte offset = 0;
+unsigned short offset = 0;
 
 //PRESET SCREEN
 const String PRESET_MSG = "PREST:";
@@ -163,7 +163,7 @@ void homeScreen()
     //first line
     lcd.print(WEIGHT_MSG);
     lcd.print(weightString);
-    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
+    for (unsigned int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
     {
         lcd.print(' ');
     }
@@ -213,7 +213,7 @@ void presetScreen()
     lcd.print(PRESET_MSG);
     lcd.print(cur_FN_Button);
     lcd.print(getFN_String());
-    for (int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN - getFN_String().length(); i++)
+    for (unsigned int i = 0; i < PRESET_DISP_SET_STR_MAX_LEN - getFN_String().length(); i++)
     {
         lcd.print(' ');
     }
@@ -239,7 +239,7 @@ void programScreen()
     lcd.print(PROGRAM_MSG);
     lcd.print(cur_FN_Button);
     lcd.print(curString);
-    for (int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN - curString.length(); i++)
+    for (unsigned int i = 0; i < PROGRAM_DISP_SET_STR_MAX_LEN - curString.length(); i++)
     {
         lcd.print(' ');
     }
@@ -263,7 +263,7 @@ void runScreen()
     //first line
     lcd.print(WEIGHT_MSG);
     lcd.print(weightString);
-    for (int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
+    for (unsigned int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
     {
         lcd.print(' ');
     }

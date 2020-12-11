@@ -1,13 +1,11 @@
 /*-------------EEPROM VARS------------*/
 //https://www.arduino.cc/en/Reference/EEPROMGet
 
-const byte SET_MEM = 0;
-const byte FN1_MEM = 1;
-const byte FN2_MEM = 2;
-const byte FN3_MEM = 3;
+#include "EE_MEM.h"
+#include "lcd.h"
+#include "buttons.h"
 
-boolean
-checkValidMem(char c)
+int checkValidMem(char c)
 {
     if ((c <= '9' && c >= '0') || c == '.') //only read in digits and dp as valid input
     {

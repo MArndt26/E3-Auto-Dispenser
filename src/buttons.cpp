@@ -1,17 +1,13 @@
-/*--------------KEYPAD VARS------------------*/
-char c; //holds value read in by keypad
+#include "buttons.h"
 
-const char FN1_Button = 'A';
-const char FN2_Button = 'B';
-const char FN3_Button = 'C';
-const char TARE = 'D';
-const char ENTER = '#';
+#include <Keypad.h>
+
+
+/*--------------KEYPAD VARS------------------*/
+char c = '\0'; //holds value read in by keypad
 
 char prev_FN_Button = '\0';
 char cur_FN_Button = '\0';
-
-const byte ROWS = 4;
-const byte COLS = 4;
 
 char hexaKeys[ROWS][COLS] ={
     { '1', '2', '3', 'A' },
@@ -35,7 +31,7 @@ void keypadInit()
     #endif
 }
 
-boolean getKeyPressed()
+int getKeyPressed()
 {
     c = keypad.getKey(); //returns the key that is pressed or /0 if no key is pressed
 
@@ -45,7 +41,7 @@ boolean getKeyPressed()
     if (curState == HOME_STATE && c == ENTER)
     {
         c = '\0';  //disreguard enter from keypad
-        return false;
+        return 0;
     }
     #endif
 

@@ -1,19 +1,13 @@
-//HUSH used to remove all serial other than serial screen emulation
-#define HUSH 0
-#define HUSH_ERRORS 0
-#define HUSH_SUCCESS 0
-#define NO_HOME_KEYPAD_ENTER 1
-
-#define SERIAL_DEBUG 0
+#include "main.h"
 
 #include <EEPROM.h>
 #include <Keypad.h>
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include "LiquidCrystal_I2C.h"
 #include "time.h"
 #include "HX711.h"
 #include "state.h"
-#include "keypad.h"
+#include "buttons.h"
 #include "scale.h"
 #include "lcd.h"
 #include "EE_MEM.h"
