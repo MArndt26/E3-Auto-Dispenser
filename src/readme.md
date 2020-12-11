@@ -30,7 +30,7 @@
 
 ## Schematic:
 
-![schematic](/images/schematic.png)
+![schematic](/docs/images/schematic.png)
 
 ## TODO:
 
