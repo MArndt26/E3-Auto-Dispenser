@@ -9,8 +9,8 @@ void debugInit()
     while (!Serial)
     { // wait for serial port to connect. Needed for native USB
     }
-    pinMode(errorPin, OUTPUT);
-    pinMode(successPin, OUTPUT);
+    pinMode(errorPin, OUTPUT);  //set error pin as an output
+    pinMode(successPin, OUTPUT); //set success pin as output
 
     #if HUSH
     Serial.println("User Functions Initialized");
@@ -19,6 +19,7 @@ void debugInit()
 
 void userError()
 {
+    // flash error led
     digitalWrite(errorPin, HIGH);
     delay(100);
     digitalWrite(errorPin, LOW);
@@ -26,6 +27,7 @@ void userError()
 
 void userSuccess()
 {
+    // flash success led
     digitalWrite(successPin, HIGH);
     delay(100);
     digitalWrite(successPin, LOW);
@@ -33,6 +35,7 @@ void userSuccess()
 #if HUSH
 void debugVars()
 {
+    //print variabled to serial monitor
     Serial.print("curStr: ");
     Serial.print(curString);
     Serial.print(", setStr: ");

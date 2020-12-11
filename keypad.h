@@ -39,10 +39,12 @@ boolean getKeyPressed()
 {
     c = keypad.getKey(); //returns the key that is pressed or /0 if no key is pressed
 
+    while (keypad.getKey()); //wait until key is released
+
     #if NO_HOME_KEYPAD_ENTER
     if (curState == HOME_STATE && c == ENTER)
     {
-        c = '\0';
+        c = '\0';  //disreguard enter from keypad
         return false;
     }
     #endif
