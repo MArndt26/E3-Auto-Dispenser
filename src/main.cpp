@@ -1,6 +1,5 @@
 #include "main.h"
 
-#include <EEPROM.h>
 #include <Keypad.h>
 #include <Wire.h>
 #include "LiquidCrystal_I2C.h"
@@ -20,10 +19,10 @@ void setup()
 {
     masterInit();
 
-    #if HUSH
+#if HUSH
     Serial.println("Setup Complete");
     debugVars();
-    #endif
+#endif
 
     updateScreenImmediate();
 }
@@ -32,9 +31,9 @@ void loop()
 {
     handleInput(); //reads in and handles input
 
-    #if HUSH
+#if HUSH
     debugVars();
-    #endif
+#endif
 
     switch (curState)
     {
@@ -54,9 +53,9 @@ void loop()
         {
             doStateChange();
             userSuccess();
-            #if HUSH_SUCCESS
+#if HUSH_SUCCESS
             Serial.println("Success: Finished Filling Cup");
-            #endif
+#endif
         }
         if (first)
         {

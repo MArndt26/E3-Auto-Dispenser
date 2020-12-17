@@ -1,3 +1,6 @@
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <Arduino.h>
 
 //HUSH used to remove all serial other than serial screen emulation
@@ -7,3 +10,5 @@
 #define NO_HOME_KEYPAD_ENTER 1
 
 #define SERIAL_DEBUG 0
+
+#endif

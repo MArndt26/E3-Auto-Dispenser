@@ -20,8 +20,6 @@ extern double average;               // the average
 
 #define calibration_factor 464.5f
 
-extern HX711 scale;
-
 /*----------------SCALE FUNCTIONS----------------*/
 void tareScale();
 

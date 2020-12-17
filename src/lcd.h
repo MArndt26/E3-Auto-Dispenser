@@ -8,16 +8,7 @@
 
 //Custom Characters
 #define LOCKED 1
-#define lockedDATA                                                     \
-    {                                                                  \
-        B01110, B10001, B10001, B11111, B11011, B11011, B11111, B00000 \
-    }
-
 #define UNLOCKED 0
-#define unlockedDATA                                                   \
-    {                                                                  \
-        B01110, B10000, B10000, B11111, B11011, B11011, B11111, B00000 \
-    }
 
 //SCREEN
 #define SCREEN_X 16
@@ -50,10 +41,10 @@ extern unsigned short offset;
 #define PROGRAM_MSG "PROGR:"
 #define PROGRAM_ENTER_MSG "PRESS # to PROGR"
 
-#define PROGRAM_DISP_SET_STR_MAX_LEN = 9;
+#define PROGRAM_DISP_SET_STR_MAX_LEN 9
 
 //RUN SCREEN
-#define RUN_WARN_MSG "g [PRESS ANY KEY TO STOP]";
+#define RUN_WARN_MSG "g [PRESS ANY KEY TO STOP]"
 
 extern String curString; //value user is currently typing in
 extern String setString; //set value saved to eeprom
@@ -63,14 +54,8 @@ extern String fn2String; //fn2 value saved to eeprom
 extern String fn3String; //fn3 value saved to eeprom
 
 //TARE SCREEN
-#define TARE_MSG = "------TARE------";
-#define BLANK_LINE = "                ";
-
-/**MAIN LCD object:
- *  params for constructor are as follows:
- *      (I2C address, disp resolution x, disp resolution y)
- */
-extern LiquidCrystal_I2C lcd;
+#define TARE_MSG "------TARE------"
+#define BLANK_LINE "                "
 
 /*--------------LCD FUNCTIONS-----------------*/
 String getFN_String();

@@ -2,6 +2,8 @@
 //https://www.arduino.cc/en/Reference/EEPROMGet
 
 #include "EE_MEM.h"
+#include <EEPROM.h>
+#include <LiquidCrystal_I2C.h>
 #include "lcd.h"
 #include "buttons.h"
 
@@ -21,12 +23,12 @@ int readChunck(int start, byte mem_type)
     for (i = start; i < start + DISP_SET_STR_MAX_LEN; i++)
     {
         c = EEPROM.read(i);
-        #if HUSH
+#if HUSH
         Serial.print("c: ");
         Serial.print(c);
         Serial.print(", i: ");
         Serial.println(i);
-        #endif
+#endif
         if (checkValidMem(c)) //only read in digits and dp as valid input
         {
             update += c;
@@ -37,31 +39,31 @@ int readChunck(int start, byte mem_type)
     {
     case SET_MEM:
         setString = update;
-        #if HUSH
+#if HUSH
         Serial.print("setString = ");
         Serial.println(setString);
-        #endif
+#endif
         break;
     case FN1_MEM:
         fn1String = update;
-        #if HUSH
+#if HUSH
         Serial.print("fn1String = ");
         Serial.println(fn1String);
-        #endif
+#endif
         break;
     case FN2_MEM:
         fn2String = update;
-        #if HUSH
+#if HUSH
         Serial.print("fn2String = ");
         Serial.println(fn2String);
-        #endif
+#endif
         break;
     case FN3_MEM:
         fn3String = update;
-        #if HUSH
+#if HUSH
         Serial.print("fn3String = ");
         Serial.println(fn3String);
-        #endif
+#endif
         break;
     }
 
@@ -104,39 +106,39 @@ int writeChunk(int start, byte mem_type)
         break;
     }
 
-    #if HUSH
+#if HUSH
     Serial.print("update: ");
     Serial.println(update);
-    #endif
+#endif
 
-    int i = 0; //index var
+    unsigned int i = 0; //index var
     for (i = start; i < start + DISP_SET_STR_MAX_LEN; i++)
     {
-        #if HUSH
+#if HUSH
         Serial.print("c[");
         Serial.print(i - start);
         Serial.print(']');
-        #endif
+#endif
 
         if (i - start < update.length())
         {
-            #if HUSH
+#if HUSH
             Serial.print(update[i - start]);
-            #endif
+#endif
             EEPROM.update(i, update[i - start]);
         }
         else
         {
-            #if HUSH
+#if HUSH
             Serial.print("*");
-            #endif
+#endif
             EEPROM.update(i, 0xFF); //clear memory
         }
 
-        #if HUSH
+#if HUSH
         Serial.print(", ind: ");
         Serial.println(i);
-        #endif
+#endif
     }
     return i;
 }
@@ -154,7 +156,7 @@ void EEPROM_WriteAll()
     eeAddrOffset = writeChunk(eeAddrOffset, FN3_MEM);
 }
 
-boolean save()
+int save()
 {
     if (cur_FN_Button == FN1_Button)
     {
@@ -170,9 +172,9 @@ boolean save()
     }
     else
     {
-        #if HUSH_ERRORS
+#if HUSH_ERRORS
         Serial.println("tried to save invalid fn button");
-        #endif
+#endif
     }
     //else not trying to save fn button
     Serial.print("fn1String: ");
@@ -188,7 +190,7 @@ void memoryInit()
     EEPROM_ReadAll();
     c = '\0'; //reset global character c
 
-    #if HUSH
+#if HUSH
     Serial.println("Memory Initialized");
-    #endif
+#endif
 }

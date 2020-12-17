@@ -5,8 +5,8 @@
 
 /*--------------TIME VARS----------------*/
 extern unsigned int period;
-unsigned int frontDelay;
-unsigned long time_now;
-extern byte first;
+extern unsigned int frontDelay;
+extern unsigned long time_now;
+extern int first;
 
 #endif

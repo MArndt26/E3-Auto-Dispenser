@@ -1,10 +1,8 @@
 #include "scale.h"
+#include <HX711.h>
 
 /*----------------SCALE VARS----------------*/
 String weightString = "";
-
-//DATA SMOOTHING VARS
-const int numReadings = 10; //used for running average
 
 double readings[numReadings]; // the readings from the analog input
 int readIndex = 0;            // the index of the current reading

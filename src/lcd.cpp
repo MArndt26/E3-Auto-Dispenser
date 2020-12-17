@@ -1,4 +1,13 @@
 #include "lcd.h"
+#include <LiquidCrystal_I2C.h>
+#include "buttons.h"
+#include "time.h"
+#include "state.h"
+#include "scale.h"
+
+uint8_t lockedDATA[8] = {B01110, B10001, B10001, B11111, B11011, B11011, B11111, B00000};
+
+uint8_t unlockedDATA[8] = {B01110, B10000, B10000, B11111, B11011, B11011, B11111, B00000};
 
 unsigned short offset = 0;
 
