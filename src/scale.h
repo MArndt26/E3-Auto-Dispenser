@@ -3,6 +3,11 @@
 
 #include "main.h"
 
+#if CALIBRATE
+#include <HX711.h>
+extern HX711 scale;
+#endif
+
 /*----------------SCALE VARS----------------*/
 extern String weightString;
 

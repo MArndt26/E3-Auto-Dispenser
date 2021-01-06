@@ -3,6 +3,11 @@
 
 #include "main.h"
 
+#if CALIBRATE
+#include "LiquidCrystal_I2C.h"
+extern LiquidCrystal_I2C lcd;
+#endif
+
 /*--------------LDC VARS----------------*/
 //Resource: https://gitlab.com/tandembyte/LCD_I2C
 
