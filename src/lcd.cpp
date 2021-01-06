@@ -95,6 +95,9 @@ void lcdInit()
     lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
     lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
     lcd.setCursor(0, 0);
+    lcd.print("LCD Initialized");
+    lcd.setCursor(0, 1);
+    lcd.print("Connect Scale");
 #if HUSH
     Serial.println("LCD Initialized");
 #endif
