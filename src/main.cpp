@@ -1,5 +1,17 @@
 #include "main.h"
 
+#if CALIBRATE
+#include "calibrate.h"
+void setup()
+{
+    setup_calibrate_scale();
+}
+void loop()
+{
+    calibrate_scale();
+}
+#else
+
 #include <Keypad.h>
 #include <Wire.h>
 #include "LiquidCrystal_I2C.h"
@@ -83,3 +95,4 @@ void loop()
         break;
     }
 }
+#endif

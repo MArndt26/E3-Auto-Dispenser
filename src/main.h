@@ -11,4 +11,6 @@
 
 #define SERIAL_DEBUG 0
 
+#define CALIBRATE 1
+
 #endif
