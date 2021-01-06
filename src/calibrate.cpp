@@ -1,6 +1,8 @@
 #ifndef CALIBRATE_H
 #define CALIBRATE_H
 
+#if CALIBRATE
+
 #include "calibrate.h"
 #include "lcd.h"
 #include "HX711.h"
@@ -122,5 +124,7 @@ void calibrate_scale()
         }
     }
 }
+
+#endif
 
 #endif //CALIBRATE_H

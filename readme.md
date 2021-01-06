@@ -44,6 +44,8 @@ This Project is used to create a control pad and scale to dispense adhesive unti
   - Press `t` on computer or `D` button on keypad to tare scale
   - Using the instructions above manipulate the calibration factor until the known value matches the displayed value
 
+`Remember to Change the CALIBRATE definition back to 0 before use in operations`
+
 ## Resources/Inspiration:
 
 ### Load Cell:

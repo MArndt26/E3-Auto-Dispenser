@@ -12,6 +12,6 @@
 #define SERIAL_DEBUG 0
 
 //used to convert between calibration mode
-#define CALIBRATE 1
+#define CALIBRATE 0
 
 #endif

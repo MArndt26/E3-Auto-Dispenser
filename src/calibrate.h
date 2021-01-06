@@ -1,7 +1,9 @@
 #include "main.h"
 
-#define BLANK_LINE "                "
+#if CALIBRATE
 
 void setup_calibrate_scale();
 
 void calibrate_scale();
+
+#endif
