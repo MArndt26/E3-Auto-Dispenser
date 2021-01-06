@@ -8,7 +8,16 @@
 #include "debug.h"
 #include "buttons.h"
 
-float factor = 464.5f; //464.5 worked best from initial testing
+#define CHARMAP_SIZE 9
+const struct
+{
+    char from[CHARMAP_SIZE];
+    char to[CHARMAP_SIZE];
+    float val[CHARMAP_SIZE];
+} charMap = {
+    .from = {'q', 'w', 'e', 'r', 'a', 's', 'd', 'f', 't'},
+    .to = {'1', '2', '3', 'A', '4', '5', '6', 'B', TARE},
+    .val = {0.1, 1, 10, 100, -0.1, -1, -10, -100, NAN}};
 
 void update_lcd()
 {
@@ -29,7 +38,7 @@ void update_lcd()
 
     int length = 8;
 
-    String factorStr = String(factor);
+    String factorStr = String(calibration_factor);
     if (factorStr.length() > 0)
     {
         lcd.print(factorStr);
@@ -59,22 +68,24 @@ void setup_calibrate_scale()
     Serial.println("HX711 calibration");
     Serial.println("Remove all weight from scale");
     Serial.println("After readings begin, place known weight on scale");
-    Serial.println("Press + or a to increase calibration factor");
-    Serial.println("Press - or z to decrease calibration factor");
-    Serial.println("Press t to tare scale");
+    Serial.println("For Computer Serial interation use the following:");
+    Serial.println("\tq, w, e, r --> calibration factor += 0.1, 1, 10, 100");
+    Serial.println("\ta, s, d, f --> calibration factor -= 0.1, 1, 10, 100");
+    Serial.println("For Keypad Matrix interaction use the following:");
+    Serial.println("\t1, 2, 3, A --> calibration factor += 0.1, 1, 10, 100");
+    Serial.println("\t4, 5, 6, B --> calibration factor -= 0.1, 1, 10, 100");
+    Serial.println("Press t on computer or D button on keypad to tare scale\n\n");
 }
 
 void calibrate_scale()
 {
-    scale.set_scale(factor); //Adjust to this calibration factor
-
     Serial.print("Reading: ");
     getWeight();
 
     Serial.print(weightString);
     Serial.print(" grams");
     Serial.print(" calibration_factor: ");
-    Serial.print(factor);
+    Serial.print(calibration_factor);
     Serial.println();
 
     update_lcd();
@@ -87,47 +98,28 @@ void calibrate_scale()
     {
         c = Serial.read(); // override keypad with serial input
 
-        if (c == 't' || c == 'T')
+        for (int i = 0; i < CHARMAP_SIZE; i++)
         {
-            c = TARE;
+            if (c == charMap.from[i])
+            {
+                c = charMap.to[i];
+                break;
+            }
         }
     }
 
-    if (c == '1')
+    for (int i = 0; i < CHARMAP_SIZE; i++)
     {
-        factor += 0.1;
-    }
-    else if (c == '2')
-    {
-        factor -= 1;
-    }
-    else if (c == '3')
-    {
-        factor += 10;
-    }
-    else if (c == FN1_Button)
-    {
-        factor += 100;
-    }
-    else if (c == '4')
-    {
-        factor -= 0.1;
-    }
-    else if (c == '5')
-    {
-        factor -= 1;
-    }
-    else if (c == '6')
-    {
-        factor -= 10;
-    }
-    else if (c == FN2_Button)
-    {
-        factor -= 100;
-    }
-    else if (c == TARE)
-    {
-        tareScale();
+        if (c == TARE)
+        {
+            tareScale();
+            break;
+        }
+        else if (c == charMap.to[i])
+        {
+            calibration_factor += charMap.val[i];
+            break;
+        }
     }
 }
 

@@ -4,6 +4,12 @@
 /*----------------SCALE VARS----------------*/
 String weightString = "";
 
+#if CALIBRATE
+float calibration_factor = 464.5f; //464.5 worked best from initial testing
+#else
+const float calibration_factor = 464.5f; //464.5 worked best from initial testing
+#endif
+
 double readings[numReadings]; // the readings from the analog input
 int readIndex = 0;            // the index of the current reading
 double total = 0.0f;          // the running total

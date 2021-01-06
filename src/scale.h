@@ -23,7 +23,11 @@ extern int readIndex;                // the index of the current reading
 extern double total;                 // the running total
 extern double average;               // the average
 
-#define calibration_factor 464.5f
+#if CALIBRATE
+extern float calibration_factor;
+#else
+extern const float calibration_factor;
+#endif
 
 /*----------------SCALE FUNCTIONS----------------*/
 void tareScale();
