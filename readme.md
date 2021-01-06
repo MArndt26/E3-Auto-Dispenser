@@ -1,6 +1,6 @@
 # Auto Adhesive Dispenser
 
-###### This Project is used to create a control pad and scale to dispense adhesive until a weight limit is reached.
+This Project is used to create a control pad and scale to dispense adhesive until a weight limit is reached. E3 Displays uses various manufacturing processes when fabricating the customized display stacks for its customers. One of these processes involves using precise amounts of adhesive for bonding displays to cover glass. In the past, this has been a manual process, requiring operators to spend large amounts of time preparing the adhesive for the bonding process. This project automates this by bundling all the prep work into one location, controlled electronically.
 
 ## External Libraries used:
 
@@ -9,24 +9,6 @@
 - Wire.h
 - LiquidCrystal_I2c.h
 - HX711.h
-
-## Resources/Inspiration:
-
-### Load Cell:
-
-- https://www.instructables.com/id/Arduino-Bathroom-Scale-With-50-Kg-Load-Cells-and-H/
-- https://create.arduino.cc/projecthub/Fedeasche/arduino-uno-high-precision-counting-scale-3f484b
-- https://github.com/bogde/HX711
-
-### Keypad:
-
-- https://www.circuitbasics.com/how-to-set-up-a-keypad-on-an-arduino/
-
-### Display:
-
-- https://www.makerguides.com/character-i2c-lcd-arduino-tutorial/
-- https://maxpromer.github.io/LCD-Character-Creator/
-- http://avtanski.net/projects/lcd/
 
 ## Schematic:
 
@@ -61,6 +43,24 @@
     ```
   - Press `t` on computer or `D` button on keypad to tare scale
   - Using the instructions above manipulate the calibration factor until the known value matches the displayed value
+
+## Resources/Inspiration:
+
+### Load Cell:
+
+- https://www.instructables.com/id/Arduino-Bathroom-Scale-With-50-Kg-Load-Cells-and-H/
+- https://create.arduino.cc/projecthub/Fedeasche/arduino-uno-high-precision-counting-scale-3f484b
+- https://github.com/bogde/HX711
+
+### Keypad:
+
+- https://www.circuitbasics.com/how-to-set-up-a-keypad-on-an-arduino/
+
+### Display:
+
+- https://www.makerguides.com/character-i2c-lcd-arduino-tutorial/
+- https://maxpromer.github.io/LCD-Character-Creator/
+- http://avtanski.net/projects/lcd/
 
 ## TODO:
 
