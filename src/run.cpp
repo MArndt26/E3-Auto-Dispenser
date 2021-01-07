@@ -9,6 +9,25 @@
 #include "controlFlow.h"
 #include "buttons.h"
 
+/*
+ * RUN_PAGE: NOTE: get to this page by pressing # from Home Page when SET VAL has been entered
+ * ------------------
+ * |S:1234  C:1234.5|
+ * | Press to Halt  |
+ * ------------------
+ */
+void updateRunScreen()
+{
+    //first line
+    lcd.setCursor(2, 0);
+    lcd.print(setString);
+
+    //second line
+    lcd.setCursor(10, 0);
+    lcd.print(weightString);
+    lcd.print("      "); //clsear out rest of frame
+}
+
 void highPerformanceRun()
 {
     boolean first = true;
@@ -28,30 +47,13 @@ void highPerformanceRun()
             return;
         }
 
-        if (first)
-        {
-            offset = 0;
-            if (millis() - time_now > frontDelay)
-            {
-                offset++;
-                first = false;
-                time_now = millis();
-                updateScreenImmediate();
-            }
-        }
-        else if (millis() - time_now > period)
-        {
-            if (offset == 0)
-            {
-                first = true;
-            }
-            else
-            {
-                offset++;
-            }
-            time_now = millis();
-            updateScreenImmediate();
-        }
+        updateRunScreen();
+
+        // if (millis() - time_now > period) // controls screen update
+        // {
+        //     time_now = millis();
+        //     updateRunScreen();
+        // }
     }
 }
 

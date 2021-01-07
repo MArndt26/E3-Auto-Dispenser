@@ -1,5 +1,4 @@
 #include "lcd.h"
-#include <LiquidCrystal_I2C.h>
 #include "buttons.h"
 #include "time.h"
 #include "state.h"
@@ -206,41 +205,23 @@ void programScreen()
 /*
  * RUN_PAGE: NOTE: get to this page by pressing # from Home Page when SET VAL has been entered
  * ------------------
- * |WEIGHT:      50g|
- * |SET:50g PRESS ANY KEY TO STOP| --> scrolling text
+ * |S:1234 C:12345.6|
+ * | Press to Halt  |
  * ------------------
  */
 void runScreen()
 {
     //first line
-    lcd.print(WEIGHT_MSG);
-    lcd.print(weightString);
-    for (unsigned int i = 0; i < DISP_WEIGHT_STR_MAX_LEN - weightString.length(); i++)
-    {
-        lcd.print(' ');
-    }
-    lcd.print("g");
+    lcd.print("S:");
+    lcd.print(setString);
+
+    lcd.setCursor(8, 0);
+    lcd.print("C:");
+    lcd.print(curString);
 
     //second line
     lcd.setCursor(0, 1);
-
-    String msg = SET_MSG + setString + RUN_WARN_MSG;
-
-    if (offset + SCREEN_X / 2 >= msg.length()) //check if end of message is in middle of screen
-    {
-        offset = 0; //go back to start
-    }
-    else if (offset + SCREEN_X < msg.length()) //substring will go out of bounds
-    {
-        msg = msg.substring(offset, msg.length());
-    }
-    else
-    {
-        msg = msg.substring(offset, offset + SCREEN_X);
-        msg += "         ";
-    }
-
-    lcd.print(msg);
+    lcd.print(" Press to Halt");
 }
 
 void tareScreen()
@@ -259,6 +240,7 @@ void updateScreenImmediate()
 #if HUSH
     Serial.println("screen updated");
 #endif
+    lcd.clear();
     lcd.setCursor(0, 0);
     switch (curState)
     {
