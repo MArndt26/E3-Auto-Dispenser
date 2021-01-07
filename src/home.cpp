@@ -2,6 +2,15 @@
 #include "lcd.h"
 #include "digital.h"
 #include "scale.h"
+#include "buttons.h"
+
+void tareScreen()
+{
+    lcd.clear();
+    //first line
+    lcd.home();
+    lcd.print("------TARE------");
+}
 
 // same as above without clearing screen
 void updateHomeScreen()
@@ -18,15 +27,13 @@ void updateHomeScreen()
     lcd.setCursor(0, 1);
     if (setValStr[0] == '\0')
     {
-        setString.toCharArray(buf, 8);
         lcd.write(LOCKED);
     }
     else
     {
-        curString.toCharArray(buf, 8);
         lcd.write(UNLOCKED);
     }
-    snprintf(line, 17, "SetVal:%-7sg", buf);
+    snprintf(line, 17, "SetVal:%-7sg", setValStr);
     lcd.print(line);
 }
 
@@ -34,9 +41,14 @@ void home()
 {
     relaysOff(); //ensure that all relays are off on home screen
 
+    keypad.setDebounceTime(50);
+
     for (;;)
     {
         getWeight();
+
+        char c = keypad.getKey();
+        setValStr[0] = c;
 
         // getKeyPressed(); //gets key pressed and writes to global var c
 
@@ -48,8 +60,7 @@ void home()
             {
                 tareScreen();
                 tareScale();
-                lcd.home();
-                homeScreen();
+                updateHomeScreen();
             }
             else
             {

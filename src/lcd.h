@@ -57,8 +57,8 @@ extern String fn2String; //fn2 value saved to eeprom
 extern String fn3String; //fn3 value saved to eeprom
 
 //TARE SCREEN
-#define TARE_MSG "------TARE------"
-#define BLANK_LINE "                "
+// #define TARE_MSG "------TARE------"
+// #define BLANK_LINE "                "
 
 /*--------------LCD FUNCTIONS-----------------*/
 String getFN_String();
@@ -67,18 +67,18 @@ void serialSetCursor(int row, int col);
 
 void lcdInit();
 
-void homeScreen();
+// void homeScreen();
 
-void presetScreen();
+// void presetScreen();
 
-void programScreen();
+// void programScreen();
 
-void runScreen();
+// void runScreen();
 
-void tareScreen();
+// void tareScreen();
 
-void updateScreenImmediate();
+// void updateScreenImmediate();
 
-void appendChar();
+// void appendChar();
 
 #endif

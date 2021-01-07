@@ -4,11 +4,8 @@
 #include "main.h"
 #include <HX711.h>
 
-#define FN1_Button 'A'
-#define FN2_Button 'B'
-#define FN3_Button 'C'
-#define TARE 'D'
-#define ENTER '#'
+#define ROWS 4
+#define COLS 4
 
 //constants
 extern const int PAST_WEIGHT_BUF_SIZE;
@@ -23,6 +20,10 @@ enum SCREEN
     RUN
 };
 extern SCREEN curScreen;
+
+//keypad variables
+extern byte rowPins[];
+extern byte colPins[];
 
 //weight variables
 extern const int LOADCELL_DOUT_PIN;
