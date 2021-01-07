@@ -30,10 +30,6 @@ void updateRunScreen()
 
 void highPerformanceRun()
 {
-    boolean first = true;
-    extern unsigned int period;
-    extern unsigned int frontDelay;
-    unsigned long time_now = millis();
     for (;;)
     {
         getWeight();
@@ -48,12 +44,6 @@ void highPerformanceRun()
         }
 
         updateRunScreen();
-
-        // if (millis() - time_now > period) // controls screen update
-        // {
-        //     time_now = millis();
-        //     updateRunScreen();
-        // }
     }
 }
 

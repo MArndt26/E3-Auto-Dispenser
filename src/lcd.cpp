@@ -150,6 +150,31 @@ void homeScreen()
     }
     lcd.print("g");
 }
+
+// // same as above without clearing screen
+// void updateHomeScreen()
+// {
+//     //first line
+//     lcd.setCursor(8, 0);
+//     lcd.print(curString);
+//     lcd.print("         ");
+//     lcd.print("g");
+
+//     //second line
+//     lcd.setCursor(0, 1);
+//     if (curString == "")
+//     {
+//         lcd.write(LOCKED);
+//     }
+//     else
+//     {
+//         lcd.write(UNLOCKED);
+//     }
+
+//     lcd.setCursor(8,1);
+//     lcd.print(setString);
+//     lcd.print()
+// }
 /*
  * PRESET_PAGE: NOTE: get to this page by pressing A, B, C, D
  *              once from home page
@@ -240,7 +265,6 @@ void updateScreenImmediate()
 #if HUSH
     Serial.println("screen updated");
 #endif
-    lcd.clear();
     lcd.setCursor(0, 0);
     switch (curState)
     {
@@ -248,12 +272,15 @@ void updateScreenImmediate()
         homeScreen();
         break;
     case PRESET_STATE:
+        lcd.clear();
         presetScreen();
         break;
     case PROGRAM_STATE:
+        lcd.clear();
         programScreen();
         break;
     case RUN_STATE:
+        lcd.clear();
         runScreen();
         break;
     }
