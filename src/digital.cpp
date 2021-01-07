@@ -14,12 +14,16 @@ void relaysOff()
 
 int readFootSwitch()
 {
+#if NO_FOOTSWITCH
+    return 0;
+#else
     int val = digitalRead(FOOT_SWITCH_PIN);
 
     while (digitalRead(FOOT_SWITCH_PIN))
         ; // wait for switch to go low
 
     return val;
+#endif
 }
 
 void relayInit()

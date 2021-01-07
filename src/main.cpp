@@ -25,6 +25,7 @@ void loop()
 #include "digital.h"
 #include "debug.h"
 #include "run.h"
+#include "home.h"
 
 #include "controlFlow.h"
 
@@ -52,7 +53,7 @@ void loop()
     {
     case HOME_STATE:
         relaysOff();
-        updateScreen();
+        highPerformanceHomeScreen();
         break;
     case PRESET_STATE:
         relaysOff();

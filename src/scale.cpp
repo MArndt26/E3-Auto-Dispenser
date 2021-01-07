@@ -4,6 +4,8 @@
 /*----------------SCALE VARS----------------*/
 String weightString = "";
 
+double weight = 0.0;
+
 #if CALIBRATE
 float calibration_factor = 464.5f; //464.5 worked best from initial testing
 #else
@@ -60,6 +62,7 @@ void getWeight()
 
     // calculate the average:
     average = total / (double)numReadings;
+    weight = average;
 
     weightString = String(average, 1);
 }

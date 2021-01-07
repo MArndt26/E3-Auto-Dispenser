@@ -151,30 +151,6 @@ void homeScreen()
     lcd.print("g");
 }
 
-// // same as above without clearing screen
-// void updateHomeScreen()
-// {
-//     //first line
-//     lcd.setCursor(8, 0);
-//     lcd.print(curString);
-//     lcd.print("         ");
-//     lcd.print("g");
-
-//     //second line
-//     lcd.setCursor(0, 1);
-//     if (curString == "")
-//     {
-//         lcd.write(LOCKED);
-//     }
-//     else
-//     {
-//         lcd.write(UNLOCKED);
-//     }
-
-//     lcd.setCursor(8,1);
-//     lcd.print(setString);
-//     lcd.print()
-// }
 /*
  * PRESET_PAGE: NOTE: get to this page by pressing A, B, C, D
  *              once from home page

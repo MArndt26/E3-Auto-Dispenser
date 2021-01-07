@@ -10,6 +10,7 @@ extern HX711 scale;
 
 /*----------------SCALE VARS----------------*/
 extern String weightString;
+extern double weight;
 
 #define LOADCELL_DOUT_PIN 11
 #define LOADCELL_SCK_PIN 10
