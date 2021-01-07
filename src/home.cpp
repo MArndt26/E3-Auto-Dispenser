@@ -21,6 +21,7 @@ void updateHomeScreen()
     lcd.print(line);
 
     //second line
+    lcd.setCursor(0, 1);
     if (curString == "")
     {
         setString.toCharArray(buf, 8);
@@ -32,7 +33,6 @@ void updateHomeScreen()
         lcd.write(UNLOCKED);
     }
     snprintf(line, 17, "SetVal:%-7sg", buf);
-    lcd.setCursor(0, 1);
     lcd.print(line);
 }
 
@@ -52,6 +52,7 @@ void highPerformanceHomeScreen()
             {
                 tareScreen();
                 tareScale();
+                lcd.home();
                 homeScreen();
             }
             else
