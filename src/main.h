@@ -3,6 +3,9 @@
 
 #include <Arduino.h>
 
+#include "e3_core.h"
+#include "debug.h"
+
 //HUSH used to remove all serial other than serial screen emulation
 #define HUSH 0
 #define HUSH_ERRORS 0

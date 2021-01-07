@@ -1,31 +1,20 @@
 #include "scale.h"
-#include <HX711.h>
 
-/*----------------SCALE VARS----------------*/
-String weightString = "";
-
-double weight = 0.0;
-
-#if CALIBRATE
-float calibration_factor = 464.5f; //464.5 worked best from initial testing
-#else
-const float calibration_factor = 464.5f; //464.5 worked best from initial testing
-#endif
-
-double readings[numReadings]; // the readings from the analog input
-int readIndex = 0;            // the index of the current reading
-double total = 0.0f;          // the running total
-double average = 0.0f;        // the average
+const int PAST_WEIGHT_BUF_SIZE = 15;
 
 HX711 scale;
+double weight;
+double pastWeights[PAST_WEIGHT_BUF_SIZE];
+double c_factor = 464.5f;
+double total = 0;
+int readIndex = 0;
 
-/*----------------SCALE FUNCTIONS----------------*/
 void tareScale()
 {
     //set readings array to all zeros
-    for (int thisReading = 0; thisReading < numReadings; thisReading++)
+    for (int i = 0; i < PAST_WEIGHT_BUF_SIZE; i++)
     {
-        readings[thisReading] = 0.0f;
+        pastWeights[i] = 0.0f;
     }
     total = 0.0; //reset total
     scale.tare(5);
@@ -34,35 +23,29 @@ void tareScale()
 void scaleInit()
 {
     scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-    scale.set_scale(calibration_factor); //Adjust to this calibration factor
-    tareScale();
-#if HUSH
-    Serial.println("Scale Initialized");
-#endif
+    scale.set_scale(c_factor); //Adjust to this calibration factor
+    scale.tare(10);
 }
 
 void getWeight()
 {
     // subtract the last reading:
-    total = total - readings[readIndex];
+    total = total - pastWeights[readIndex];
     // read from the sensor:
-    readings[readIndex] = (double)scale.get_value() / calibration_factor;
+    pastWeights[readIndex] = (double)scale.get_value() / c_factor;
 
     // add the reading to the total:
-    total = total + readings[readIndex];
+    total = total + pastWeights[readIndex];
     // advance to the next position in the array:
     readIndex = readIndex + 1;
 
     // if we're at the end of the array...
-    if (readIndex >= numReadings)
+    if (readIndex >= PAST_WEIGHT_BUF_SIZE)
     {
         // ...wrap around to the beginning:
         readIndex = 0;
     }
 
     // calculate the average:
-    average = total / (double)numReadings;
-    weight = average;
-
-    weightString = String(average, 1);
+    weight = total / (double)PAST_WEIGHT_BUF_SIZE;
 }

@@ -1,26 +1,26 @@
-#ifndef CONTROL_FLOW_H
-#define CONTROL_FLOW_H
+// #ifndef CONTROL_FLOW_H
+// #define CONTROL_FLOW_H
 
-#include "main.h"
+// #include "main.h"
 
-/*----------------CONTROL FLOW VARS---------------*/
-#define NO_INPUT 0
-#define INPUT_IS_FN 1
-#define INPUT_IS_DIGIT 2
-#define INPUT_IS_ENTER 3
+// /*----------------CONTROL FLOW VARS---------------*/
+// #define NO_INPUT 0
+// #define INPUT_IS_FN 1
+// #define INPUT_IS_DIGIT 2
+// #define INPUT_IS_ENTER 3
 
-void masterInit();
+// void masterInit();
 
-void doStateChange();
+// void doStateChange();
 
-boolean handleFN();
+// boolean handleFN();
 
-void handleKeypad(boolean keypadAllowed);
+// void handleKeypad(boolean keypadAllowed);
 
-void handleDigital();
+// void handleDigital();
 
-void handleInput();
+// void handleInput();
 
-void updateScreen();
+// void updateScreen();
 
-#endif
+// #endif

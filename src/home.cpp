@@ -1,13 +1,7 @@
-#ifndef HOME_H
-#define HOME_H
-
-#include "home.h"
-#include "controlFlow.h"
-#include "scale.h"
+#include "e3_core.h"
 #include "lcd.h"
-#include "debug.h"
-#include "buttons.h"
-#include "state.h"
+#include "digital.h"
+#include "scale.h"
 
 // same as above without clearing screen
 void updateHomeScreen()
@@ -15,14 +9,14 @@ void updateHomeScreen()
     //first line
     char line[17];
     char buf[8];
-    weightString.toCharArray(buf, 8);
-    snprintf(line, 17, "WEIGHT:%-8sg", buf);
+    String(weight, 1).toCharArray(buf, 8);
+    snprintf(line, 17, "WEIGHT:%8sg", buf);
     lcd.home();
     lcd.print(line);
 
     //second line
     lcd.setCursor(0, 1);
-    if (curString == "")
+    if (setValStr[0] == '\0')
     {
         setString.toCharArray(buf, 8);
         lcd.write(LOCKED);
@@ -36,15 +30,17 @@ void updateHomeScreen()
     lcd.print(line);
 }
 
-void highPerformanceHomeScreen()
+void home()
 {
+    relaysOff(); //ensure that all relays are off on home screen
+
     for (;;)
     {
-        getWeight(); //gets smoothed weight and assigns to weight string
+        getWeight();
 
-        getKeyPressed(); //gets key pressed and writes to global var c
+        // getKeyPressed(); //gets key pressed and writes to global var c
 
-        handleDigital(); //overrides key pressed if foot switch is pressed
+        // handleDigital(); //overrides key pressed if foot switch is pressed
 
         if (c != '\0') //check if input exists
         {
@@ -57,13 +53,13 @@ void highPerformanceHomeScreen()
             }
             else
             {
-                handleKeypad(true);
+                // handleKeypad(true);
             }
             break;
             c = '\0'; //consume character
         }
 
-        if (curState != HOME_STATE)
+        if (curScreen != HOME)
         {
             return;
         }
@@ -73,5 +69,3 @@ void highPerformanceHomeScreen()
         updateHomeScreen();
     }
 }
-
-#endif

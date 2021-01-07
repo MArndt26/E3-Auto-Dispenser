@@ -7,12 +7,12 @@ void debugInit()
     while (!Serial)
     { // wait for serial port to connect. Needed for native USB
     }
-    pinMode(errorPin, OUTPUT);  //set error pin as an output
+    pinMode(errorPin, OUTPUT);   //set error pin as an output
     pinMode(successPin, OUTPUT); //set success pin as output
 
-    #if HUSH
+#if HUSH
     Serial.println("User Functions Initialized");
-    #endif
+#endif
 }
 
 void userError()

@@ -12,61 +12,65 @@ void loop()
 }
 #else
 
-#include <Keypad.h>
-#include <Wire.h>
-#include "LiquidCrystal_I2C.h"
-#include "time.h"
-#include "HX711.h"
-#include "state.h"
-#include "buttons.h"
+#include "e3_core.h"
+// #include <Keypad.h>
+// #include <Wire.h>
+// #include "LiquidCrystal_I2C.h"
+// #include "time.h"
+// #include "HX711.h"
+// #include "state.h"
+// #include "buttons.h"
 #include "scale.h"
 #include "lcd.h"
-#include "EE_MEM.h"
-#include "digital.h"
-#include "debug.h"
-#include "run.h"
+// #include "EE_MEM.h"
+// #include "digital.h"
+// #include "debug.h"
+// #include "run.h"
 #include "home.h"
 
-#include "controlFlow.h"
+// #include "controlFlow.h"
 
 void setup()
 {
-    masterInit();
+    lcdInit();
+
+    scaleInit();
+
+    // masterInit();
 
 #if HUSH
     Serial.println("Setup Complete");
     debugVars();
 #endif
 
-    updateScreenImmediate();
+    // updateScreenImmediate();
 }
 
 void loop()
 {
-    handleInput(); //reads in and handles input
+    // handleInput(); //reads in and handles input
 
 #if HUSH
     debugVars();
 #endif
 
-    switch (curState)
+    switch (curScreen)
     {
-    case HOME_STATE:
-        relaysOff();
-        highPerformanceHomeScreen();
+    case HOME:
+        home();
         break;
-    case PRESET_STATE:
-        relaysOff();
+    case PRESET:
+        // relaysOff();
         break;
-    case PROGRAM_STATE:
-        relaysOff();
+    case PROGRAM:
+        // relaysOff();
         break;
-    case RUN_STATE:
-        relaysOn();
-        highPerformanceRun();
-        relaysOff();
-        clearFN_Buttons();
-        curState = HOME_STATE;
+    case RUN:
+        // relaysOn();
+        // highPerformanceRun();
+        // relaysOff();
+        // clearFN_Buttons();
+        curScreen = HOME;
         break;
     }
 }

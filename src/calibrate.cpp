@@ -1,6 +1,3 @@
-#ifndef CALIBRATE_H
-#define CALIBRATE_H
-
 #if CALIBRATE
 
 #include "calibrate.h"
@@ -126,5 +123,3 @@ void calibrate_scale()
 }
 
 #endif
-
-#endif //CALIBRATE_H
