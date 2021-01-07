@@ -24,6 +24,7 @@ void loop()
 #include "EE_MEM.h"
 #include "digital.h"
 #include "debug.h"
+#include "run.h"
 
 #include "controlFlow.h"
 
@@ -61,37 +62,10 @@ void loop()
         break;
     case RUN_STATE:
         relaysOn();
-        if (weightString.toInt() >= setString.toInt())
-        {
-            doStateChange();
-            userSuccess();
-#if HUSH_SUCCESS
-            Serial.println("Success: Finished Filling Cup");
-#endif
-        }
-        if (first)
-        {
-            if (millis() - time_now > frontDelay)
-            {
-                offset++;
-                first = false;
-                time_now = millis();
-                updateScreenImmediate();
-            }
-        }
-        else if (millis() - time_now > period)
-        {
-            if (offset == 0)
-            {
-                first = true;
-            }
-            else
-            {
-                offset++;
-            }
-            time_now = millis();
-            updateScreenImmediate();
-        }
+        highPerformanceRun();
+        relaysOff();
+        clearFN_Buttons();
+        curState = HOME_STATE;
         break;
     }
 }

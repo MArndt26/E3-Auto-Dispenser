@@ -4,10 +4,10 @@
 #include "main.h"
 
 /*----------------CONTROL FLOW VARS---------------*/
-#define NO_INPUT        0
-#define INPUT_IS_FN     1
-#define INPUT_IS_DIGIT  2
-#define INPUT_IS_ENTER  3
+#define NO_INPUT 0
+#define INPUT_IS_FN 1
+#define INPUT_IS_DIGIT 2
+#define INPUT_IS_ENTER 3
 
 void masterInit();
 
