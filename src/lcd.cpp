@@ -6,15 +6,6 @@ uint8_t lockedDATA[8] = {B01110, B10001, B10001, B11111, B11011, B11011, B11111,
 
 uint8_t unlockedDATA[8] = {B01110, B10000, B10000, B11111, B11011, B11011, B11111, B00000};
 
-unsigned short offset = 0;
-
-String curString = ""; //value user is currently typing in
-String setString = ""; //set value saved to eeprom
-
-String fn1String = ""; //fn1 value saved to eeprom
-String fn2String = ""; //fn2 value saved to eeprom
-String fn3String = ""; //fn3 value saved to eeprom
-
 /**MAIN LCD object:
  *  params for constructor are as follows:
  *      (I2C address, disp resolution x, disp resolution y)

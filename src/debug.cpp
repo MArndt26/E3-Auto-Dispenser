@@ -34,22 +34,24 @@ void userSuccess()
 void debugVars()
 {
     //print variabled to serial monitor
-    Serial.print("curStr: ");
-    Serial.print(curString);
-    Serial.print(", setStr: ");
-    Serial.print(setString);
-    Serial.print(", c: ");
-    Serial.print(c);
-    Serial.print(", cur_fn: ");
-    Serial.print(cur_FN_Button);
-    Serial.print(", fn1: ");
-    Serial.print(fn1String);
-    Serial.print(", fn2: ");
-    Serial.print(fn2String);
-    Serial.print(", fn3: ");
-    Serial.print(fn3String);
-    Serial.print(", weightString: ");
-    Serial.print(weightString);
-    Serial.println();
+    Serial.print("scale: ");
+    Serial.println(scale.weight);
+    // Serial.print("curStr: ");
+    // Serial.print(curString);
+    // Serial.print(", setStr: ");
+    // Serial.print(setString);
+    // Serial.print(", c: ");
+    // Serial.print(c);
+    // Serial.print(", cur_fn: ");
+    // Serial.print(cur_FN_Button);
+    // Serial.print(", fn1: ");
+    // Serial.print(fn1String);
+    // Serial.print(", fn2: ");
+    // Serial.print(fn2String);
+    // Serial.print(", fn3: ");
+    // Serial.print(fn3String);
+    // Serial.print(", weightString: ");
+    // Serial.print(weightString);
+    // Serial.println();
 }
 #endif

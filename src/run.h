@@ -1,3 +1,8 @@
-// #include "main.h"
+#ifndef RUN_H
+#define RUN_H
 
-// void highPerformanceRun();
+#include "main.h"
+
+void run();
+
+#endif

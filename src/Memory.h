@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#define PERMANENT_MEM 1
+#define PERMANENT_MEM 0
 
 class Memory
 {

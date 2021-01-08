@@ -1,3 +1,4 @@
+#include "home.h"
 #include "e3_core.h"
 #include "lcd.h"
 #include "digital.h"
@@ -16,7 +17,7 @@ void updateHomeScreen()
     //first line
     char line[17];
     char buf[8];
-    String(scale.weight, 1).toCharArray(buf, 8);
+    dtostrf(e3_scale.weight, 8, 1, buf);
     snprintf(line, 17, "WEIGHT:%8sg", buf);
     lcd.home();
     lcd.print(line);
@@ -26,7 +27,7 @@ void updateHomeScreen()
     if (setValStr[0] == '\0')
     {
         lcd.write(LOCKED);
-        snprintf(line, 17, "SetVal:%7dg", scale.setVal);
+        snprintf(line, 17, "SetVal:%7dg", e3_scale.setVal);
     }
     else
     {
@@ -61,7 +62,7 @@ inline void handleEnter(char c)
     if (setValStr[0] != '\0')
     {
         //user is currently setting the value
-        scale.setVal = atoi(setValStr);
+        e3_scale.setVal = atoi(setValStr);
         setValStr[0] = '\0';
     }
     else if (HOME_KEYPAD_ENTER)
@@ -75,13 +76,13 @@ void home()
 {
     relaysOff(); //ensure that all relays are off on home screen
 
-    scale.setVal = memory.fn1;
+    e3_scale.setVal = memory.fn1;
 
     keypad.setDebounceTime(50);
 
     for (;;)
     {
-        scale.getWeight();
+        getWeight();
 
         char c = keypad.getKey();
 
@@ -104,7 +105,7 @@ void home()
             else if (c == TARE) //tare only works from home screen
             {
                 tareScreen();
-                scale.tare();
+                tare();
                 updateHomeScreen();
             }
             else

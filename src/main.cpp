@@ -23,7 +23,7 @@ void loop()
 // #include "EE_MEM.h"
 // #include "digital.h"
 #include "debug.h"
-// #include "run.h"
+#include "run.h"
 #include "home.h"
 
 // #include "controlFlow.h"
@@ -34,7 +34,7 @@ void setup()
 
     lcdInit();
 
-    // scaleInit();
+    scaleInit();
 
     // masterInit();
 
@@ -48,12 +48,6 @@ void setup()
 
 void loop()
 {
-    // handleInput(); //reads in and handles input
-
-#if HUSH
-    debugVars();
-#endif
-
     switch (curScreen)
     {
     case HOME:
@@ -66,10 +60,7 @@ void loop()
         // relaysOff();
         break;
     case RUN:
-        // relaysOn();
-        // highPerformanceRun();
-        // relaysOff();
-        // clearFN_Buttons();
+        run();
         curScreen = HOME;
         break;
     }

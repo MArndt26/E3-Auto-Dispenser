@@ -67,7 +67,7 @@ void setup_calibrate_scale()
     Serial.println("After readings begin, place known weight on scale");
     Serial.println("For Computer Serial interation use the following:");
     Serial.println("\tq, w, e, r --> calibration factor += 0.1, 1, 10, 100");
-    Serial.println("\ta, s, d, f --> calibration factor -= 0.1, 1, 10, 100");
+    Serial.println("\ta, scale, d, f --> calibration factor -= 0.1, 1, 10, 100");
     Serial.println("For Keypad Matrix interaction use the following:");
     Serial.println("\t1, 2, 3, A --> calibration factor += 0.1, 1, 10, 100");
     Serial.println("\t4, 5, 6, B --> calibration factor -= 0.1, 1, 10, 100");

@@ -37,9 +37,6 @@ char hexaKeys[ROWS][COLS] = {
 
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
-//weight variables
-Scale scale = Scale();
-
 //user variables
 char setValStr[SET_VAL_SIZE + 1] = "";
 char curFNButton = '\0';
@@ -47,3 +44,5 @@ char prevFNButton = '\0';
 
 //permenant memory variables
 Memory memory = Memory();
+
+// Scale e3_scale = Scale();

@@ -34,7 +34,7 @@ extern const char ENTER;
 extern Keypad keypad;
 
 //weight variables
-extern Scale scale;
+// extern Scale e3_scale;
 
 //user variables
 extern char setValStr[];
