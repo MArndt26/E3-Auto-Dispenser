@@ -3,7 +3,6 @@
 #include "calibrate.h"
 #include "lcd.h"
 #include "HX711.h"
-#include "scale.h"
 #include "debug.h"
 #include "buttons.h"
 

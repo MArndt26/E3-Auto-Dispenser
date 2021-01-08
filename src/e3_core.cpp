@@ -3,6 +3,20 @@
 //constants
 const int SET_VAL_SIZE = 4;
 
+bool append(char *str, int maxLen, char c)
+{
+    for (int i = 0; i < maxLen; i++)
+    {
+        if (!str[i])
+        {
+            str[i] = c;
+            str[i + 1] = '\0';
+            return true;
+        }
+    }
+    return false;
+}
+
 //enumerations
 SCREEN curScreen = HOME;
 
@@ -25,9 +39,8 @@ Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
 
 //weight variables
 Scale scale = Scale();
-double weight = 0.0;
 
 //user variables
-char setValStr[SET_VAL_SIZE + 1] = "-999";
+char setValStr[SET_VAL_SIZE + 1] = "";
 char curFNButton = '\0';
 char prevFNButton = '\0';

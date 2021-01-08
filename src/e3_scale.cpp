@@ -3,12 +3,16 @@
 
 Scale::Scale()
 {
+    c_factor = 464.5f;
+    setVal = 1234;
+    weight = 0.0;
+
     _scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
     _scale.set_scale(c_factor); //Adjust to this calibration factor
     _scale.tare(10);
 }
 
-double Scale::getWeight()
+void Scale::getWeight()
 {
     // subtract the last reading:
     total = total - pastWeights[i];
@@ -28,7 +32,7 @@ double Scale::getWeight()
     }
 
     // calculate the average:
-    return total / (double)PAST_WEIGHT_BUF_SIZE;
+    weight = total / (double)PAST_WEIGHT_BUF_SIZE;
 }
 
 void Scale::tare()
@@ -39,5 +43,6 @@ void Scale::tare()
         pastWeights[i] = 0.0f;
     }
     total = 0.0; //reset total
+    weight = 0.0;
     _scale.tare(5);
 }

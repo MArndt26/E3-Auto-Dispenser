@@ -16,13 +16,15 @@ private:
     HX711 _scale;
 
 public:
+    double c_factor;
+    int setVal;
+    double weight;
+
     Scale();
 
-    double getWeight();
+    void getWeight();
 
     void tare();
-
-    double c_factor = 464.5f;
 };
 
 #endif

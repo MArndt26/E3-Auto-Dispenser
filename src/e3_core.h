@@ -8,6 +8,8 @@
 #define ROWS 4
 #define COLS 4
 
+bool append(char *str, int maxLen, char c);
+
 //constants
 extern const int SET_VAL_SIZE;
 
@@ -32,7 +34,6 @@ extern Keypad keypad;
 
 //weight variables
 extern Scale scale;
-extern double weight;
 
 //user variables
 extern char setValStr[];

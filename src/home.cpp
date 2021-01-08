@@ -1,7 +1,6 @@
 #include "e3_core.h"
 #include "lcd.h"
 #include "digital.h"
-// #include "scale.h"
 #include "buttons.h"
 
 void tareScreen()
@@ -18,7 +17,7 @@ void updateHomeScreen()
     //first line
     char line[17];
     char buf[8];
-    String(weight, 1).toCharArray(buf, 8);
+    String(scale.weight, 1).toCharArray(buf, 8);
     snprintf(line, 17, "WEIGHT:%8sg", buf);
     lcd.home();
     lcd.print(line);
@@ -28,13 +27,47 @@ void updateHomeScreen()
     if (setValStr[0] == '\0')
     {
         lcd.write(LOCKED);
+        snprintf(line, 17, "SetVal:%7dg", scale.setVal);
     }
     else
     {
         lcd.write(UNLOCKED);
+        snprintf(line, 17, "SetVal:%7sg", setValStr);
     }
-    snprintf(line, 17, "SetVal:%-7sg", setValStr);
+    lcd.setCursor(1, 1);
     lcd.print(line);
+}
+
+inline void handleNumeric(char c)
+{
+    bool appended = append(setValStr, SET_VAL_SIZE, c);
+
+    if (!appended)
+    {
+        // handle overflow
+        setValStr[0] = '\0'; //clear string
+        userError();
+        return;
+    }
+}
+
+inline void handleFN(char c)
+{
+    return;
+}
+
+inline void handleEnter(char c)
+{
+    if (setValStr[0] != '\0')
+    {
+        //user is currently setting the value
+        scale.setVal = atoi(setValStr);
+    }
+    else if (HOME_KEYPAD_ENTER)
+    {
+        curScreen = RUN;
+        //go to run state
+    }
 }
 
 void home()
@@ -45,24 +78,27 @@ void home()
 
     for (;;)
     {
-        weight = scale.getWeight();
+        scale.getWeight();
 
-        char c = keypad.getKeys();
-        // getKeyPressed();
-        setValStr[1] = c;
-        setValStr[2] = '\0';
-        if (c)
-        {
-            userSuccess();
-        }
-
-        // getKeyPressed(); //gets key pressed and writes to global var c
+        char c = keypad.getKey();
 
         // handleDigital(); //overrides key pressed if foot switch is pressed
 
         if (c != '\0') //check if input exists
         {
-            if (c == TARE) //tare only works from home screen
+            if (c >= '0' && c <= '9')
+            {
+                handleNumeric(c);
+            }
+            else if (c >= FN1_Button && c <= FN3_Button)
+            {
+                handleFN(c);
+            }
+            else if (c == ENTER)
+            {
+                handleEnter(c);
+            }
+            else if (c == TARE) //tare only works from home screen
             {
                 tareScreen();
                 scale.tare();
@@ -70,10 +106,8 @@ void home()
             }
             else
             {
-                // handleKeypad(true);
+                userError;
             }
-            break;
-            c = '\0'; //consume character
         }
 
         if (curScreen != HOME)
