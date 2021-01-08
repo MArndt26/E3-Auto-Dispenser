@@ -4,7 +4,7 @@
 Scale::Scale()
 {
     c_factor = 464.5f;
-    setVal = 1234;
+    setVal = -999;
     weight = 0.0;
 
     _scale.begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);

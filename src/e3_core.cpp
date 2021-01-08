@@ -44,3 +44,6 @@ Scale scale = Scale();
 char setValStr[SET_VAL_SIZE + 1] = "";
 char curFNButton = '\0';
 char prevFNButton = '\0';
+
+//permenant memory variables
+Memory memory = Memory();

@@ -4,6 +4,7 @@
 #include "main.h"
 #include "e3_scale.h"
 #include <Keypad.h>
+#include "Memory.h"
 
 #define ROWS 4
 #define COLS 4
@@ -39,5 +40,8 @@ extern Scale scale;
 extern char setValStr[];
 extern char curFNButton;
 extern char prevFNButton;
+
+//permenant memory variables
+extern Memory memory;
 
 #endif

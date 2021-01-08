@@ -52,6 +52,7 @@ inline void handleNumeric(char c)
 
 inline void handleFN(char c)
 {
+    //TODO: implement this
     return;
 }
 
@@ -73,6 +74,8 @@ inline void handleEnter(char c)
 void home()
 {
     relaysOff(); //ensure that all relays are off on home screen
+
+    scale.setVal = memory.fn1;
 
     keypad.setDebounceTime(50);
 
@@ -115,8 +118,6 @@ void home()
             return;
         }
 
-        // lcd.home();
-        // homeScreen();
         updateHomeScreen();
     }
 }
