@@ -1,5 +1,4 @@
 #include "lcd.h"
-#include "buttons.h"
 #include "time.h"
 #include "state.h"
 

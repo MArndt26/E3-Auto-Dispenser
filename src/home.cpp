@@ -1,7 +1,6 @@
 #include "e3_core.h"
 #include "lcd.h"
 #include "digital.h"
-#include "buttons.h"
 
 void tareScreen()
 {
@@ -62,6 +61,7 @@ inline void handleEnter(char c)
     {
         //user is currently setting the value
         scale.setVal = atoi(setValStr);
+        setValStr[0] = '\0';
     }
     else if (HOME_KEYPAD_ENTER)
     {
@@ -106,7 +106,7 @@ void home()
             }
             else
             {
-                userError;
+                userError();
             }
         }
 

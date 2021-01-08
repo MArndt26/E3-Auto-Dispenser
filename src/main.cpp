@@ -19,7 +19,6 @@ void loop()
 // #include "time.h"
 // #include "HX711.h"
 // #include "state.h"
-// #include "buttons.h"
 #include "lcd.h"
 // #include "EE_MEM.h"
 // #include "digital.h"

@@ -5,7 +5,6 @@
 // #include <EEPROM.h>
 // #include <LiquidCrystal_I2C.h>
 // #include "lcd.h"
-// #include "buttons.h"
 
 // int checkValidMem(char c)
 // {

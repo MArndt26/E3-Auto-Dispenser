@@ -4,7 +4,6 @@
 #include "lcd.h"
 #include "HX711.h"
 #include "debug.h"
-#include "buttons.h"
 
 #define CHARMAP_SIZE 9
 const struct
