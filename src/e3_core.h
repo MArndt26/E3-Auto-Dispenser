@@ -2,13 +2,13 @@
 #define E3_CORE_H
 
 #include "main.h"
-#include <HX711.h>
+#include "e3_scale.h"
+#include <Keypad.h>
 
 #define ROWS 4
 #define COLS 4
 
 //constants
-extern const int PAST_WEIGHT_BUF_SIZE;
 extern const int SET_VAL_SIZE;
 
 //enumerations
@@ -21,27 +21,22 @@ enum SCREEN
 };
 extern SCREEN curScreen;
 
-//keypad variables
-extern byte rowPins[];
-extern byte colPins[];
+/*--------------KEYPAD VARS------------------*/
+extern const char FN1_Button;
+extern const char FN2_Button;
+extern const char FN3_Button;
+extern const char TARE;
+extern const char ENTER;
+
+extern Keypad keypad;
 
 //weight variables
-extern const int LOADCELL_DOUT_PIN;
-extern const int LOADCELL_SCK_PIN;
-extern HX711 scale;
-struct weightFilter
-{
-    double total;
-    int index;
-    double past[];
-};
-extern double c_factor; //calibration factor
+extern Scale scale;
 extern double weight;
 
 //user variables
 extern char setValStr[];
 extern char curFNButton;
 extern char prevFNButton;
-extern char c;
 
 #endif

@@ -1,18 +1,18 @@
-#ifndef SCALE_H
-#define SCALE_H
+// #ifndef SCALE_H
+// #define SCALE_H
 
-#include "main.h"
+// #include "main.h"
 
-extern const int PAST_WEIGHT_BUF_SIZE;
+// extern const int PAST_WEIGHT_BUF_SIZE;
 
-extern HX711 scale;
-extern double weight;
-extern double c_factor;
+// extern HX711 scale;
+// extern double weight;
+// extern double c_factor;
 
-void tareScale();
+// void tareScale();
 
-void scaleInit();
+// void scaleInit();
 
-void getWeight();
+// void getWeight();
 
-#endif
+// #endif

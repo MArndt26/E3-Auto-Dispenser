@@ -1,7 +1,7 @@
 #include "e3_core.h"
 #include "lcd.h"
 #include "digital.h"
-#include "scale.h"
+// #include "scale.h"
 #include "buttons.h"
 
 void tareScreen()
@@ -45,10 +45,16 @@ void home()
 
     for (;;)
     {
-        getWeight();
+        weight = scale.getWeight();
 
-        char c = keypad.getKey();
-        setValStr[0] = c;
+        char c = keypad.getKeys();
+        // getKeyPressed();
+        setValStr[1] = c;
+        setValStr[2] = '\0';
+        if (c)
+        {
+            userSuccess();
+        }
 
         // getKeyPressed(); //gets key pressed and writes to global var c
 
@@ -59,7 +65,7 @@ void home()
             if (c == TARE) //tare only works from home screen
             {
                 tareScreen();
-                tareScale();
+                scale.tare();
                 updateHomeScreen();
             }
             else

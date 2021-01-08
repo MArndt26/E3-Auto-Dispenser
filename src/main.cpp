@@ -20,11 +20,11 @@ void loop()
 // #include "HX711.h"
 // #include "state.h"
 // #include "buttons.h"
-#include "scale.h"
+// #include "scale.h"
 #include "lcd.h"
 // #include "EE_MEM.h"
 // #include "digital.h"
-// #include "debug.h"
+#include "debug.h"
 // #include "run.h"
 #include "home.h"
 
@@ -32,9 +32,11 @@ void loop()
 
 void setup()
 {
+    debugInit();
+
     lcdInit();
 
-    scaleInit();
+    // scaleInit();
 
     // masterInit();
 
