@@ -1,9 +1,7 @@
 #include "e3_loadcell.h"
 
-Scale::Scale()
+Scale::Scale(const int dout, const int sck) : _scale()
 {
-    _scale = new HX711();
-
     c_factor = 464.5f;
     setVal = -999;
     weight = 0.0;
@@ -11,14 +9,9 @@ Scale::Scale()
     total = 0.0;
     i = 0;
 
-    _scale->begin(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
-    _scale->set_scale(c_factor); //Adjust to this calibration factor
-    _scale->tare(10);
-}
-
-Scale::~Scale()
-{
-    delete _scale;
+    _scale.begin(dout, sck);
+    _scale.set_scale(c_factor); //Adjust to this calibration factor
+    _scale.tare(10);
 }
 
 void Scale::getWeight()
@@ -26,7 +19,7 @@ void Scale::getWeight()
     // subtract the last reading:
     total = total - pastWeights[i];
     // read from the sensor:
-    pastWeights[i] = (double)_scale->get_value() / c_factor;
+    pastWeights[i] = (double)_scale.get_value() / c_factor;
 
     // add the reading to the total:
     total = total + pastWeights[i];
@@ -53,5 +46,5 @@ void Scale::tare()
     }
     total = 0.0; //reset total
     weight = 0.0;
-    _scale->tare(5);
+    _scale.tare(5);
 }

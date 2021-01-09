@@ -1,9 +1,6 @@
 #include "run.h"
 #include "e3_core.h"
-#include "lcd.h"
-#include "digital.h"
 #include "e3_loadcell.h"
-#include "debug.h"
 
 /*
  * RUN_PAGE: NOTE: get to this page by pressing # from Home Page when SET VAL has been entered
@@ -19,30 +16,30 @@ void updateRunScreen()
     // char buf[8];
     // dtostrf(e3_scale.weight, 8, 1, buf);
     snprintf(line, 17, "S:%4d C:%6.1f", e3_scale.setVal, e3_scale.weight);
-    lcd.print(line);
+    screen.lcd.print(line);
 
-    lcd.setCursor(0, 1);
-    lcd.print(" Press to Halt");
+    screen.lcd.setCursor(0, 1);
+    screen.lcd.print(" Press to Halt");
 }
 
 void run()
 {
-    relaysOn(); //ensure that all relays turn on
-    lcd.clear();
+    digital.relaysOn(); //ensure that all relays turn on
+    screen.lcd.clear();
 
     e3_scale.setVal = memory.fn1;
     for (;;)
     {
-        getWeight();
+        e3_scale.getWeight();
 
         if (keypad.getKey())
         {
-            userError();
+            signal.error();
             return;
         }
         if (e3_scale.weight >= e3_scale.setVal)
         {
-            userSuccess();
+            signal.success();
             return;
         }
 

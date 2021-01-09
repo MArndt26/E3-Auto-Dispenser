@@ -1,9 +1,7 @@
 #if CALIBRATE
 
 #include "calibrate.h"
-#include "lcd.h"
 #include "HX711.h"
-#include "debug.h"
 
 #define CHARMAP_SIZE 9
 const struct

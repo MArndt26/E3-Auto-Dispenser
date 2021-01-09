@@ -5,10 +5,9 @@
 #include <Keypad.h>
 #include "Memory.h"
 #include "e3_loadcell.h"
-
-extern const int PUMP_CTRL_PIN;
-extern const int IO_1_PIN;
-extern const int FOOT_SWITCH_PIN;
+#include "e3_lcd.h"
+#include "e3_signal.h"
+#include "e3_digital.h"
 
 #define ROWS 4
 #define COLS 4
@@ -47,5 +46,14 @@ extern char prevFNButton;
 
 //permenant memory variables
 extern Memory memory;
+
+//lcd object
+extern e3_lcd screen;
+
+//led signaling object
+extern Signal signal;
+
+//digital object for relays and foot switch
+extern E3_Digital digital;
 
 #endif

@@ -3,10 +3,6 @@
 //constants
 const int SET_VAL_SIZE = 4;
 
-const int PUMP_CTRL_PIN = A3;
-const int IO_1_PIN = A2;
-const int FOOT_SWITCH_PIN = A1;
-
 bool append(char *str, int maxLen, char c)
 {
     for (int i = 0; i < maxLen; i++)
@@ -49,4 +45,21 @@ char prevFNButton = '\0';
 //permenant memory variables
 Memory memory = Memory();
 
-Scale e3_scale = Scale();
+//scale variables
+const uint8_t LOADCELL_DOUT_PIN = 11;
+const uint8_t LOADCELL_SCK_PIN = 10;
+Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+
+//lcd object
+e3_lcd screen = e3_lcd(0x27, 16, 2);
+
+//led signaling object
+const int errorPin = 13;
+const int successPin = 12;
+Signal signal = Signal(errorPin, successPin);
+
+// relay pins
+const uint8_t PUMP_CTRL_PIN = A3;
+const uint8_t IO_1_PIN = A2;
+const uint8_t FOOT_SWITCH_PIN = A1;
+E3_Digital digital = E3_Digital(PUMP_CTRL_PIN, IO_1_PIN, FOOT_SWITCH_PIN);

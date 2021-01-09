@@ -1,16 +1,12 @@
 #include "home.h"
 #include "e3_core.h"
-#include "lcd.h"
-#include "digital.h"
-#include "e3_loadcell.h"
-#include "debug.h"
 
 void tareScreen()
 {
-    lcd.clear();
+    screen.lcd.clear();
     //first line
-    lcd.home();
-    lcd.print("------TARE------");
+    screen.lcd.home();
+    screen.lcd.print("------TARE------");
 }
 
 // same as above without clearing screen
@@ -21,23 +17,23 @@ void updateHomeScreen()
     char buf[8];
     dtostrf(e3_scale.weight, 8, 1, buf);
     snprintf(line, 17, "WEIGHT:%8sg", buf);
-    lcd.home();
-    lcd.print(line);
+    screen.lcd.home();
+    screen.lcd.print(line);
 
     //second line
-    lcd.setCursor(0, 1);
+    screen.lcd.setCursor(0, 1);
     if (setValStr[0] == '\0')
     {
-        lcd.write(LOCKED);
+        screen.lcd.write(screen.LOCKED);
         snprintf(line, 17, "SetVal:%7dg", e3_scale.setVal);
     }
     else
     {
-        lcd.write(UNLOCKED);
+        screen.lcd.write(screen.UNLOCKED);
         snprintf(line, 17, "SetVal:%7sg", setValStr);
     }
-    lcd.setCursor(1, 1);
-    lcd.print(line);
+    screen.lcd.setCursor(1, 1);
+    screen.lcd.print(line);
 }
 
 inline void handleNumeric(char c)
@@ -48,7 +44,7 @@ inline void handleNumeric(char c)
     {
         // handle overflow
         setValStr[0] = '\0'; //clear string
-        userError();
+        signal.error();
         return;
     }
 }
@@ -76,7 +72,7 @@ inline void handleEnter(char c)
 
 void home()
 {
-    relaysOff(); //ensure that all relays are off on home screen
+    digital.relaysOff(); //ensure that all relays are off on home screen
 
     e3_scale.setVal = memory.fn1;
 
@@ -84,7 +80,7 @@ void home()
 
     for (;;)
     {
-        getWeight();
+        e3_scale.getWeight();
 
         char c = keypad.getKey();
 
@@ -107,12 +103,12 @@ void home()
             else if (c == TARE) //tare only works from home screen
             {
                 tareScreen();
-                tare();
+                e3_scale.tare();
                 updateHomeScreen();
             }
             else
             {
-                userError();
+                signal.error();
             }
         }
 

@@ -1,14 +1,21 @@
-#include "lcd.h"
-#include "time.h"
-uint8_t lockedDATA[8] = {B01110, B10001, B10001, B11111, B11011, B11011, B11111, B00000};
-
-uint8_t unlockedDATA[8] = {B01110, B10000, B10000, B11111, B11011, B11011, B11111, B00000};
+#include "e3_lcd.h"
+e3_lcd::e3_lcd(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows) : lcd(lcd_Addr, lcd_cols, lcd_rows)
+{
+    lcd.init();
+    lcd.backlight();
+    lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
+    lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
+    lcd.home();
+    lcd.print("LCD Initialized");
+    lcd.setCursor(0, 1);
+    lcd.print("Connect Scale");
+}
 
 /**MAIN LCD object:
  *  params for constructor are as follows:
  *      (I2C address, disp resolution x, disp resolution y)
  */
-LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
+// LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
 
 /******************LDC SCREENS******************
  * HOME_PAGE:
@@ -42,17 +49,17 @@ LiquidCrystal_I2C lcd = LiquidCrystal_I2C(0x27, 16, 2);
  *      A#      ::sets SET VAL to the A PRESET
  *      AA1234# ::sets A PRESET and SET VAL to 1234
  */
-void lcdInit()
-{
-    lcd.init();
-    lcd.backlight();
-    lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
-    lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
-    lcd.home();
-    lcd.print("LCD Initialized");
-    lcd.setCursor(0, 1);
-    lcd.print("Connect Scale");
-}
+// void lcdInit()
+// {
+//     lcd.init();
+//     lcd.backlight();
+//     lcd.createChar(LOCKED, lockedDATA);     //create lock symbol
+//     lcd.createChar(UNLOCKED, unlockedDATA); //creat unlock symbol
+//     lcd.home();
+//     lcd.print("LCD Initialized");
+//     lcd.setCursor(0, 1);
+//     lcd.print("Connect Scale");
+// }
 
 // /*
 //  * HOME_PAGE:
