@@ -3,6 +3,10 @@
 //constants
 const int SET_VAL_SIZE = 4;
 
+const int PUMP_CTRL_PIN = A3;
+const int IO_1_PIN = A2;
+const int FOOT_SWITCH_PIN = A1;
+
 bool append(char *str, int maxLen, char c)
 {
     for (int i = 0; i < maxLen; i++)
@@ -45,4 +49,4 @@ char prevFNButton = '\0';
 //permenant memory variables
 Memory memory = Memory();
 
-// Scale e3_scale = Scale();
+Scale e3_scale = Scale();

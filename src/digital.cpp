@@ -1,4 +1,5 @@
 #include "digital.h"
+#include "e3_core.h"
 
 void relaysOn()
 {

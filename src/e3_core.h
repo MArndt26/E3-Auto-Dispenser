@@ -4,6 +4,11 @@
 #include "main.h"
 #include <Keypad.h>
 #include "Memory.h"
+#include "e3_loadcell.h"
+
+extern const int PUMP_CTRL_PIN;
+extern const int IO_1_PIN;
+extern const int FOOT_SWITCH_PIN;
 
 #define ROWS 4
 #define COLS 4
@@ -33,7 +38,7 @@ extern const char ENTER;
 extern Keypad keypad;
 
 //weight variables
-// extern Scale e3_scale;
+extern Scale e3_scale;
 
 //user variables
 extern char setValStr[];
