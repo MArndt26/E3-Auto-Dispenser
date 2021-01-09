@@ -2,6 +2,8 @@
 #include "e3_core.h"
 #include "lcd.h"
 #include "digital.h"
+#include "e3_loadcell.h"
+#include "debug.h"
 
 void tareScreen()
 {

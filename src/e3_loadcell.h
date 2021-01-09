@@ -1,8 +1,7 @@
-#ifndef E3_SCALE_H
-#define E3_SCALE_H
+#ifndef E3_LOADCELL_H
+#define E3_LOADCELL_H
 
-#include "Arduino.h"
-#include <HX711.h>
+#include "main.h"
 
 struct E3_SCALE
 {

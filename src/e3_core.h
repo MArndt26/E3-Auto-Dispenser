@@ -2,7 +2,6 @@
 #define E3_CORE_H
 
 #include "main.h"
-#include "e3_scale.h"
 #include <Keypad.h>
 #include "Memory.h"
 

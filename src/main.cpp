@@ -13,15 +13,15 @@ void loop()
 #else
 
 #include "e3_core.h"
+#include "e3_loadcell.h"
 // #include <Keypad.h>
 // #include <Wire.h>
 // #include "LiquidCrystal_I2C.h"
 // #include "time.h"
 // #include "HX711.h"
-// #include "state.h"
 #include "lcd.h"
 // #include "EE_MEM.h"
-// #include "digital.h"
+#include "digital.h"
 #include "debug.h"
 #include "run.h"
 #include "home.h"
@@ -35,6 +35,8 @@ void setup()
     lcdInit();
 
     scaleInit();
+
+    relayInit();
 
     // masterInit();
 

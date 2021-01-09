@@ -3,7 +3,6 @@
 // #include "digital.h"
 // #include "debug.h"
 // #include "EE_MEM.h"
-// #include "state.h"
 // #include "time.h"
 
 // void masterInit()

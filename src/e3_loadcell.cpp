@@ -1,16 +1,16 @@
-#include "e3_scale.h"
+#include "e3_loadcell.h"
 #include <HX711.h>
+
+const int LOADCELL_DOUT_PIN = 11;
+const int LOADCELL_SCK_PIN = 10;
+const int PAST_WEIGHT_BUF_SIZE = 15;
 
 E3_SCALE e3_scale;
 HX711 _scale;
 
-static const int LOADCELL_DOUT_PIN = 11;
-static const int LOADCELL_SCK_PIN = 10;
-static const int PAST_WEIGHT_BUF_SIZE = 15;
-
-static double pastWeights[PAST_WEIGHT_BUF_SIZE] = {0.0};
-static double total = 0.0;
-static int i = 0;
+double pastWeights[PAST_WEIGHT_BUF_SIZE] = {0.0};
+double total = 0.0;
+int i = 0;
 
 void scaleInit()
 {

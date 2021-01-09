@@ -1,7 +1,5 @@
 #include "lcd.h"
 #include "time.h"
-#include "state.h"
-
 uint8_t lockedDATA[8] = {B01110, B10001, B10001, B11111, B11011, B11011, B11111, B00000};
 
 uint8_t unlockedDATA[8] = {B01110, B10000, B10000, B11111, B11011, B11011, B11111, B00000};
