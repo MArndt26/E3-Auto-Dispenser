@@ -4,7 +4,7 @@
 #include "main.h"
 // #include <Keypad.h>
 // #include "Memory.h"
-// #include "e3_loadcell.h"
+#include "e3_loadcell.h"
 // #include "e3_lcd.h"
 // #include "e3_signal.h"
 // #include "e3_digital.h"
@@ -28,6 +28,9 @@ enum SCREENS
 };
 extern SCREENS curScreen;
 
+//weight variables
+extern Scale e3_scale;
+
 // #define ROWS 4
 // #define COLS 4
 
@@ -44,9 +47,6 @@ extern SCREENS curScreen;
 // extern const char ENTER;
 
 // extern Keypad keypad;
-
-// //weight variables
-// extern Scale e3_scale;
 
 // //user variables
 // extern char setValStr[];

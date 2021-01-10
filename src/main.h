@@ -9,6 +9,8 @@
 
 #define SERIAL_DEBUG
 
+#define VIRTUAL_SCALE
+
 // #define CALIBRATE
 
 #endif

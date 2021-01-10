@@ -11,6 +11,11 @@ E3_Serial screen = E3_Serial();
 E3_LCD screen = E3_LCD(0x27, 16, 2);
 #endif
 
+//scale variables
+const uint8_t LOADCELL_DOUT_PIN = 11;
+const uint8_t LOADCELL_SCK_PIN = 10;
+Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+
 // //constants
 // const int SET_VAL_SIZE = 4;
 
@@ -52,11 +57,6 @@ E3_LCD screen = E3_LCD(0x27, 16, 2);
 
 // //permenant memory variables
 // Memory memory = Memory();
-
-// //scale variables
-// const uint8_t LOADCELL_DOUT_PIN = 11;
-// const uint8_t LOADCELL_SCK_PIN = 10;
-// Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 
 // //led signaling object
 // const int errorPin = 13;

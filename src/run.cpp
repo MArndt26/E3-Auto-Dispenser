@@ -12,11 +12,10 @@ void updateRunScreen()
 {
     //first line
     char line[17];
-    char buf[8];
 
     int whole;
     unsigned int frac;
-    floatToString(-3.14, &whole, &frac);
+    floatToString(e3_scale.weight, &whole, &frac);
     snprintf(line, 17, "S:%4d C:%4d.%1u", 1234, whole, frac);
 
     screen.home();
@@ -35,7 +34,7 @@ void run()
     // e3_scale.setVal = memory.fn1;
     for (;;)
     {
-        // e3_scale.getWeight();
+        e3_scale.getWeight();
 
         // if (keypad.getKey())
         // {
