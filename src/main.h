@@ -3,16 +3,12 @@
 
 #include <Arduino.h>
 
-//HUSH used to remove all serial other than serial screen emulation
-#define HUSH 0
-#define HUSH_ERRORS 0
-#define HUSH_SUCCESS 0
-#define HOME_KEYPAD_ENTER 1
-#define NO_FOOTSWITCH 1
+//uncomment to toggle options on, leave commented for off
+#define HOME_KEYPAD_ENTER
+#define NO_FOOTSWITCH
 
-#define SERIAL_DEBUG 0
+#define SERIAL_DEBUG
 
-//used to convert between calibration mode
-#define CALIBRATE 0
+// #define CALIBRATE
 
 #endif

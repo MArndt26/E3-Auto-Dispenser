@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "cmath": "cpp",
-        "type_traits": "cpp",
-        "xtr1common": "cpp"
-    }
-}
