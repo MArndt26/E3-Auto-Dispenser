@@ -57,6 +57,12 @@ Signal signal = Signal(errorPin, successPin);
 //permenant memory variables
 E3_Memory memory = E3_Memory();
 
+// relay pins
+const uint8_t PUMP_CTRL_PIN = A3;
+const uint8_t IO_1_PIN = A2;
+const uint8_t FOOT_SWITCH_PIN = A1;
+E3_Digital digital = E3_Digital(PUMP_CTRL_PIN, IO_1_PIN, FOOT_SWITCH_PIN);
+
 // //constants
 // const int SET_VAL_SIZE = 4;
 
@@ -78,9 +84,3 @@ E3_Memory memory = E3_Memory();
 // char setValStr[SET_VAL_SIZE + 1] = "";
 // char curFNButton = '\0';
 // char prevFNButton = '\0';
-
-// // relay pins
-// const uint8_t PUMP_CTRL_PIN = A3;
-// const uint8_t IO_1_PIN = A2;
-// const uint8_t FOOT_SWITCH_PIN = A1;
-// E3_Digital digital = E3_Digital(PUMP_CTRL_PIN, IO_1_PIN, FOOT_SWITCH_PIN);

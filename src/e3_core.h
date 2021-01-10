@@ -7,7 +7,7 @@
 #include "e3_loadcell.h"
 #include "e3_lcd.h"
 #include "e3_signal.h"
-// #include "e3_digital.h"
+#include "e3_digital.h"
 #include "e3_serial.h"
 
 //screen object
@@ -56,6 +56,9 @@ extern Signal signal;
 //permenant memory variables
 extern E3_Memory memory;
 
+//digital object for relays and foot switch
+extern E3_Digital digital;
+
 // bool append(char *str, int maxLen, char c);
 
 // //constants
@@ -65,8 +68,5 @@ extern E3_Memory memory;
 // extern char setValStr[];
 // extern char curFNButton;
 // extern char prevFNButton;
-
-// //digital object for relays and foot switch
-// extern E3_Digital digital;
 
 #endif

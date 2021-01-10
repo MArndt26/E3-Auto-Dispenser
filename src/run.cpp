@@ -27,9 +27,10 @@ void updateRunScreen()
 
 void run()
 {
-    // digital.relaysOn(); //ensure that all relays turn on
     screen.clear();
     screen.home();
+
+    digital.relaysOn(); //ensure that all relays turn on
 
     e3_scale.setVal = memory.fn1;
     for (;;)

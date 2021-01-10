@@ -17,6 +17,8 @@
 
 #define VIRTUAL_KEYBOARD
 
+#define VIRTUAL_DIGITAL
+
 // #define CALIBRATE
 
 #endif
