@@ -3,8 +3,9 @@
 
 #include <Arduino.h>
 
+#define HOME_KEYPAD_ENTER 1
+
 //uncomment to toggle options on, leave commented for off
-#define HOME_KEYPAD_ENTER
 #define NO_FOOTSWITCH
 
 // #define PERMANENT_MEM

@@ -57,3 +57,16 @@ void E3_Memory::write(int i)
     }
 #endif
 }
+
+int E3_Memory::getFN1()
+{
+    return fn1;
+}
+int E3_Memory::getFN2()
+{
+    return fn2;
+}
+int E3_Memory::getFN3()
+{
+    return fn3;
+}

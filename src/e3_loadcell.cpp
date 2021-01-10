@@ -16,14 +16,13 @@ Scale::Scale(const int dout, const int sck) : _scale()
 #endif
 }
 
-void Scale::getWeight()
+void Scale::updateWeight()
 {
-
     // subtract the last reading:
     total = total - pastWeights[i];
 
 #ifdef VIRTUAL_SCALE
-    pastWeights[i] = random(0, 100);
+    pastWeights[i] = random(0, 99);
 #else
     // read from the sensor:
     pastWeights[i] = (double)_scale.get_value() / c_factor;
@@ -58,4 +57,19 @@ void Scale::tare()
 #ifndef VIRTUAL_SCALE
     _scale.tare(5);
 #endif
+}
+
+double Scale::getWeight()
+{
+    return weight;
+}
+
+int Scale::getSetVal()
+{
+    return setVal;
+}
+
+void Scale::setSetVal(int val)
+{
+    setVal = val;
 }

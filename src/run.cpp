@@ -15,14 +15,23 @@ void updateRunScreen()
 
     int whole;
     unsigned int frac;
-    floatToString(e3_scale.weight, &whole, &frac);
+    whole = 10;
+    frac = 5;
+    // floatToString(e3_scale.weight, &whole, &frac);
     snprintf(line, 17, "S:%4d C:%4d.%1u", 1234, whole, frac);
 
     screen.home();
+
+    Serial.write(line);
+    Serial.println("here");
+    delay(1000);
+
     screen.print(line);
 
     screen.setCursor(0, 1);
     screen.print(" Press to Halt");
+
+    delay(500);
 }
 
 void run()
@@ -30,23 +39,24 @@ void run()
     screen.clear();
     screen.home();
 
-    digital.relaysOn(); //ensure that all relays turn on
+    // digital.relaysOn(); //ensure that all relays turn on
 
-    e3_scale.setVal = memory.fn1;
+    // e3_scale.setSetVal(memory.getFN1());
+
     for (;;)
     {
-        e3_scale.getWeight();
+        // e3_scale.updateWeight();
 
-        if (keypad.getKey())
-        {
-            signal.error();
-            return;
-        }
-        if (e3_scale.weight >= e3_scale.setVal)
-        {
-            signal.success();
-            return;
-        }
+        // if (keypad.getKey())
+        // {
+        //     signal.error();
+        //     return;
+        // }
+        // if (e3_scale.weight >= e3_scale.setVal)
+        // {
+        //     signal.success();
+        //     return;
+        // }
 
         updateRunScreen();
     }

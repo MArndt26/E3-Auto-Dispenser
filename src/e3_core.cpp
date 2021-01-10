@@ -3,18 +3,18 @@
 //state object for curent screen displayed
 SCREENS curScreen = HOME;
 
-//screen object
-#ifdef SERIAL_DEBUG
-E3_Serial screen = E3_Serial();
-#else
-//lcd object
-E3_LCD screen = E3_LCD(0x27, 16, 2);
-#endif
+// //screen object
+// #ifdef SERIAL_DEBUG
+// screen = E3_Serial();
+// #else
+// //lcd object
+// static E3_LCD screen = E3_LCD(0x27, 16, 2);
+// #endif
 
 //scale variables
-const uint8_t LOADCELL_DOUT_PIN = 11;
-const uint8_t LOADCELL_SCK_PIN = 10;
-Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+// const uint8_t LOADCELL_DOUT_PIN = 11;
+// const uint8_t LOADCELL_SCK_PIN = 10;
+// e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 
 const char FN1_Button = 'A';
 const char FN2_Button = 'B';
@@ -37,11 +37,17 @@ char hexaKeys[ROWS][COLS] = {
 #ifdef VIRTUAL_KEYBOARD
 char VirtualKeypad::getKey()
 {
-    if (Serial.available())
+    char c = '\0';
+    while (Serial.available())
     {
-        return Serial.read();
+        c = Serial.read();
     }
-    return '\0';
+    return c;
+}
+
+void VirtualKeypad::setDebounceTime(int t)
+{
+    //do nothing
 }
 
 VirtualKeypad keypad = VirtualKeypad();
@@ -63,24 +69,24 @@ const uint8_t IO_1_PIN = A2;
 const uint8_t FOOT_SWITCH_PIN = A1;
 E3_Digital digital = E3_Digital(PUMP_CTRL_PIN, IO_1_PIN, FOOT_SWITCH_PIN);
 
-// //constants
-// const int SET_VAL_SIZE = 4;
+//constants
+const int SET_VAL_SIZE = 4;
 
-// bool append(char *str, int maxLen, char c)
-// {
-//     for (int i = 0; i < maxLen; i++)
-//     {
-//         if (!str[i])
-//         {
-//             str[i] = c;
-//             str[i + 1] = '\0';
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+bool append(char *str, int maxLen, char c)
+{
+    for (int i = 0; i < maxLen; i++)
+    {
+        if (!str[i])
+        {
+            str[i] = c;
+            str[i + 1] = '\0';
+            return true;
+        }
+    }
+    return false;
+}
 
-// //user variables
-// char setValStr[SET_VAL_SIZE + 1] = "";
+//user variables
+char setValStr[SET_VAL_SIZE + 1] = "";
 // char curFNButton = '\0';
 // char prevFNButton = '\0';

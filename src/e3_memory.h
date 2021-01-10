@@ -12,11 +12,11 @@ private:
 
     static const int MAX_VAL = 9999;
 
-public:
     int fn1;
     int fn2;
     int fn3;
 
+public:
     E3_Memory();
 
     void read();
@@ -24,6 +24,12 @@ public:
     void write();
 
     void write(int i);
+
+    int getFN1();
+
+    int getFN2();
+
+    int getFN3();
 };
 
 #endif

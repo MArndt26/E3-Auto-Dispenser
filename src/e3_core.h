@@ -12,10 +12,11 @@
 
 //screen object
 #ifdef SERIAL_DEBUG
-extern E3_Serial screen;
+static E3_Serial screen = E3_Serial();
 #else
 //lcd object
-extern E3_LCD screen;
+static E3_LCD screen = E3_LCD(0x27, 16, 2);
+;
 #endif
 
 //enumerations
@@ -29,7 +30,9 @@ enum SCREENS
 extern SCREENS curScreen;
 
 //weight variables
-extern Scale e3_scale;
+const uint8_t LOADCELL_DOUT_PIN = 11;
+const uint8_t LOADCELL_SCK_PIN = 10;
+static Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 
 /*--------------KEYPAD VARS------------------*/
 extern const char FN1_Button;
@@ -43,6 +46,7 @@ class VirtualKeypad
 {
 public:
     char getKey();
+    void setDebounceTime(int t);
 };
 
 extern VirtualKeypad keypad;
@@ -59,13 +63,13 @@ extern E3_Memory memory;
 //digital object for relays and foot switch
 extern E3_Digital digital;
 
-// bool append(char *str, int maxLen, char c);
+bool append(char *str, int maxLen, char c);
 
-// //constants
-// extern const int SET_VAL_SIZE;
+//constants
+extern const int SET_VAL_SIZE;
 
-// //user variables
-// extern char setValStr[];
+//user variables
+extern char setValStr[];
 // extern char curFNButton;
 // extern char prevFNButton;
 
