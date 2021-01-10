@@ -7,9 +7,15 @@
 #define HOME_KEYPAD_ENTER
 #define NO_FOOTSWITCH
 
+// #define PERMANENT_MEM
+
 #define SERIAL_DEBUG
 
 #define VIRTUAL_SCALE
+
+#define VIRTUAL_SIGNAL
+
+#define VIRTUAL_KEYBOARD
 
 // #define CALIBRATE
 

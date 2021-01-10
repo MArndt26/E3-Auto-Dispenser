@@ -16,6 +16,47 @@ const uint8_t LOADCELL_DOUT_PIN = 11;
 const uint8_t LOADCELL_SCK_PIN = 10;
 Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 
+const char FN1_Button = 'A';
+const char FN2_Button = 'B';
+const char FN3_Button = 'C';
+const char TARE = 'D';
+const char ENTER = '#';
+
+#define ROWS 4
+#define COLS 4
+
+byte rowPins[ROWS] = {9, 8, 7, 6};
+byte colPins[COLS] = {5, 4, 3, 2};
+
+char hexaKeys[ROWS][COLS] = {
+    {'1', '2', '3', 'A'},
+    {'4', '5', '6', 'B'},
+    {'7', '8', '9', 'C'},
+    {'*', '0', '#', 'D'}};
+
+#ifdef VIRTUAL_KEYBOARD
+char VirtualKeypad::getKey()
+{
+    if (Serial.available())
+    {
+        return Serial.read();
+    }
+    return '\0';
+}
+
+VirtualKeypad keypad = VirtualKeypad();
+#else
+Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
+#endif
+
+//led signaling object
+const int errorPin = 13;
+const int successPin = 12;
+Signal signal = Signal(errorPin, successPin);
+
+//permenant memory variables
+E3_Memory memory = E3_Memory();
+
 // //constants
 // const int SET_VAL_SIZE = 4;
 
@@ -33,35 +74,10 @@ Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 //     return false;
 // }
 
-// const char FN1_Button = 'A';
-// const char FN2_Button = 'B';
-// const char FN3_Button = 'C';
-// const char TARE = 'D';
-// const char ENTER = '#';
-
-// byte rowPins[ROWS] = {9, 8, 7, 6};
-// byte colPins[COLS] = {5, 4, 3, 2};
-
-// char hexaKeys[ROWS][COLS] = {
-//     {'1', '2', '3', 'A'},
-//     {'4', '5', '6', 'B'},
-//     {'7', '8', '9', 'C'},
-//     {'*', '0', '#', 'D'}};
-
-// Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);
-
 // //user variables
 // char setValStr[SET_VAL_SIZE + 1] = "";
 // char curFNButton = '\0';
 // char prevFNButton = '\0';
-
-// //permenant memory variables
-// Memory memory = Memory();
-
-// //led signaling object
-// const int errorPin = 13;
-// const int successPin = 12;
-// Signal signal = Signal(errorPin, successPin);
 
 // // relay pins
 // const uint8_t PUMP_CTRL_PIN = A3;

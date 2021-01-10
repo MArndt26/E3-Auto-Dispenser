@@ -31,21 +31,21 @@ void run()
     screen.clear();
     screen.home();
 
-    // e3_scale.setVal = memory.fn1;
+    e3_scale.setVal = memory.fn1;
     for (;;)
     {
         e3_scale.getWeight();
 
-        // if (keypad.getKey())
-        // {
-        //     signal.error();
-        //     return;
-        // }
-        // if (e3_scale.weight >= e3_scale.setVal)
-        // {
-        //     signal.success();
-        //     return;
-        // }
+        if (keypad.getKey())
+        {
+            signal.error();
+            return;
+        }
+        if (e3_scale.weight >= e3_scale.setVal)
+        {
+            signal.success();
+            return;
+        }
 
         updateRunScreen();
     }

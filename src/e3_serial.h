@@ -1,7 +1,7 @@
 #ifndef E3_SERIAL_H
 #define E3_SERIAL_H
 
-#include "Arduino.h"
+#include "main.h"
 
 void floatToString(double input, int *whole, unsigned int *frac);
 
