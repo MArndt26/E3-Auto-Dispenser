@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+#ifdef SERIAL_DEBUG
+
 #define CLEAR_STR_LEN 7
 #define CURSOR_POS_STR_LEN 8
 #define HOME_STR_LEN 8
@@ -30,5 +32,7 @@ public:
 
     void write(uint8_t num);
 };
+
+#endif
 
 #endif

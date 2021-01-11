@@ -10,13 +10,13 @@
 
 // #define PERMANENT_MEM
 
-#define SERIAL_DEBUG
+// #define SERIAL_DEBUG
 
 #define VIRTUAL_SCALE
 
 #define VIRTUAL_SIGNAL
 
-#define VIRTUAL_KEYBOARD
+// #define VIRTUAL_KEYBOARD
 
 #define VIRTUAL_DIGITAL
 

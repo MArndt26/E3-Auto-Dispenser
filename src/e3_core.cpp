@@ -3,13 +3,13 @@
 //state object for curent screen displayed
 SCREENS curScreen = HOME;
 
-// //screen object
-// #ifdef SERIAL_DEBUG
-// screen = E3_Serial();
-// #else
-// //lcd object
-// static E3_LCD screen = E3_LCD(0x27, 16, 2);
-// #endif
+//screen object
+#ifdef SERIAL_DEBUG
+E3_Serial screen = E3_Serial();
+#else
+//lcd object
+E3_LCD screen = E3_LCD(0x27, 16, 2);
+#endif
 
 //scale variables
 const uint8_t LOADCELL_DOUT_PIN = 11;

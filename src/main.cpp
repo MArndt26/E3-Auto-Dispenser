@@ -6,13 +6,25 @@
 
 void setup()
 {
-#ifdef SERIAL_DEBUG
+  // #ifdef SERIAL_DEBUG
   Serial.begin(9600);
   while (!Serial)
     ;
-#endif
+  // #endif
+
+  screen.init();
+  screen.backlight();
+  screen.createCustomChars();
+  screen.home();
+  screen.print("LCD Initialized");
+  screen.setCursor(0, 1);
+  screen.print("Connect Scale");
+
+  signal.success();
 
   e3_scale.setSetVal(memory.getFN1());
+
+  signal.success();
 }
 
 void loop()

@@ -1,5 +1,7 @@
 #include "e3_serial.h"
 
+#ifdef SERIAL_DEBUG
+
 #define CURSOR_X_POS 4
 #define CURSOR_Y_POS 2
 
@@ -47,3 +49,5 @@ void E3_Serial::write(uint8_t num)
 {
     Serial.print(num);
 }
+
+#endif

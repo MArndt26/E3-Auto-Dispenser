@@ -83,6 +83,8 @@ void home()
 
     for (;;)
     {
+        signal.error();
+
         e3_scale.updateWeight();
 
         char c = keypad.getKey();

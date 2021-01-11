@@ -2,7 +2,10 @@
 #define E3_LCD_H
 
 #include "main.h"
+
+#ifndef SERIAL_DEBUG
 #include <LiquidCrystal_I2C.h>
+#include <avr/pgmspace.h>
 
 class E3_LCD : public LiquidCrystal_I2C
 {
@@ -15,6 +18,9 @@ public:
     static const byte LOCKED = 0;
     static const byte UNLOCKED = 1;
     E3_LCD(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows);
+
+    void createCustomChars();
 };
+#endif
 
 #endif

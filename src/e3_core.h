@@ -12,11 +12,10 @@
 
 //screen object
 #ifdef SERIAL_DEBUG
-static E3_Serial screen = E3_Serial();
+extern E3_Serial screen; // = E3_Serial();
 #else
 //lcd object
-static E3_LCD screen = E3_LCD(0x27, 16, 2);
-;
+extern E3_LCD screen; // = E3_LCD(0x27, 16, 2);
 #endif
 
 //enumerations

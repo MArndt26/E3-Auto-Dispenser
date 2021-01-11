@@ -4,6 +4,8 @@ Signal::Signal(uint8_t e, uint8_t s)
 {
     errorPin = e;
     successPin = s;
+    pinMode(errorPin, OUTPUT);
+    pinMode(successPin, OUTPUT);
 }
 
 void Signal::error()
