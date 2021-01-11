@@ -96,7 +96,7 @@ void home()
 #ifdef VIRTUAL_DIGITAL
         if (c == 'f')
 #else
-        else if (digital.checkFS())
+        if (digital.checkFS())
 #endif
         {
             if (setValStr[0] != '\0')
