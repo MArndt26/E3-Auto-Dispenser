@@ -15,7 +15,7 @@ void updateProgramScreen()
     screen.setCursor(0, 1);
     if (setValStr[0] == '\0')
     {
-        snprintf(line, 17, "Cur Val:%7dg", memory.getFN(curFNButton - FN1_Button));
+        snprintf(line, 17, "Cur Val:%7dg", memory.getFN(curFNButton - FN1_Button + 1));
     }
     else
     {

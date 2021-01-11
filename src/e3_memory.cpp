@@ -3,7 +3,7 @@
 
 E3_Memory::E3_Memory()
 {
-    E3_Memory::readAll();
+    readAll();
 }
 
 void E3_Memory::readAll()
@@ -12,6 +12,7 @@ void E3_Memory::readAll()
     EEPROM.get(fn1_addr, fn1);
     EEPROM.get(fn2_addr, fn2);
     EEPROM.get(fn3_addr, fn3);
+    EEPROM.get(c_fact_addr, c_factor);
 
     int size = 3;
     int arr[] = {fn1, fn2, fn3};
@@ -41,7 +42,7 @@ void E3_Memory::writeFN(int i, int val)
     {
         fn1 = val;
 #ifdef PERMANENT_MEM
-        EEPROM.put(fn1_ad, fn1);
+        EEPROM.put(fn1_addr, fn1);
 #endif
     }
     else if (i == 2)

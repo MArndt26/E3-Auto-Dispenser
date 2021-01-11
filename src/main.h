@@ -6,9 +6,11 @@
 #define HOME_KEYPAD_ENTER 1
 
 //uncomment to toggle options on, leave commented for off
-#define NO_FOOTSWITCH
+#define PERMANENT_MEM
 
-// #define PERMANENT_MEM
+#define INITIALIZE_PERMANENT_MEM
+
+#define CALIBRATION_PASSWORD "1234"
 
 // #define SERIAL_DEBUG
 
@@ -19,7 +21,5 @@
 // #define VIRTUAL_KEYBOARD
 
 #define VIRTUAL_DIGITAL
-
-// #define CALIBRATE
 
 #endif

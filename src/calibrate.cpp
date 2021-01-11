@@ -1,7 +1,7 @@
 #include "calibrate.h"
 #include "e3_core.h"
 
-const char PASSWORD[5] = "1234";
+const char PASSWORD[5] = CALIBRATION_PASSWORD;
 int LOCKED = 1;
 
 #define CHARMAP_SIZE 8
@@ -126,10 +126,16 @@ void calibrate_lock()
             else if (c == ENTER)
             {
                 handleEnter_lock();
+                if (LOCKED)
+                {
+                    incorrectPasswordScreen();
+                    delay(1000);
+                }
                 return;
             }
             else if (c == CALIBRATE_BUTTON)
             {
+                setValStr[0] = '\0';
                 signal.error();
                 return;
             }
@@ -150,8 +156,6 @@ void calibrate()
 
     if (LOCKED)
     {
-        incorrectPasswordScreen();
-        delay(1000);
         curScreen = HOME;
         return;
     }

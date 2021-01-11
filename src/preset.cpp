@@ -5,7 +5,7 @@ void updatePresetScreen()
 {
     char line[17];
 
-    sprintf(line, "PREST:%c %7dg", curFNButton, memory.getFN(curFNButton - FN1_Button));
+    sprintf(line, "PREST:%c %7dg", curFNButton, memory.getFN(curFNButton - FN1_Button + 1));
 
     screen.home();
     screen.print(line);
@@ -29,7 +29,7 @@ void handleFN_preset(char c)
 
 void handleEnter_preset(char c)
 {
-    e3_scale.setVal = memory.getFN(curFNButton - FN1_Button);
+    e3_scale.setVal = memory.getFN(curFNButton - FN1_Button + 1);
 
     curScreen = HOME;
 }

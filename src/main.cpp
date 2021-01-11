@@ -18,6 +18,13 @@ void setup()
   screen.start();
 #endif
 
+#ifndef INITIALIZE_PERMANENT_MEM
+  memory.fn1 = 100;
+  memory.fn2 = 200;
+  memory.fn3 = 300;
+  memory.c_factor = 464.5f;
+#endif
+
   e3_scale.setVal = memory.fn1;
 
   keypad.setDebounceTime(50);
