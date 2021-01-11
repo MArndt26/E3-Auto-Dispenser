@@ -37,8 +37,6 @@ void updateHomeScreen()
     }
     screen.setCursor(1, 1);
     screen.print(line);
-
-    delay(500);
 }
 
 void handleNumeric(char c)
@@ -87,7 +85,9 @@ void home()
 
         char c = keypad.getKey();
 
-        // handleDigital(); //overrides key pressed if foot switch is pressed
+#ifdef VIRTUAL_DIGITAL
+        screen.setPrevChar(c);
+#endif
 
         if (c != '\0') //check if input exists
         {
@@ -110,6 +110,22 @@ void home()
                 delay(200);
                 updateHomeScreen();
             }
+#ifdef VIRTUAL_DIGITAL
+            else if (screen.getPrevChar() == 'f')
+#else
+            else if (digital.checkFS())
+#endif
+            {
+                if (setValStr[0] != '\0')
+                {
+                    signal.error();
+                }
+                else
+                {
+                    curScreen = RUN;
+                }
+            }
+
             else
             {
                 signal.error();

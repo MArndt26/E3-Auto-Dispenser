@@ -1,26 +1,12 @@
 #include "e3_serial.h"
 
-//percision is 1 followed by the number of digits of percision desired
-#define PERCISION 10
-
-void floatToString(double input, int *whole, unsigned int *frac)
-{
-    *whole = (int)input;
-    if (input >= 0)
-    {
-        *frac = (input - int(input)) * PERCISION;
-    }
-    else
-    {
-        *frac = (int(input) - input) * PERCISION;
-    }
-}
-
 #define CURSOR_X_POS 4
 #define CURSOR_Y_POS 2
 
 E3_Serial::E3_Serial()
 {
+    prevChar = 0; //index of prevChar stack
+
     clear(); //clean up terminal before emulating lcd
 
     Serial.print("LCD Initialized");
@@ -62,4 +48,14 @@ void E3_Serial::print(const char *str)
 void E3_Serial::write(uint8_t num)
 {
     Serial.print(num);
+}
+
+void E3_Serial::setPrevChar(char c)
+{
+    prevChar = c;
+}
+
+char E3_Serial::getPrevChar()
+{
+    return prevChar;
 }

@@ -40,21 +40,10 @@ void E3_Digital::relaysOff()
 
 int E3_Digital::checkFS()
 {
-#ifdef VIRTUAL_DIGITAL
-    if (Serial.available())
-    {
-        if (Serial.read() == 'f')
-        {
-            return 1;
-        }
-    }
-    return 0;
-#else
     int val = digitalRead(FOOT_SWITCH_PIN);
 
     while (digitalRead(FOOT_SWITCH_PIN))
         ; // wait for switch to go low
 
     return val;
-#endif
 }

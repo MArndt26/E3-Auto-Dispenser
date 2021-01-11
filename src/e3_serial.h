@@ -3,8 +3,6 @@
 
 #include "main.h"
 
-void floatToString(double input, int *whole, unsigned int *frac);
-
 #define CLEAR_STR_LEN 7
 #define CURSOR_POS_STR_LEN 8
 #define HOME_STR_LEN 8
@@ -15,6 +13,8 @@ private:
     const char CLEAR[CLEAR_STR_LEN] = "\033[2J";
     char CURSOR_POS[CURSOR_POS_STR_LEN] = "\033[0;0H";
     const char HOME[HOME_STR_LEN] = "\033[0;0H";
+
+    char prevChar;
 
 public:
     byte LOCKED = 1;
@@ -31,6 +31,10 @@ public:
     void print(const char *str);
 
     void write(uint8_t num);
+
+    void setPrevChar(char c);
+
+    char getPrevChar();
 };
 
 #endif

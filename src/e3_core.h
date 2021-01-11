@@ -66,6 +66,8 @@ bool append(char *str, int maxLen, char c);
 //constants
 extern const int SET_VAL_SIZE;
 
+void floatToString(double input, int *whole, unsigned int *frac);
+
 //user variables
 extern char setValStr[];
 // extern char curFNButton;

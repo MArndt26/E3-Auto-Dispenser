@@ -86,6 +86,22 @@ bool append(char *str, int maxLen, char c)
     return false;
 }
 
+//percision is 1 followed by the number of digits of percision desired
+#define PERCISION 10
+
+void floatToString(double input, int *whole, unsigned int *frac)
+{
+    *whole = (int)input;
+    if (input >= 0)
+    {
+        *frac = (input - int(input)) * PERCISION;
+    }
+    else
+    {
+        *frac = (int(input) - input) * PERCISION;
+    }
+}
+
 //user variables
 char setValStr[SET_VAL_SIZE + 1] = "";
 // char curFNButton = '\0';
