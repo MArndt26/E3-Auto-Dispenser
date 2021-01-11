@@ -18,7 +18,7 @@ void updateHomeScreen()
     int whole;
     unsigned int frac;
 
-    floatToString(e3_scale.getWeight(), &whole, &frac);
+    floatToString(e3_scale.weight, &whole, &frac);
     snprintf(line, 17, "WEIGHT:%6d.%1ug", whole, frac);
     screen.home();
     screen.print(line);
@@ -28,7 +28,7 @@ void updateHomeScreen()
     if (setValStr[0] == '\0')
     {
         screen.write(screen.LOCKED);
-        snprintf(line, 17, "SetVal:%7dg", e3_scale.getSetVal());
+        snprintf(line, 17, "SetVal:%7dg", e3_scale.setVal);
     }
     else
     {
@@ -65,7 +65,7 @@ void handleEnter_home(char c)
     if (setValStr[0] != '\0')
     {
         //user is currently setting the value
-        e3_scale.setSetVal(atoi(setValStr));
+        e3_scale.setVal = atoi(setValStr);
         setValStr[0] = '\0';
     }
     else if (HOME_KEYPAD_ENTER)
@@ -82,7 +82,7 @@ void home()
 
     for (;;)
     {
-        e3_scale.updateWeight();
+        e3_scale.updateWeight(memory.c_factor);
 
         char c = keypad.getKey();
 
@@ -121,6 +121,10 @@ void home()
                 e3_scale.tare();
                 delay(200);
                 updateHomeScreen();
+            }
+            else if (c == CALIBRATE_BUTTON)
+            {
+                curScreen = CALIBRATE;
             }
             else
             {

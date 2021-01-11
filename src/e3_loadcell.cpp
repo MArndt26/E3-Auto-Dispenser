@@ -2,7 +2,6 @@
 
 Scale::Scale(const int dout, const int sck) : _scale()
 {
-    c_factor = 464.5f;
     setVal = -999;
     weight = 0.0;
     total = 0.0;
@@ -15,12 +14,11 @@ Scale::Scale(const int dout, const int sck) : _scale()
 
 #ifndef VIRTUAL_SCALE
     _scale.begin(dout, sck);
-    _scale.set_scale(c_factor); //Adjust to this calibration factor
     _scale.tare(10);
 #endif
 }
 
-void Scale::updateWeight()
+void Scale::updateWeight(double c_factor)
 {
     // subtract the last reading:
     total = total - pastWeights[i];
@@ -61,19 +59,4 @@ void Scale::tare()
 #ifndef VIRTUAL_SCALE
     _scale.tare(5);
 #endif
-}
-
-double Scale::getWeight()
-{
-    return weight;
-}
-
-int Scale::getSetVal()
-{
-    return setVal;
-}
-
-void Scale::setSetVal(int val)
-{
-    setVal = val;
 }

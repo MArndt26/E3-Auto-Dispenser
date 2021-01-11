@@ -11,26 +11,11 @@ void updateProgramScreen()
     screen.home();
     screen.print(line);
 
-    int val;
-
-    if (curFNButton == FN1_Button)
-    {
-        val = memory.getFN1();
-    }
-    else if (curFNButton == FN2_Button)
-    {
-        val = memory.getFN2();
-    }
-    else //c == FN3_Button
-    {
-        val = memory.getFN3();
-    }
-
     //second line
     screen.setCursor(0, 1);
     if (setValStr[0] == '\0')
     {
-        snprintf(line, 17, "Cur Val:%7dg", val);
+        snprintf(line, 17, "Cur Val:%7dg", memory.getFN(curFNButton - FN1_Button));
     }
     else
     {
@@ -72,20 +57,9 @@ void handleEnter_program(char c)
     {
         //user is currently setting the value
         int val = atoi(setValStr);
-        e3_scale.setSetVal(val);
+        e3_scale.setVal = val;
 
-        if (curFNButton == FN1_Button)
-        {
-            memory.writeFN1(val);
-        }
-        else if (curFNButton == FN2_Button)
-        {
-            memory.writeFN2(val);
-        }
-        else //curFNButton == FN3_Button
-        {
-            memory.writeFN3(val);
-        }
+        memory.writeFN(curFNButton - FN1_Button, val);
         setValStr[0] = '\0';
     }
 }

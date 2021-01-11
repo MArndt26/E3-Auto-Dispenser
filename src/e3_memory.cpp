@@ -3,10 +3,10 @@
 
 E3_Memory::E3_Memory()
 {
-    E3_Memory::read();
+    E3_Memory::readAll();
 }
 
-void E3_Memory::read()
+void E3_Memory::readAll()
 {
 #ifdef PERMANENT_MEM
     EEPROM.get(fn1_addr, fn1);
@@ -28,69 +28,62 @@ void E3_Memory::read()
     fn1 = 100;
     fn2 = 200;
     fn3 = 300;
+    c_factor = 464.5f;
 #endif
 }
 
-void E3_Memory::write()
+/**
+ * Assuming that i is always in range 1 - 3
+ */
+void E3_Memory::writeFN(int i, int val)
 {
-#ifdef PERMANENT_MEM
-    EEPROM.put(fn1_addr, fn1);
-    EEPROM.put(fn2_addr, fn2);
-    EEPROM.put(fn3_addr, fn3);
-#endif
-}
-
-void E3_Memory::write(int i)
-{
-#ifdef PERMANENT_MEM
     if (i == 1)
     {
-        EEPROM.put(fn1_addr, fn1);
+        fn1 = val;
+#ifdef PERMANENT_MEM
+        EEPROM.put(fn1_ad, fn1);
+#endif
     }
     else if (i == 2)
     {
+        fn2 = val;
+#ifdef PERMANENT_MEM
         EEPROM.put(fn2_addr, fn2);
+#endif
+    }
+    else // i == 3
+    {
+        fn3 = val;
+#ifdef PERMANENT_MEM
+        EEPROM.put(fn3_addr, fn3);
+#endif
+    }
+}
+
+/**
+ * returns -999 if i is not in range 1-3
+ */
+int E3_Memory::getFN(int i)
+{
+    int val = -999;
+    if (i == 1)
+    {
+        val = fn1;
+    }
+    else if (i == 2)
+    {
+        val = fn2;
     }
     else if (i == 3)
     {
-        EEPROM.put(fn3_addr, fn3);
+        val = fn3;
     }
-#endif
+    return val;
 }
 
-int E3_Memory::getFN1()
+void E3_Memory::writeCF()
 {
-    return fn1;
-}
-int E3_Memory::getFN2()
-{
-    return fn2;
-}
-int E3_Memory::getFN3()
-{
-    return fn3;
-}
-
-void E3_Memory::writeFN1(int i)
-{
-    fn1 = i;
 #ifdef PERMANENT_MEM
-    EEPROM.put(fn1_addr, fn1);
-#endif
-}
-
-void E3_Memory::writeFN2(int i)
-{
-    fn2 = i;
-#ifdef PERMANENT_MEM
-    EEPROM.put(fn2_addr, fn2);
-#endif
-}
-
-void E3_Memory::writeFN3(int i)
-{
-    fn3 = i;
-#ifdef PERMANENT_MEM
-    EEPROM.put(fn3_addr, fn3);
+    EEPROM.put(c_fact_addr, c_factor);
 #endif
 }

@@ -4,6 +4,7 @@
 #include "home.h"
 #include "preset.h"
 #include "program.h"
+#include "calibrate.h"
 
 void setup()
 {
@@ -17,7 +18,7 @@ void setup()
   screen.start();
 #endif
 
-  e3_scale.setSetVal(memory.getFN1());
+  e3_scale.setVal = memory.fn1;
 
   keypad.setDebounceTime(50);
 }
@@ -38,6 +39,9 @@ void loop()
   case RUN:
     run();
     curScreen = HOME;
+    break;
+  case CALIBRATE:
+    calibrate();
     break;
   }
 }

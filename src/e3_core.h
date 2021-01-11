@@ -24,7 +24,8 @@ enum SCREENS
     HOME,
     PRESET,
     PROGRAM,
-    RUN
+    RUN,
+    CALIBRATE
 };
 extern SCREENS curScreen;
 
@@ -37,6 +38,7 @@ extern const char FN2_Button;
 extern const char FN3_Button;
 extern const char TARE;
 extern const char ENTER;
+extern const char CALIBRATE_BUTTON;
 
 #ifdef VIRTUAL_KEYBOARD
 class VirtualKeypad

@@ -21,6 +21,7 @@ const char FN2_Button = 'B';
 const char FN3_Button = 'C';
 const char TARE = 'D';
 const char ENTER = '#';
+const char CALIBRATE_BUTTON = '*';
 
 #define ROWS 4
 #define COLS 4

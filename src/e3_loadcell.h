@@ -13,22 +13,14 @@ private:
     int i;
     HX711 _scale;
 
-    double c_factor;
+public:
     int setVal;
     double weight;
-
-public:
     Scale(const int dout, const int sck);
 
-    double getWeight();
-
-    void updateWeight();
+    void updateWeight(double c_factor);
 
     void tare();
-
-    void setSetVal(int val);
-
-    int getSetVal();
 };
 
 #endif

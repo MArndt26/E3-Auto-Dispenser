@@ -16,8 +16,8 @@ void updateRunScreen()
     int whole;
     unsigned int frac;
 
-    floatToString(e3_scale.getWeight(), &whole, &frac);
-    snprintf(line, 17, "S:%4d C:%4d.%1u", e3_scale.getSetVal(), whole, frac);
+    floatToString(e3_scale.weight, &whole, &frac);
+    snprintf(line, 17, "S:%4d C:%4d.%1u", e3_scale.setVal, whole, frac);
 
     screen.home();
     screen.print(line);
@@ -35,14 +35,14 @@ void run()
 
     for (;;)
     {
-        e3_scale.updateWeight();
+        e3_scale.updateWeight(memory.c_factor);
 
         if (keypad.getKey())
         {
             signal.error();
             return;
         }
-        if (e3_scale.getWeight() >= e3_scale.getSetVal())
+        if (e3_scale.weight >= e3_scale.setVal)
         {
             signal.success();
             return;
