@@ -16,7 +16,9 @@ This Project is used to create a control pad and scale to dispense adhesive unti
 
 ## Hardware Layout:
 
-![Hardware Layout](/docs/images/Hardware_Layout.svg)
+<div style="background-color:white">
+<img src="docs/images/Hardware_Layout.svg" alt="Hardware Layout">
+</div>
 
 ## Development tools
 
