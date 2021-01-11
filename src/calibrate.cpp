@@ -10,7 +10,7 @@ const struct
     char key[CHARMAP_SIZE];
     float val[CHARMAP_SIZE];
 } charMap = {
-    .key = {'1', '2', '3', 'A', '4', '5', '6', 'B'},
+    .key = {'A', '3', '2', '1', 'B', '6', '5', '4'},
     .val = {0.1, 1, 10, 100, -0.1, -1, -10, -100}};
 
 void saveCFScreen()

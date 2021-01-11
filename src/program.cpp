@@ -40,14 +40,20 @@ void handleNumeric_program(char c)
 
 void handleFN_program(char c)
 {
-    setValStr[0] = '\0'; //clear setValSt
-
-    prevFNButton = curFNButton;
-    curFNButton = c;
-
-    if (curFNButton == prevFNButton)
+    if (setValStr[0] == '\0')
     {
-        curScreen = HOME;
+        prevFNButton = curFNButton;
+        curFNButton = c;
+
+        if (curFNButton == prevFNButton)
+        {
+            curScreen = HOME;
+        }
+    }
+    else
+    {
+        setValStr[0] = '\0'; //clear setValSt
+        signal.error();
     }
 }
 

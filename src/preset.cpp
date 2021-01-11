@@ -16,14 +16,20 @@ void updatePresetScreen()
 
 void handleFN_preset(char c)
 {
-    setValStr[0] = '\0'; //clear setValSt
-
-    prevFNButton = curFNButton;
-    curFNButton = c;
-
-    if (curFNButton == prevFNButton)
+    if (setValStr[0] == '\0')
     {
-        curScreen = PROGRAM;
+        prevFNButton = curFNButton;
+        curFNButton = c;
+
+        if (curFNButton == prevFNButton)
+        {
+            curScreen = PROGRAM;
+        }
+    }
+    else
+    {
+        setValStr[0] = '\0'; //clear setValSt
+        signal.error();
     }
 }
 

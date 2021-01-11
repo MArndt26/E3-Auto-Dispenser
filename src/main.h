@@ -3,7 +3,8 @@
 
 #include <Arduino.h>
 
-#define HOME_KEYPAD_ENTER 1
+//used to emulate pressing the foot pedal by pressing the Enter key
+// #define HOME_KEYPAD_ENTER
 
 //uncomment to use permanent storage (saves even when powered off)
 #define PERMANENT_MEM

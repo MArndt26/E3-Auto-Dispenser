@@ -23,32 +23,32 @@ This Project is used to create a control pad and scale to dispense adhesive unti
 - Download [Arduino IDE](https://www.arduino.cc/en/software)
 - Download [Visual Studio Code](https://code.visualstudio.com/download) (VS code)
 - Open VS code and click on the Extensions button on left nav bar (Ctrl+Shift+X)
-- Search for PlatformIO IDE and install
-- use [git bash](https://git-scm.com/downloads) or [wsl](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to pull from this repository to your local machine
-  - see [GitHub documentation](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository) for how to do this
+- Search for PlatformIO IDE and install the extension
+- Use [git bash](https://git-scm.com/downloads) or [wsl](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to pull from this repository to your local machine
+  - see [GitHub documentation](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository) for more information
+  - if you don't have the repository on your computer use:
+    - `git clone https://github.com/MArndt26/E3-Auto-Dispenser.git`
+  - if the repository is already on your computer update it to the lastest version with:
+    - `git pull origin`
+- Open VS Code and open the project directory
+  - File -> Open Folder
+- Wait for ProjectIO to initialize and then press the [->] upload button to reprogram the device
 
 ## Calibration Procedure
 
 - Go to main.h and check the calibration password `CALIBRATION_PASSWORD`
   - note that you can change the password by editing this value and updating the firmware via the USB programming port
 - Once on the Calibration Screen follow the following instructions:
+
   - Remove all weight from scale
   - Tare scale (`D` button)
-  - place known weight on scale
-  - For Computer Serial interation use the following
-    ```
-    q, w, e, r --> calibration factor += 0.1, 1, 10, 100
-    a, s, d, f --> calibration factor -= 0.1, 1, 10, 100
-    ```
-  - For Keypad Matrix interaction use the following
+  - Place known weight on scale
+  - Pressing the following buttons will add/subtract the given value from the calibration factor
     ```
     1, 2, 3, A --> calibration factor += 0.1, 1, 10, 100
     4, 5, 6, B --> calibration factor -= 0.1, 1, 10, 100
     ```
-  - Press `t` on computer or `D` button on keypad to tare scale
   - Using the instructions above manipulate the calibration factor until the known value matches the displayed value
-
-`Remember to Change the CALIBRATE definition back to 0 before use in operations`
 
 ## Resources/Inspiration:
 

@@ -54,10 +54,16 @@ void handleNumeric_home(char c)
 
 void handleFN_home(char c)
 {
-    setValStr[0] = '\0'; //clear setValSt
-    curFNButton = c;
-
-    curScreen = PRESET;
+    if (setValStr[0] == '\0')
+    {
+        curFNButton = c;
+        curScreen = PRESET;
+    }
+    else
+    {
+        setValStr[0] = '\0'; //clear setValSt
+        signal.error();
+    }
 }
 
 void handleEnter_home(char c)
@@ -67,12 +73,13 @@ void handleEnter_home(char c)
         //user is currently setting the value
         e3_scale.setVal = atoi(setValStr);
         setValStr[0] = '\0';
+        signal.success();
     }
-    else if (HOME_KEYPAD_ENTER)
-    {
-        curScreen = RUN;
-        //go to run state
-    }
+#ifdef HOME_KEYPAD_ENTER
+    curScreen = RUN;
+#else
+    signal.error();
+#endif
 }
 
 void home()
@@ -117,6 +124,7 @@ void home()
             }
             else if (c == TARE) //tare only works from home screen
             {
+                setValStr[0] = '\0';
                 tareScreen();
                 e3_scale.tare();
                 delay(200);
