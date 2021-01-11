@@ -10,6 +10,8 @@ void setup()
   while (!Serial)
     ;
 #endif
+
+  e3_scale.setSetVal(memory.getFN1());
 }
 
 void loop()

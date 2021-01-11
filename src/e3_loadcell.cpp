@@ -5,9 +5,13 @@ Scale::Scale(const int dout, const int sck) : _scale()
     c_factor = 464.5f;
     setVal = -999;
     weight = 0.0;
-    pastWeights[PAST_WEIGHT_BUF_SIZE] = {0.0};
     total = 0.0;
     i = 0;
+
+    for (int j = 0; j < PAST_WEIGHT_BUF_SIZE; j++)
+    {
+        pastWeights[j] = 0.0;
+    }
 
 #ifndef VIRTUAL_SCALE
     _scale.begin(dout, sck);
@@ -49,7 +53,7 @@ void Scale::tare()
     //set readings array to all zeros
     for (int i = 0; i < PAST_WEIGHT_BUF_SIZE; i++)
     {
-        pastWeights[i] = 0.0f;
+        pastWeights[i] = 0.0;
     }
     total = 0.0; //reset total
     weight = 0.0;

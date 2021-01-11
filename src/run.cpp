@@ -15,10 +15,9 @@ void updateRunScreen()
 
     int whole;
     unsigned int frac;
-    whole = 10;
-    frac = 5;
-    // floatToString(e3_scale.weight, &whole, &frac);
-    snprintf(line, 17, "S:%4d C:%4d.%1u", 1234, whole, frac);
+
+    floatToString(e3_scale.getWeight(), &whole, &frac);
+    snprintf(line, 17, "S:%4d C:%4d.%1u", e3_scale.getSetVal(), whole, frac);
 
     screen.home();
     screen.print(line);
@@ -34,11 +33,9 @@ void run()
 
     // digital.relaysOn(); //ensure that all relays turn on
 
-    // e3_scale.setSetVal(memory.getFN1());
-
     for (;;)
     {
-        // e3_scale.updateWeight();
+        e3_scale.updateWeight();
 
         if (keypad.getKey())
         {
