@@ -78,13 +78,10 @@ void handleEnter_home(char c)
 void home()
 {
     digital.relaysOff(); //ensure that all relays are off on home screen
-
-    keypad.setDebounceTime(50);
+    screen.clear();
 
     for (;;)
     {
-        signal.error();
-
         e3_scale.updateWeight();
 
         char c = keypad.getKey();

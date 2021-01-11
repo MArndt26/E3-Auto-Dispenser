@@ -27,6 +27,8 @@ void updatePresetScreen()
 
 void handleFN_preset(char c)
 {
+    setValStr[0] = '\0'; //clear setValSt
+
     prevFNButton = curFNButton;
     curFNButton = c;
 
@@ -39,15 +41,15 @@ void handleFN_preset(char c)
 void handleEnter_preset(char c)
 {
     int val = 0;
-    if (c == FN1_Button)
+    if (curFNButton == FN1_Button)
     {
         val = memory.getFN1();
     }
-    else if (c == FN2_Button)
+    else if (curFNButton == FN2_Button)
     {
         val = memory.getFN2();
     }
-    else //c == FN3_Button
+    else //curFNButton == FN3_Button
     {
         val = memory.getFN3();
     }

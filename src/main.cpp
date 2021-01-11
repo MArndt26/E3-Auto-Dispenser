@@ -3,6 +3,7 @@
 #include "run.h"
 #include "home.h"
 #include "preset.h"
+#include "program.h"
 
 void setup()
 {
@@ -10,21 +11,15 @@ void setup()
   Serial.begin(9600);
   while (!Serial)
     ;
-  // #endif
+    // #endif
 
-  screen.init();
-  screen.backlight();
-  screen.createCustomChars();
-  screen.home();
-  screen.print("LCD Initialized");
-  screen.setCursor(0, 1);
-  screen.print("Connect Scale");
-
-  signal.success();
+#ifndef SERIAL_DEBUG
+  screen.start();
+#endif
 
   e3_scale.setSetVal(memory.getFN1());
 
-  signal.success();
+  keypad.setDebounceTime(50);
 }
 
 void loop()
@@ -38,7 +33,7 @@ void loop()
     preset();
     break;
   case PROGRAM:
-    // relaysOff();
+    program();
     break;
   case RUN:
     run();

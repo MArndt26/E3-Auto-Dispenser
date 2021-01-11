@@ -12,9 +12,9 @@
 
 // #define SERIAL_DEBUG
 
-#define VIRTUAL_SCALE
+// #define VIRTUAL_SCALE
 
-#define VIRTUAL_SIGNAL
+// #define VIRTUAL_SIGNAL
 
 // #define VIRTUAL_KEYBOARD
 

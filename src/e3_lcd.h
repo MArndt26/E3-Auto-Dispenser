@@ -19,7 +19,9 @@ public:
     static const byte UNLOCKED = 1;
     E3_LCD(uint8_t lcd_Addr, uint8_t lcd_cols, uint8_t lcd_rows);
 
-    void createCustomChars();
+    // void createCustomChars();
+
+    void start();
 };
 #endif
 

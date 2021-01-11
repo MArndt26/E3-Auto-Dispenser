@@ -42,11 +42,11 @@ void run()
             signal.error();
             return;
         }
-        // if (e3_scale.weight >= e3_scale.setVal)
-        // {
-        //     signal.success();
-        //     return;
-        // }
+        if (e3_scale.getWeight() >= e3_scale.getSetVal())
+        {
+            signal.success();
+            return;
+        }
 
         updateRunScreen();
     }

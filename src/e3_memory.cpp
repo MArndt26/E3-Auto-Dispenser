@@ -70,3 +70,27 @@ int E3_Memory::getFN3()
 {
     return fn3;
 }
+
+void E3_Memory::writeFN1(int i)
+{
+    fn1 = i;
+#ifdef PERMANENT_MEM
+    EEPROM.put(fn1_addr, fn1);
+#endif
+}
+
+void E3_Memory::writeFN2(int i)
+{
+    fn2 = i;
+#ifdef PERMANENT_MEM
+    EEPROM.put(fn2_addr, fn2);
+#endif
+}
+
+void E3_Memory::writeFN3(int i)
+{
+    fn3 = i;
+#ifdef PERMANENT_MEM
+    EEPROM.put(fn3_addr, fn3);
+#endif
+}

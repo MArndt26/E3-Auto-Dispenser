@@ -30,6 +30,10 @@ public:
     int getFN2();
 
     int getFN3();
+
+    void writeFN1(int i);
+    void writeFN2(int i);
+    void writeFN3(int i);
 };
 
 #endif
