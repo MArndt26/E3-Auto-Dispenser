@@ -132,7 +132,15 @@ void home()
             }
             else if (c == CALIBRATE_BUTTON)
             {
-                curScreen = CALIBRATE;
+                if (setValStr[0] == '\0')
+                {
+                    curScreen = CALIBRATE;
+                }
+                else
+                {
+                    setValStr[0] = '\0';
+                    signal.error();
+                }
             }
             else
             {

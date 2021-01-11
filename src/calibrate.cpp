@@ -185,34 +185,43 @@ void calibrate()
         {
             signal.error();
         }
-        else if (c == TARE)
+        else if (c != '\0')
         {
-            tareScreen_calibrate();
-            e3_scale.tare();
-            delay(200);
-            updateCalibrateScreen();
-        }
-        else if (c == ENTER)
-        {
-            memory.writeCF();
-            saveCFScreen();
-            curScreen = HOME;
-            signal.success();
-            delay(1000);
-        }
-        else if (c == CALIBRATE_BUTTON)
-        {
-            signal.error();
-            curScreen = HOME;
-        }
-        else
-        {
-            for (int i = 0; i < CHARMAP_SIZE; i++)
+            if (c == TARE)
             {
-                if (c == charMap.key[i])
+                tareScreen_calibrate();
+                e3_scale.tare();
+                delay(200);
+                updateCalibrateScreen();
+            }
+            else if (c == ENTER)
+            {
+                memory.writeCF();
+                saveCFScreen();
+                curScreen = HOME;
+                signal.success();
+                delay(1000);
+            }
+            else if (c == CALIBRATE_BUTTON)
+            {
+                signal.error();
+                curScreen = HOME;
+            }
+            else
+            {
+                int FOUND_IN_MAP = 0;
+                for (int i = 0; i < CHARMAP_SIZE; i++)
                 {
-                    memory.c_factor += charMap.val[i];
-                    break;
+                    if (c == charMap.key[i])
+                    {
+                        memory.c_factor += charMap.val[i];
+                        FOUND_IN_MAP = 1;
+                        break;
+                    }
+                }
+                if (!FOUND_IN_MAP)
+                {
+                    signal.error(); //pressed invalid key for calibration
                 }
             }
         }
