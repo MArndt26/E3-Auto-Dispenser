@@ -12,9 +12,9 @@ SCREENS curScreen = HOME;
 // #endif
 
 //scale variables
-// const uint8_t LOADCELL_DOUT_PIN = 11;
-// const uint8_t LOADCELL_SCK_PIN = 10;
-// e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+const uint8_t LOADCELL_DOUT_PIN = 11;
+const uint8_t LOADCELL_SCK_PIN = 10;
+Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
 
 const char FN1_Button = 'A';
 const char FN2_Button = 'B';

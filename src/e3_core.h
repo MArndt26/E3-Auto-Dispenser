@@ -30,9 +30,7 @@ enum SCREENS
 extern SCREENS curScreen;
 
 //weight variables
-const uint8_t LOADCELL_DOUT_PIN = 11;
-const uint8_t LOADCELL_SCK_PIN = 10;
-static Scale e3_scale = Scale(LOADCELL_DOUT_PIN, LOADCELL_SCK_PIN);
+extern Scale e3_scale;
 
 /*--------------KEYPAD VARS------------------*/
 extern const char FN1_Button;

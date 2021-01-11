@@ -21,17 +21,10 @@ void updateRunScreen()
     snprintf(line, 17, "S:%4d C:%4d.%1u", 1234, whole, frac);
 
     screen.home();
-
-    Serial.write(line);
-    Serial.println("here");
-    delay(1000);
-
     screen.print(line);
 
     screen.setCursor(0, 1);
     screen.print(" Press to Halt");
-
-    delay(500);
 }
 
 void run()
@@ -47,11 +40,11 @@ void run()
     {
         // e3_scale.updateWeight();
 
-        // if (keypad.getKey())
-        // {
-        //     signal.error();
-        //     return;
-        // }
+        if (keypad.getKey())
+        {
+            signal.error();
+            return;
+        }
         // if (e3_scale.weight >= e3_scale.setVal)
         // {
         //     signal.success();

@@ -14,22 +14,20 @@ void setup()
 
 void loop()
 {
-  home();
-  run();
-  // switch (curScreen)
-  // {
-  // case HOME:
-  //   home();
-  //   break;
-  // case PRESET:
-  //   // relaysOff();
-  //   break;
-  // case PROGRAM:
-  //   // relaysOff();
-  //   break;
-  // case RUN:
-  //   run();
-  //   curScreen = HOME;
-  //   break;
-  // }
+  switch (curScreen)
+  {
+  case HOME:
+    home();
+    break;
+  case PRESET:
+    // relaysOff();
+    break;
+  case PROGRAM:
+    // relaysOff();
+    break;
+  case RUN:
+    run();
+    curScreen = HOME;
+    break;
+  }
 }

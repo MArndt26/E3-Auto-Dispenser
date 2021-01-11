@@ -17,8 +17,8 @@ private:
     const char HOME[HOME_STR_LEN] = "\033[0;0H";
 
 public:
-    byte LOCKED = 0;
-    byte UNLOCKED = 1;
+    byte LOCKED = 1;
+    byte UNLOCKED = 0;
 
     E3_Serial();
 

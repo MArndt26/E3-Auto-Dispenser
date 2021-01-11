@@ -15,8 +15,13 @@ void updateHomeScreen()
     //first line
     char line[17];
     char buf[8];
-    dtostrf(e3_scale.getWeight(), 8, 1, buf);
-    snprintf(line, 17, "WEIGHT:%8sg", buf);
+    int whole;
+    unsigned int frac;
+    whole = 10;
+    frac = 5;
+
+    // floatToString(e3_scale.weight, &whole, &frac);
+    snprintf(line, 17, "WEIGHT:%6d.%1ug", whole, frac);
     screen.home();
     screen.print(line);
 
@@ -25,7 +30,7 @@ void updateHomeScreen()
     if (setValStr[0] == '\0')
     {
         screen.write(screen.LOCKED);
-        snprintf(line, 17, "SetVal:%7dg", e3_scale.getSetVal());
+        snprintf(line, 17, "SetVal:%7dg", -123);
     }
     else
     {
@@ -38,7 +43,7 @@ void updateHomeScreen()
     delay(500);
 }
 
-inline void handleNumeric(char c)
+void handleNumeric(char c)
 {
     bool appended = append(setValStr, SET_VAL_SIZE, c);
 
@@ -51,18 +56,18 @@ inline void handleNumeric(char c)
     }
 }
 
-inline void handleFN(char c)
+void handleFN(char c)
 {
     //TODO: implement this
     return;
 }
 
-inline void handleEnter(char c)
+void handleEnter(char c)
 {
     if (setValStr[0] != '\0')
     {
         //user is currently setting the value
-        e3_scale.setSetVal(atoi(setValStr));
+        // e3_scale.setSetVal(atoi(setValStr));
         setValStr[0] = '\0';
     }
     else if (HOME_KEYPAD_ENTER)
@@ -76,13 +81,13 @@ void home()
 {
     digital.relaysOff(); //ensure that all relays are off on home screen
 
-    e3_scale.setSetVal(memory.getFN1());
+    // e3_scale.setSetVal(memory.getFN1());
 
     keypad.setDebounceTime(50);
 
     for (;;)
     {
-        e3_scale.updateWeight();
+        // e3_scale.updateWeight();
 
         char c = keypad.getKey();
 
@@ -105,7 +110,8 @@ void home()
             else if (c == TARE) //tare only works from home screen
             {
                 tareScreen();
-                e3_scale.tare();
+                // e3_scale.tare();
+                delay(200);
                 updateHomeScreen();
             }
             else
