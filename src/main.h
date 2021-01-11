@@ -27,6 +27,7 @@
 //uncomment to emulate keypad matrix with computer keyboard input from serial terminal
 // #define VIRTUAL_KEYBOARD
 
-#define VIRTUAL_DIGITAL
+//uncomment to emulate digital with the serial terminal
+// #define VIRTUAL_DIGITAL
 
 #endif
