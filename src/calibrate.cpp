@@ -117,7 +117,15 @@ void calibrate_lock()
     {
         char c = keypad.getKey();
 
-        if (c != '\0')
+#ifdef VIRTUAL_DIGITAL
+        if (c == 'f')
+#else
+        if (digital.checkFS())
+#endif
+        {
+            signal.error();
+        }
+        else if (c != '\0')
         {
             if (c >= '0' && c <= '9')
             {
@@ -169,7 +177,15 @@ void calibrate()
         // using keypad to update factor
         char c = keypad.getKey();
 
-        if (c == TARE)
+#ifdef VIRTUAL_DIGITAL
+        if (c == 'f')
+#else
+        if (digital.checkFS())
+#endif
+        {
+            signal.error();
+        }
+        else if (c == TARE)
         {
             tareScreen_calibrate();
             e3_scale.tare();
