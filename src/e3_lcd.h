@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#ifndef SERIAL_DEBUG
+#ifndef VIRTUAL_SCREEN
 #include <LiquidCrystal_I2C.h>
 #include <avr/pgmspace.h>
 

@@ -4,7 +4,7 @@
 SCREENS curScreen = HOME;
 
 //screen object
-#ifdef SERIAL_DEBUG
+#ifdef VIRTUAL_SCREEN
 E3_Serial screen = E3_Serial();
 #else
 //lcd object

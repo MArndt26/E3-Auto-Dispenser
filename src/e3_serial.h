@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#ifdef SERIAL_DEBUG
+#ifdef VIRTUAL_SCREEN
 
 #define CLEAR_STR_LEN 7
 #define CURSOR_POS_STR_LEN 8

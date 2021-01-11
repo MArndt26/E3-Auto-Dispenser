@@ -8,13 +8,13 @@
 
 void setup()
 {
-  // #ifdef SERIAL_DEBUG
+  // #ifdef VIRTUAL_SCREEN
   Serial.begin(9600);
   while (!Serial)
     ;
     // #endif
 
-#ifndef SERIAL_DEBUG
+#ifndef VIRTUAL_SCREEN
   screen.start();
 #endif
 

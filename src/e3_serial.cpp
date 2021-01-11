@@ -1,6 +1,6 @@
 #include "e3_serial.h"
 
-#ifdef SERIAL_DEBUG
+#ifdef VIRTUAL_SCREEN
 
 #define CURSOR_X_POS 4
 #define CURSOR_Y_POS 2

@@ -11,7 +11,7 @@
 #include "e3_serial.h"
 
 //screen object
-#ifdef SERIAL_DEBUG
+#ifdef VIRTUAL_SCREEN
 extern E3_Serial screen; // = E3_Serial();
 #else
 //lcd object
