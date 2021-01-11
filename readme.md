@@ -2,6 +2,10 @@
 
 This Project is used to create a control pad and scale to dispense adhesive until a weight limit is reached. E3 Displays uses various manufacturing processes when fabricating the customized display stacks for its customers. One of these processes involves using precise amounts of adhesive for bonding displays to cover glass. In the past, this has been a manual process, requiring operators to spend large amounts of time preparing the adhesive for the bonding process. This project automates this by bundling all the prep work into one location, controlled electronically.
 
+## Operation Instructions
+
+The opeeration instructions can be located [here](/docs/Operation_Instructions.docx)
+
 ## External Libraries used:
 
 - EEPROM.h
