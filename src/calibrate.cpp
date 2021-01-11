@@ -162,6 +162,8 @@ void calibrate()
     digital.relaysOff();
     calibrate_lock();
 
+    double tempC_Factor = memory.c_factor;
+
     if (LOCKED)
     {
         curScreen = HOME;
@@ -204,6 +206,7 @@ void calibrate()
             }
             else if (c == CALIBRATE_BUTTON)
             {
+                memory.c_factor = tempC_Factor; //revert to old c factor
                 signal.error();
                 curScreen = HOME;
             }
