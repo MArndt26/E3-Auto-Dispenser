@@ -8,11 +8,11 @@
 
 void setup()
 {
-  // #ifdef VIRTUAL_SCREEN
+#if defined(VIRTUAL_SCREEN) || defined(VIRTUAL_SCALE) || defined(VIRTUAL_SIGNAL) || defined(VIRTUAL_KEYBOARD) || defined(VIRTUAL_DIGITAL)
   Serial.begin(9600);
   while (!Serial)
     ;
-    // #endif
+#endif
 
 #ifndef VIRTUAL_SCREEN
   screen.start();
