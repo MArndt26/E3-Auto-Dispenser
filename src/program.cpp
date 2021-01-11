@@ -65,7 +65,7 @@ void handleEnter_program(char c)
         int val = atoi(setValStr);
         e3_scale.setVal = val;
 
-        memory.writeFN(curFNButton - FN1_Button, val);
+        memory.writeFN(curFNButton - FN1_Button + 1, val);
         setValStr[0] = '\0';
     }
 }
@@ -83,7 +83,7 @@ void program()
 #ifdef VIRTUAL_DIGITAL
         if (c == 'f')
 #else
-        else if (digital.checkFS())
+        if (digital.checkFS())
 #endif
         {
             signal.error();

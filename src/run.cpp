@@ -31,13 +31,13 @@ void run()
     screen.clear();
     screen.home();
 
-    // digital.relaysOn(); //ensure that all relays turn on
+    digital.relaysOn(); //ensure that all relays turn on
 
     for (;;)
     {
         e3_scale.updateWeight(memory.c_factor);
 
-        if (keypad.getKey())
+        if (keypad.getKey() || digital.checkFS())
         {
             signal.error();
             return;

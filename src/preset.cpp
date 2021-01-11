@@ -52,7 +52,7 @@ void preset()
 #ifdef VIRTUAL_DIGITAL
         if (c == 'f')
 #else
-        else if (digital.checkFS())
+        if (digital.checkFS())
 #endif
         {
             signal.error();
