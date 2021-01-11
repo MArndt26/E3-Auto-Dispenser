@@ -16,7 +16,7 @@
 #define CALIBRATION_PASSWORD "1234"
 
 // uncomment to emulate lcd with serial terminal
-#define VIRTUAL_SCREEN
+// #define VIRTUAL_SCREEN
 
 //uncomment to emulate scale with random number generator
 // #define VIRTUAL_SCALE
