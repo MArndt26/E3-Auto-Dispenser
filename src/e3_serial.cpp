@@ -5,8 +5,6 @@
 
 E3_Serial::E3_Serial()
 {
-    prevChar = 0; //index of prevChar stack
-
     clear(); //clean up terminal before emulating lcd
 
     Serial.print("LCD Initialized");
@@ -48,14 +46,4 @@ void E3_Serial::print(const char *str)
 void E3_Serial::write(uint8_t num)
 {
     Serial.print(num);
-}
-
-void E3_Serial::setPrevChar(char c)
-{
-    prevChar = c;
-}
-
-char E3_Serial::getPrevChar()
-{
-    return prevChar;
 }

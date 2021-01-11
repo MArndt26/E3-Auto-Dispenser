@@ -14,8 +14,6 @@ private:
     char CURSOR_POS[CURSOR_POS_STR_LEN] = "\033[0;0H";
     const char HOME[HOME_STR_LEN] = "\033[0;0H";
 
-    char prevChar;
-
 public:
     byte LOCKED = 1;
     byte UNLOCKED = 0;
@@ -31,10 +29,6 @@ public:
     void print(const char *str);
 
     void write(uint8_t num);
-
-    void setPrevChar(char c);
-
-    char getPrevChar();
 };
 
 #endif

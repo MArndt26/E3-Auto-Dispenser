@@ -104,5 +104,5 @@ void floatToString(double input, int *whole, unsigned int *frac)
 
 //user variables
 char setValStr[SET_VAL_SIZE + 1] = "";
-// char curFNButton = '\0';
-// char prevFNButton = '\0';
+char curFNButton = '\0';
+char prevFNButton = '\0';

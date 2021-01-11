@@ -2,6 +2,7 @@
 #include "e3_core.h"
 #include "run.h"
 #include "home.h"
+#include "preset.h"
 
 void setup()
 {
@@ -22,7 +23,7 @@ void loop()
     home();
     break;
   case PRESET:
-    // relaysOff();
+    preset();
     break;
   case PROGRAM:
     // relaysOff();

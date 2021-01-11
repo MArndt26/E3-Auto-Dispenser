@@ -39,7 +39,7 @@ void updateHomeScreen()
     screen.print(line);
 }
 
-void handleNumeric(char c)
+void handleNumeric_home(char c)
 {
     bool appended = append(setValStr, SET_VAL_SIZE, c);
 
@@ -52,13 +52,15 @@ void handleNumeric(char c)
     }
 }
 
-void handleFN(char c)
+void handleFN_home(char c)
 {
-    //TODO: implement this
-    return;
+    setValStr[0] = '\0'; //clear setValSt
+    curFNButton = c;
+
+    curScreen = PRESET;
 }
 
-void handleEnter(char c)
+void handleEnter_home(char c)
 {
     if (setValStr[0] != '\0')
     {
@@ -86,22 +88,33 @@ void home()
         char c = keypad.getKey();
 
 #ifdef VIRTUAL_DIGITAL
-        screen.setPrevChar(c);
+        if (c == 'f')
+#else
+        else if (digital.checkFS())
 #endif
-
-        if (c != '\0') //check if input exists
+        {
+            if (setValStr[0] != '\0')
+            {
+                signal.error();
+            }
+            else
+            {
+                curScreen = RUN;
+            }
+        }
+        else if (c != '\0') //check if input exists
         {
             if (c >= '0' && c <= '9')
             {
-                handleNumeric(c);
+                handleNumeric_home(c);
             }
             else if (c >= FN1_Button && c <= FN3_Button)
             {
-                handleFN(c);
+                handleFN_home(c);
             }
             else if (c == ENTER)
             {
-                handleEnter(c);
+                handleEnter_home(c);
             }
             else if (c == TARE) //tare only works from home screen
             {
@@ -110,22 +123,6 @@ void home()
                 delay(200);
                 updateHomeScreen();
             }
-#ifdef VIRTUAL_DIGITAL
-            else if (screen.getPrevChar() == 'f')
-#else
-            else if (digital.checkFS())
-#endif
-            {
-                if (setValStr[0] != '\0')
-                {
-                    signal.error();
-                }
-                else
-                {
-                    curScreen = RUN;
-                }
-            }
-
             else
             {
                 signal.error();

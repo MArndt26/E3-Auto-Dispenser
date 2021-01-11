@@ -70,7 +70,7 @@ void floatToString(double input, int *whole, unsigned int *frac);
 
 //user variables
 extern char setValStr[];
-// extern char curFNButton;
-// extern char prevFNButton;
+extern char curFNButton;
+extern char prevFNButton;
 
 #endif
