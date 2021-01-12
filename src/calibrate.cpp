@@ -164,7 +164,11 @@ void calibrate()
 
     for (;;)
     {
-        e3_scale.updateWeight(memory.c_factor);
+        if (!e3_scale.updateWeight(memory.c_factor))
+        {
+            scaleDisconnectedScreen();
+            e3_scale.reconnect();
+        }
 
         // using keypad to update factor
         char c = keypad.getKey();
