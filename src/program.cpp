@@ -67,6 +67,12 @@ void handleEnter_program(char c)
 
         memory.writeFN(curFNButton - FN1_Button + 1, val);
         setValStr[0] = '\0';
+        signal.success();
+        curScreen = HOME;
+    }
+    else
+    {
+        signal.error();
     }
 }
 

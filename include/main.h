@@ -7,7 +7,7 @@
 // #define HOME_KEYPAD_ENTER
 
 //uncomment to emulate digital with the serial terminal
-// #define VIRTUAL_DIGITAL
+#define VIRTUAL_DIGITAL
 
 //uncomment to use permanent storage (saves even when powered off)
 #define PERMANENT_MEM
