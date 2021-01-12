@@ -25,15 +25,15 @@ void updateHomeScreen()
     screen.setCursor(0, 1);
     if (setValStr[0] == '\0')
     {
+        snprintf(line, 16, "SetVal:%7dg", e3_scale.setVal);
         screen.write(screen.LOCKED);
-        snprintf(line, 17, "SetVal:%7dg", e3_scale.setVal);
     }
     else
     {
+        snprintf(line, 16, "Setting:%6sg", setValStr);
         screen.write(screen.UNLOCKED);
-        snprintf(line, 17, "SetVal:%7sg", setValStr);
     }
-    screen.setCursor(1, 1);
+    // screen.setCursor(0, 1);
     screen.print(line);
 }
 
