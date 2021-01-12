@@ -74,11 +74,8 @@ void updateCalibrateLockScreen()
 void incorrectPasswordScreen()
 {
     screen.clear();
-    screen.setCursor(3, 0);
-    screen.print("-Incorrect");
-
-    screen.setCursor(4, 1);
-    screen.print("Password");
+    screen.home();
+    screen.print("Invalid Password");
 }
 
 void handleNumeric_lock(char c)
