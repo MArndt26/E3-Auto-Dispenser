@@ -18,7 +18,7 @@ Scale::Scale(const int dout, const int sck) : _scale()
 #endif
 }
 
-void Scale::updateWeight(double c_factor)
+bool Scale::updateWeight(double c_factor)
 {
     // subtract the last reading:
     total = total - pastWeights[i];
@@ -27,6 +27,10 @@ void Scale::updateWeight(double c_factor)
     pastWeights[i] = random(0, 99);
 #else
     // read from the sensor:
+    if (!_scale.wait_ready_timeout())
+    {
+        return false; //scale is not connected/detected
+    }
     pastWeights[i] = (double)_scale.get_value() / c_factor;
 #endif
 
@@ -44,6 +48,7 @@ void Scale::updateWeight(double c_factor)
 
     // calculate the average:
     weight = total / (double)PAST_WEIGHT_BUF_SIZE;
+    return true;
 }
 
 void Scale::tare()
@@ -59,4 +64,13 @@ void Scale::tare()
 #ifndef VIRTUAL_SCALE
     _scale.tare(5);
 #endif
+}
+
+/**
+ * Warning! This is an infinite loop if the
+ * the scale is disconnected
+ */
+void Scale::reconnect()
+{
+    _scale.wait_ready();
 }

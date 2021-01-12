@@ -1,13 +1,6 @@
 #include "home.h"
 #include "e3_core.h"
-
-void tareScreen()
-{
-    screen.clear();
-    //first line
-    screen.home();
-    screen.print("------TARE------");
-}
+#include "common.h"
 
 // same as above without clearing screen
 void updateHomeScreen()
@@ -92,7 +85,11 @@ void home()
 
     for (;;)
     {
-        e3_scale.updateWeight(memory.c_factor);
+        if (!e3_scale.updateWeight(memory.c_factor))
+        {
+            scaleDisconnectedScreen();
+            e3_scale.reconnect();
+        }
 
         char c = keypad.getKey();
 

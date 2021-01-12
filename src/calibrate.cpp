@@ -1,5 +1,6 @@
 #include "calibrate.h"
 #include "e3_core.h"
+#include "common.h"
 
 const char PASSWORD[5] = CALIBRATION_PASSWORD;
 int LOCKED = 1;
@@ -27,14 +28,6 @@ void saveCFScreen()
 
     screen.home();
     screen.print(line);
-}
-
-void tareScreen_calibrate()
-{
-    screen.clear();
-    //first line
-    screen.home();
-    screen.print("------TARE------");
 }
 
 void updateCalibrateScreen()
@@ -188,7 +181,7 @@ void calibrate()
         {
             if (c == TARE)
             {
-                tareScreen_calibrate();
+                tareScreen();
                 e3_scale.tare();
                 delay(200);
                 updateCalibrateScreen();

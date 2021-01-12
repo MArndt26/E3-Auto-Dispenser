@@ -18,7 +18,9 @@ public:
     double weight;
     Scale(const int dout, const int sck);
 
-    void updateWeight(double c_factor);
+    bool updateWeight(double c_factor);
+
+    void reconnect();
 
     void tare();
 };
