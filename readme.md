@@ -4,7 +4,13 @@ This Project is used to create a control pad and scale to dispense adhesive unti
 
 ## Operation Instructions
 
-The opeeration instructions can be located [here](/docs/Operation_Instructions.docx)
+The full operation instructions can be located [here](/docs/Operation_Instructions.docx)
+
+### Transition Diagram
+
+<div style="background-color:white">
+<img src="docs/images/Storyboard.svg" alt="Transition Diagram">
+</div>
 
 ## External Libraries used:
 
