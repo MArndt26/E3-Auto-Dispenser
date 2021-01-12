@@ -150,6 +150,7 @@ void calibrate_lock()
 
 void calibrate()
 {
+    LOCKED = 1;
     digital.relaysOff();
     calibrate_lock();
 
