@@ -29,14 +29,17 @@ void updateRunScreen()
 void run()
 {
     screen.clear();
-    screen.home();
+    updateRunScreen();
 
     digital.relaysOn(); //ensure that all relays turn on
 
     for (;;)
     {
-        e3_scale.updateWeight(memory.c_factor);
-
+        if (!e3_scale.updateWeight(memory.c_factor))
+        {
+            signal.error();
+            return;
+        }
         if (keypad.getKey() || digital.checkFS())
         {
             signal.error();

@@ -82,6 +82,7 @@ void home()
 {
     digital.relaysOff(); //ensure that all relays are off on home screen
     screen.clear();
+    updateHomeScreen();
 
     for (;;)
     {

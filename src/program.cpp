@@ -73,8 +73,8 @@ void handleEnter_program(char c)
 void program()
 {
     digital.relaysOff(); //ensure that all relays are off on program screen
-
     screen.clear();
+    updateProgramScreen();
 
     for (;;)
     {

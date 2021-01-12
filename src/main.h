@@ -4,7 +4,10 @@
 #include <Arduino.h>
 
 //used to emulate pressing the foot pedal by pressing the Enter key
-// #define HOME_KEYPAD_ENTER
+#define HOME_KEYPAD_ENTER
+
+//uncomment to emulate digital with the serial terminal
+#define VIRTUAL_DIGITAL
 
 //uncomment to use permanent storage (saves even when powered off)
 #define PERMANENT_MEM
@@ -26,8 +29,5 @@
 
 //uncomment to emulate keypad matrix with computer keyboard input from serial terminal
 // #define VIRTUAL_KEYBOARD
-
-//uncomment to emulate digital with the serial terminal
-// #define VIRTUAL_DIGITAL
 
 #endif

@@ -102,6 +102,7 @@ void handleEnter_lock()
 void calibrate_lock()
 {
     screen.clear();
+    updateCalibrateLockScreen();
 
     for (;;)
     {
@@ -161,6 +162,7 @@ void calibrate()
     }
 
     screen.clear();
+    updateCalibrateScreen();
 
     for (;;)
     {

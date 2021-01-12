@@ -42,8 +42,9 @@ void handleEnter_preset(char c)
 
 void preset()
 {
-    screen.clear();
     digital.relaysOff(); //redundant
+    screen.clear();
+    updatePresetScreen();
 
     for (;;)
     {
