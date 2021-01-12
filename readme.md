@@ -8,7 +8,7 @@ The full operation instructions can be located [here](/docs/Operation_Instructio
 
 ### Transition Diagram
 
-<div style="background-color:#fffe">
+<div style="background-color:white">
 <img src="docs/images/Storyboard.svg" alt="Transition Diagram">
 </div>
 
@@ -26,7 +26,7 @@ The full operation instructions can be located [here](/docs/Operation_Instructio
 
 ## Hardware Layout:
 
-<div style="background-color:#fffe">
+<div style="background-color:white">
 <img src="docs/images/Hardware_Layout.svg" alt="Hardware Layout">
 </div>
 
