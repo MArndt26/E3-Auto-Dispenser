@@ -7,7 +7,7 @@
 // #define HOME_KEYPAD_ENTER
 
 //uncomment to emulate digital with the serial terminal
-#define VIRTUAL_DIGITAL
+// #define VIRTUAL_DIGITAL
 
 //uncomment to use permanent storage (saves even when powered off)
 #define PERMANENT_MEM
@@ -29,5 +29,11 @@
 
 //uncomment to emulate keypad matrix with computer keyboard input from serial terminal
 // #define VIRTUAL_KEYBOARD
+
+#if defined(HOME_KEYPAD_ENTER) || defined(VIRTUAL_DIGITAL) ||       \
+    defined(INITIALIZE_PERMANENT_MEM) || defined(VIRTUAL_SCREEN) || \
+    defined(VIRTUAL_SCALE) || defined(VIRTUAL_SIGNAL) || defined(VIRTUAL_KEYBOARD)
+#define DEVELOPMENT_MODE
+#endif
 
 #endif

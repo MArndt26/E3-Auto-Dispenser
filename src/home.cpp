@@ -12,7 +12,12 @@ void updateHomeScreen()
     unsigned int frac;
 
     floatToString(e3_scale.weight, &whole, &frac);
+#ifdef DEVELOPMENT_MODE
+    snprintf(line, 17, "DEVMODE%6d.%1ug", whole, frac);
+
+#else
     snprintf(line, 17, "WEIGHT:%6d.%1ug", whole, frac);
+#endif
     screen.home();
     screen.print(line);
 
