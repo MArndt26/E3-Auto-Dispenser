@@ -75,11 +75,14 @@ void handleEnter_home(char c)
         setValStr[0] = '\0';
         signal.success();
     }
+    else
+    {
 #ifdef HOME_KEYPAD_ENTER
-    curScreen = RUN;
+        curScreen = RUN;
 #else
-    signal.error();
+        signal.error();
 #endif
+    }
 }
 
 void home()
